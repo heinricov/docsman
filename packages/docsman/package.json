@@ -1,5 +1,5 @@
 {
-  "name": "@workspace/ui",
+  "name": "docsman",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -33,11 +33,19 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
+  "files": [
+    "src"
+  ],
   "exports": {
     "./globals.css": "./src/styles/globals.css",
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./ui/*": "./src/ui/*.tsx",
     "./components/*": "./src/components/*.tsx",
-    "./hooks/*": "./src/hooks/*.ts"
+    "./layouts": "./src/layouts/index.ts",
+    "./layouts/*": "./src/layouts/*.tsx",
+    "./sidebar-1/*": "./src/sidebar-1/*.tsx",
+    "./navigations/*": "./src/navigations/*.tsx"
   }
 }

@@ -1,11 +1,10 @@
-import { Geist_Mono, Roboto } from "next/font/google"
+import { Geist_Mono, Oxanium } from "next/font/google"
 
-import "docsman/globals.css"
+import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "docsman/lib/utils"
-import { LayoutBasic } from "docsman/layouts"
+import { cn } from "@/lib/utils"
 
-const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
+const oxanium = Oxanium({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -25,13 +24,11 @@ export default function RootLayout({
         "antialiased",
         fontMono.variable,
         "font-sans",
-        roboto.variable
+        oxanium.variable
       )}
     >
       <body>
-        <ThemeProvider>
-          <LayoutBasic>{children}</LayoutBasic>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )
