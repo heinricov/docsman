@@ -9,7 +9,7 @@ import { AppLogo } from "./app-logo"
 import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
 
-export function AppHeader({ icon, title }: AppHeaderProps) {
+export function AppHeader({ icon, title, theme, search }: AppHeaderProps) {
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -31,8 +31,10 @@ export function AppHeader({ icon, title }: AppHeaderProps) {
             <AppLogo icon={icon} title={title} />
           </div>
           <div className="flex items-center gap-2">
-            <SearchForm className="hidden w-full sm:ml-auto sm:w-auto md:block" />
-            <AppTheme />
+            {search === true ? (
+              <SearchForm className="hidden w-full sm:ml-auto sm:w-auto md:block" />
+            ) : null}
+            {theme === true ? <AppTheme /> : null}
           </div>
         </div>
       </div>

@@ -14,7 +14,11 @@ export function LayoutBasic({
   children,
   icon = <SquareText className="size-5! text-primary" />,
   title = "Acme Inc.",
-  Header = <AppHeader icon={icon} title={title} />,
+  theme = true,
+  search = true,
+  Header = (
+    <AppHeader icon={icon} title={title} theme={theme} search={search} />
+  ),
 }: LayoutBasicProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">

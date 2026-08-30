@@ -3,4 +3,6 @@ export type LayoutBasicProps = {
   children: React.ReactNode
   icon?: React.ReactNode
   title?: string
+  theme?: boolean
+  search?: boolean
 }
