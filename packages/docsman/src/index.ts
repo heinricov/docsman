@@ -1,3 +1,5 @@
+"use client"
+
 export { LayoutBasic } from "./layouts/layout-basic"
 export { LayoutFloating } from "./layouts/layout-floating"
 

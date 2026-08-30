@@ -1,3 +1,5 @@
+"use client"
+
 import { AppSidebar } from "../navigations/app-sidebar-basic"
 import { AppHeader } from "../navigations/app-header-basic"
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"

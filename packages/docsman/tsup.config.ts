@@ -2,6 +2,7 @@ import { defineConfig } from "tsup"
 import { cpSync } from "node:fs"
 
 export default defineConfig({
+  splitting: false,
   entry: [
     "src/index.ts",
     "src/layouts/index.ts",

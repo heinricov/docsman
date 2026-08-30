@@ -1,3 +1,5 @@
+"use client"
+
 import { AppSidebar } from "../navigations/app-sidebar-floating"
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { AppHeader } from "../navigations/app-header-floating"
