@@ -5,7 +5,7 @@ import * as React from "react"
 import { NavCollaps } from "./nav-collaps"
 import { NavMenus } from "./nav-menus"
 import { NavSwitcher } from "./nav-switcher"
-import { AppLogo } from "./app-logo"
+import { AppLogoSidebar } from "./app-logo"
 import {
   Sidebar,
   SidebarContent,
@@ -136,7 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
-        <AppLogo />{" "}
+        <AppLogoSidebar />{" "}
         <NavSwitcher versions={data.teams} defaultVersion={data.teams[0]!} />
       </SidebarHeader>
       <SidebarContent>

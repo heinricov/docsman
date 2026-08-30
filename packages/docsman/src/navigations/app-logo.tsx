@@ -4,9 +4,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar"
-import { TerminalIcon } from "lucide-react"
+import { SquareText, TerminalIcon } from "lucide-react"
 
-export function AppLogo({className}:{className?:string}) {
+export function AppLogoSidebar({className}:{className?:string}) {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -25,5 +25,16 @@ export function AppLogo({className}:{className?:string}) {
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
+  )
+}
+
+export function AppLogo(){
+  return(
+    
+      <a href="#" className="flex items-center gap-2">
+        <SquareText className="size-5!" />
+        <span className="text-base font-semibold">Acme Inc.</span>
+      </a>
+    
   )
 }
