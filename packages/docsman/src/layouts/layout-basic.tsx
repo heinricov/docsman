@@ -2,6 +2,7 @@
 
 import { AppSidebar } from "../navigations/app-sidebar-basic"
 import { AppHeader } from "../navigations/app-header-basic"
+import { AppFooter } from "../navigations/app-footer"
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { LayoutBasicProps } from "../types/layouts"
 import { SquareText } from "lucide-react"
@@ -19,6 +20,7 @@ export function LayoutBasic({
   Header = (
     <AppHeader icon={icon} title={title} theme={theme} search={search} />
   ),
+  Footer = <AppFooter icon={icon} title={title} />,
 }: LayoutBasicProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
@@ -31,6 +33,7 @@ export function LayoutBasic({
           </SidebarInset>
         </div>
       </SidebarProvider>
+      {Footer}
     </div>
   )
 }
