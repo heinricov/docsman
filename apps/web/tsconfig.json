@@ -2,7 +2,12 @@
   "extends": "@workspace/typescript-config/nextjs.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "docsman/layouts": ["../../packages/docsman/src/layouts/index"],
+      "docsman/hooks/*": ["../../packages/docsman/src/hooks/*"],
+      "docsman/lib/*": ["../../packages/docsman/src/lib/*"],
+      "docsman/ui/*": ["../../packages/docsman/src/ui/*"],
+      "docsman/navigations/*": ["../../packages/docsman/src/navigations/*"]
     },
     "plugins": [
       {
