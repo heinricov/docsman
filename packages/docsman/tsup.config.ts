@@ -53,5 +53,7 @@ export default defineConfig({
   ],
   onSuccess: async () => {
     cpSync("src/styles/globals.css", "dist/globals.css")
+    cpSync("src/styles/colors-styles.css", "dist/colors-styles.css")
+    cpSync("src/styles/sidebar-styles.css", "dist/sidebar-styles.css")
   },
 })

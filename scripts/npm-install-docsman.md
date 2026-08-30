@@ -4,11 +4,17 @@ Panduan untuk **user nyata** yang memasang `docsman` dan ingin memakai `LayoutBa
 
 ## Cara kerja styling docsman (penting dibaca dulu)
 
-`docsman` **tidak** menyertakan full thema shadcn. Paket ini hanya menyumbang token khusus _sidebar_ yang di-scope (via `@theme inline` + `@theme default`), sehingga **tidak bentrok** dengan thema milik user:
+`docsman` menyediakan **sistem warna default lengkap** yang di-scope dan **tidak bentrok** dengan thema milik user:
 
-- **User memegang thema dasarnya** sendiri: `--background`, `--foreground`, `--primary`, `--chart-*`, font, dst. (biasanya yang dihasilkan `shadcn init`).
-- **docsman menyediakan nilai fallback** untuk `--sidebar*`. Jika user **tidak** mendefinisikan `--sidebar*`, nilai bawaan docsman otomatis terpakai. Jika user **mendefinisikan sendiri** (di `:root` / `.dark`), nilai user yang menang (karena `@theme default` berprioritas terendah).
-- Karena Tailwind v4 mengabaikan `node_modules` secara default, user **wajib** menambahkan satu baris `@source "../node_modules/docsman"` agar class utility `bg-sidebar`, `text-sidebar-foreground`, dst. ikut digenerate.
+- **Warna base** (`--background`, `--foreground`, `--primary`, `--muted`, `--chart-*`, dst.) diambil dari `colors-styles.css`.
+- **Warna sidebar** (`--sidebar*`) diambil dari `sidebar-styles.css`.
+
+Keduanya ditulis memakai `:where()` (ber-specificity nol) di dalam `docsman/globals.css`. Akibatnya:
+- **User mendefinisikan warna itu sendiri** (di `:root` / `.dark` mana pun) → **nilai user yang menang selalu**, apa pun urutannya.
+- **User tidak mendefinisikan** → default **biru** docsman otomatis terpakai.
+- **Font TIDAK disediakan docsman** — user mengatur sendiri (mis. `next/font`) via variabelnya.
+
+> Karena Tailwind v4 mengabaikan `node_modules` secara default, user **wajib** menambahkan satu baris `@source "../node_modules/docsman"` agar class utility `bg-sidebar`, `bg-primary`, `text-foreground`, dst. ikut digenerate.
 
 ## Instal
 
@@ -20,29 +26,33 @@ npm install docsman
 
 ## 1. Setup CSS (di `app/globals.css`)
 
+Sekarang sangat ringkas — docsman sudah menyediakan warna base + sidebar:
+
 ```css
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "docsman/globals.css";   /* token sidebar docsman (scoped, non-clash) */
+@import "docsman/globals.css";   /* warna base + sidebar docsman (non-clash) */
 
 @custom-variant dark (&:is(.dark *));
 @source "../app/**/*.{ts,tsx}";      /* scan file app user */
 @source "../node_modules/docsman";   /* scan class docsman — WAJIB */
 
-/* ====== thema dasar milik USER (contoh dari shadcn init) ====== */
+/* (opsional) hubungkan font milikmu, contoh via next/font: */
 @theme inline {
-  /* --color-* bridge ke var --* user */
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-heading: var(--font-serif);
 }
 
-:root {
-  /* --background, --primary, --muted, dst. SUDAH di-scope user */
-}
-
-.dark {
-  /* versi dark */
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 ```
+
+Tidak perlu menulis blok `:root`/`.dark` untuk warna base — itu sudah dari docsman. Tambahkan saja jika ingin **meng-*override*** warna tertentu (lihat bagian "Kustomisasi warna").
 
 > **Catatan non-`@import`:** bisa juga memuat CSS docsman lewat JS di `app/layout.tsx`:
 >
@@ -118,18 +128,32 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 > `ThemeProvider` adalah komponen **lokal** user (membungkus `next-themes`), bukan ekspor docsman.
 
-## Kustomisasi warna sidebar
+## Kustomisasi warna
 
-Untuk mengganti warna sidebar, definisikan token `--sidebar*` sendiri — nilai user mengalahkan bawaan docsman:
+docsman memakai `:where()` (specificity nol) untuk semua default-nya, jadi definisimu di `:root`/`.dark` **selalu menang**. Ganti warna base dengan override `--primary`, `--background`, dst.:
 
 ```css
 :root {
-  --sidebar: oklch(0.97 0 0);
-  --sidebar-foreground: oklch(0.14 0.005 285);
-  --sidebar-primary: oklch(0.45 0.12 260);      /* dll. */
+  --primary: oklch(0.6 0.15 200);
+  --background: oklch(0.98 0.01 240);
 }
 .dark {
-  --sidebar: oklch(0.2 0.01 285);
+  --primary: oklch(0.5 0.12 200);
+}
+```
+
+Dan untuk warna sidebar, override token `--sidebar*`:
+
+```css
+:root {
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-primary: oklch(0.5 0.134 242.749);
+  --sidebar-primary-foreground: oklch(0.977 0.013 236.62);
+  --sidebar-accent: oklch(0.967 0.001 286.375);
+  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-ring: oklch(0.705 0.015 286.067);
 }
 ```
 
@@ -157,9 +181,21 @@ Jika `docsman` diinstal sebagai workspace (symlink di-root, mis. `node_modules/d
 
    Script ini: build `packages/docsman` → buat tarball `docsman-<versi>.tgz` → pasang ke proyek uji `__tests__/next` (meniru `npm install docsman`) → cek tipe `tsc --noEmit` → hapus tarball.
 
-2. Proyek uji `__tests__/next` memakai `LayoutBasic` di `app/layout.tsx`. `app/globals.css`-nya sudah memuat setup CSS lengkap (base thema + `@import "docsman/globals.css"` + `@source "../node_modules/docsman"`).
+2. Jalankan dari root proyek uji coba
 
-3. Untuk mencoba `LayoutFloating`, ubah import & komponen di `app/layout.tsx`:
+   kita bisa tambahkan script docsman di **tests**/next/package.json:
+
+   ```json
+   "scripts": {
+     "docsman": "bash ../../scripts/npm-install-docsman.sh"
+   }
+   ```
+
+   Setelah itu, npm run docsman bisa dijalankan dari dalam **tests**/next/ pun.
+
+3. Proyek uji `__tests__/next` memakai `LayoutBasic` di `app/layout.tsx`. `app/globals.css`-nya sudah memuat setup CSS lengkap (base thema + `@import "docsman/globals.css"` + `@source "../node_modules/docsman"`).
+
+4. Untuk mencoba `LayoutFloating`, ubah import & komponen di `app/layout.tsx`:
 
    ```tsx
    import { LayoutFloating } from "docsman/layouts"
@@ -167,7 +203,7 @@ Jika `docsman` diinstal sebagai workspace (symlink di-root, mis. `node_modules/d
    <LayoutFloating>{children}</LayoutFloating>
    ```
 
-4. Verifikasi tampilan:
+5. Verifikasi tampilan:
    ```bash
    cd __tests__/next
    npm run dev     # atau: npm run build && npm start

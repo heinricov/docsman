@@ -1,14 +1,19 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./colors-styles.css";
+@import "./sidebar-styles.css";
 
 /*
  * docsman — scoped theming.
  *
- * docsman only contributes its OWN tokens: the sidebar color bridge and fallback
- * sidebar values. It deliberately does NOT redefine your base theme
- * (--background, --primary, --chart-*, fonts, ...) so importing it never clashes
- * with the theme you already own. Supply your own shadcn-style theme alongside.
+ * docsman provides its OWN default color system:
+ *   - base colors  (--background, --primary, --chart-*, ...) from colors-styles.css
+ *   - sidebar colors (--sidebar, --sidebar-primary, ...)      from sidebar-styles.css
+ *
+ * Both are written with `:where()` (zero specificity) so YOUR own definitions —
+ * wherever they appear — always win. If you don't define them, docsman's blue
+ * defaults apply automatically. Fonts are left to you (usually via next/font).
  */
 
 /* Make sure to add `@source "../node_modules/docsman"` in your own CSS so
@@ -17,8 +22,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Bridge --sidebar* values into the Tailwind `--color-sidebar-*` namespace so
-   utilities like bg-sidebar / text-sidebar-foreground are generated. */
+/* Bridge the raw --* color vars into the Tailwind `--color-*` namespace so
+   utilities like bg-background, bg-primary, bg-sidebar, text-muted-foreground,
+   rounded-lg, etc. resolve correctly at runtime. */
 @theme inline {
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -28,6 +34,29 @@
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -35,17 +64,4 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-/* Fallback sidebar values — LOWEST priority. If you define your own --sidebar*
-   (e.g. in :root / .dark) those win automatically. */
-@theme default {
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.141 0.005 285.823);
-    --sidebar-primary: oklch(0.21 0.006 285.885);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.967 0.001 286.375);
-    --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-    --sidebar-border: oklch(0.92 0.004 286.32);
-    --sidebar-ring: oklch(0.705 0.015 286.067);
 }

@@ -37,7 +37,11 @@ Package ini memakai Tailwind CSS v4. Pastikan kamu sudah menginstall dan mengakt
 
    Tambahkan baris tersebut di CSS-mu jika belum ada, lalu aktifkan mode gelap dengan menambahkan class `dark` pada elemen `<html>` (misal lewat `next-themes`).
 
-**Tentang theming:** docsman tidak menyertakan full thema (table base `--background`, `--primary`, dst.), sehingga tidak memberatkan/bentrok dengan thema aplikasimu. Kamu menyediakan thema dasar sendiri (mis. hasil `shadcn init`). docsman hanya menyediakan nilai **fallback** untuk `--sidebar*` via `@theme default` — selama kamu belum mendefinisikan `--sidebar*`, nilai bawaan docsman terpakai; begitu kamu mendefinisikannya sendiri, nilaimu yang menang.
+**Tentang theming:** docsman menyediakan sistem warna default lengkap:
+- **Warna base** (`--background`, `--primary`, `--muted`, `--chart-*`, dst.) dari `colors-styles.css`.
+- **Warna sidebar** (`--sidebar*`) dari `sidebar-styles.css`.
+
+Keduanya ditulis memakai `:where()` (ber-specificity nol), sehingga **definisi kamu sendiri selalu menang** — di mana pun ia berada. Jika kamu tidak mendefinisikan warna itu, default biru docsman otomatis terpakai. **Font tidak disediakan docsman** — atur sendiri (mis. lewat `next/font`) dan hubungkan via `@theme inline` bila perlu.
 
 ## Langkah 3 — Gunakan layout
 

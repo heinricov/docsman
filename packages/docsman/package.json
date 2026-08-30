@@ -66,6 +66,8 @@
       "import": "./dist/index.js"
     },
     "./globals.css": "./dist/globals.css",
+    "./colors-styles.css": "./dist/colors-styles.css",
+    "./sidebar-styles.css": "./dist/sidebar-styles.css",
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./dist/lib/*.js",
     "./hooks/*": "./dist/hooks/*.js",
