@@ -1,6 +1,6 @@
 import { Geist_Mono, Roboto } from "next/font/google"
 
-import "docsman/globals.css"
+import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "docsman/lib/utils"
 import { LayoutBasic } from "docsman/layouts"

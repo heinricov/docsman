@@ -22,10 +22,11 @@ Package ini memakai Tailwind CSS v4. Pastikan kamu sudah menginstall dan mengakt
    @import "docsman/globals.css";
    ```
 
-2. Tambahkan `@source` yang menunjuk ke file aplikasimu sendiri agar Tailwind memindai class yang kamu gunakan:
+2. Tambahkan `@source` yang menunjuk ke file aplikasimu sendiri **dan** ke paket docsman, agar Tailwind memindai class yang kamu gunakan:
 
    ```css
    @source "../app/**/*.{ts,tsx}";
+   @source "../node_modules/docsman";
    ```
 
 3. Pastikan selector `.dark` tersedia untuk mode gelap. Docsman mengekspos varian `dark` lewat:
@@ -35,6 +36,8 @@ Package ini memakai Tailwind CSS v4. Pastikan kamu sudah menginstall dan mengakt
    ```
 
    Tambahkan baris tersebut di CSS-mu jika belum ada, lalu aktifkan mode gelap dengan menambahkan class `dark` pada elemen `<html>` (misal lewat `next-themes`).
+
+**Tentang theming:** docsman tidak menyertakan full thema (table base `--background`, `--primary`, dst.), sehingga tidak memberatkan/bentrok dengan thema aplikasimu. Kamu menyediakan thema dasar sendiri (mis. hasil `shadcn init`). docsman hanya menyediakan nilai **fallback** untuk `--sidebar*` via `@theme default` — selama kamu belum mendefinisikan `--sidebar*`, nilai bawaan docsman terpakai; begitu kamu mendefinisikannya sendiri, nilaimu yang menang.
 
 ## Langkah 3 — Gunakan layout
 
