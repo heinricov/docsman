@@ -1,7 +1,7 @@
 "use client"
 
 import { AppSidebar } from "../navigations/app-sidebar-basic"
-import { AppHeader } from "../navigations/app-header-basic"
+import { AppHeader } from "../navigations/app-header"
 import { AppFooter } from "../navigations/app-footer"
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { LayoutBasicProps } from "../types/layouts"
@@ -18,7 +18,13 @@ export function LayoutBasic({
   theme = true,
   search = true,
   Header = (
-    <AppHeader icon={icon} title={title} theme={theme} search={search} />
+    <AppHeader
+      icon={icon}
+      title={title}
+      theme={theme}
+      search={search}
+      className=""
+    />
   ),
   Footer = <AppFooter icon={icon} title={title} />,
 }: LayoutBasicProps) {

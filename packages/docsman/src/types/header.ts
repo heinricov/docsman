@@ -3,4 +3,5 @@ export type AppHeaderProps = {
   title?: string
   theme?: boolean
   search?: boolean
+  className?: string
 }

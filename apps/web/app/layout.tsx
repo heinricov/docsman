@@ -3,7 +3,7 @@ import { Geist_Mono, Roboto } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "docsman/lib/utils"
-import { LayoutBasic } from "docsman/layouts"
+import { LayoutFloating } from "docsman/layouts"
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -30,7 +30,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <LayoutBasic>{children}</LayoutBasic>
+          <LayoutFloating>{children}</LayoutFloating>
         </ThemeProvider>
       </body>
     </html>

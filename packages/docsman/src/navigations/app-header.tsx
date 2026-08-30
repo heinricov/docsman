@@ -8,8 +8,15 @@ import { PanelLeftIcon } from "lucide-react"
 import { AppLogo } from "./app-logo"
 import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
+import { cn } from "../lib/utils"
 
-export function AppHeader({ icon, title, theme, search }: AppHeaderProps) {
+export function AppHeader({
+  icon,
+  title,
+  theme,
+  search,
+  className,
+}: AppHeaderProps) {
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -17,7 +24,12 @@ export function AppHeader({ icon, title, theme, search }: AppHeaderProps) {
       <div className="flex h-(--header-height) w-full items-center gap-2 px-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex items-center md:hidden data-vertical:h-4 data-vertical:self-auto">
+            <div
+              className={cn(
+                "flex items-center md:hidden data-vertical:h-4 data-vertical:self-auto",
+                className
+              )}
+            >
               <Button
                 className="h-8 w-8"
                 variant="ghost"
