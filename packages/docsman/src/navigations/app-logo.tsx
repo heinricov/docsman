@@ -1,17 +1,14 @@
 import { cn } from "../lib/utils"
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "../ui/sidebar"
-import { SquareText, TerminalIcon } from "lucide-react"
+import { AppLogoProps } from "../types/logo"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar"
+import { TerminalIcon } from "lucide-react"
 
-export function AppLogoSidebar({className}:{className?:string}) {
+export function AppLogoSidebar({ className }: { className?: string }) {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton
-          className={cn("hover:bg-none",className)}
+          className={cn("hover:bg-none", className)}
           size="lg"
           render={<a href="#" />}
         >
@@ -28,13 +25,11 @@ export function AppLogoSidebar({className}:{className?:string}) {
   )
 }
 
-export function AppLogo(){
-  return(
-    
-      <a href="#" className="flex items-center gap-2">
-        <SquareText className="size-5!" />
-        <span className="text-base font-semibold">Acme Inc.</span>
-      </a>
-    
+export function AppLogo({ icon, title }: AppLogoProps) {
+  return (
+    <a href="#" className="flex items-center gap-2">
+      {icon}
+      <span className="text-base font-semibold">{title}</span>
+    </a>
   )
 }

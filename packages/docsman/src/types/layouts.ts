@@ -1,4 +1,6 @@
-export type LayoutBasic={
-Header?: React.ReactNode
+export type LayoutBasicProps = {
+  Header?: React.ReactNode
   children: React.ReactNode
+  icon?: React.ReactNode
+  title?: string
 }

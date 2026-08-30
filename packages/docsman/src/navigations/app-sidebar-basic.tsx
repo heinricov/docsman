@@ -131,11 +131,15 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
-      className="top-(--header-height) h-[calc(100svh-var(--header-height))]!"
+      className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
       {...props}
     >
       <SidebarHeader>
-        <NavSwitcher className="mt-4" versions={data.teams} defaultVersion={data.teams[0]!} />
+        <NavSwitcher
+          className="mt-4"
+          versions={data.teams}
+          defaultVersion={data.teams[0]!}
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavCollaps items={data.navMain} />
