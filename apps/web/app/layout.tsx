@@ -3,7 +3,7 @@ import { Geist_Mono, Roboto } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "docsman/lib/utils"
-import { DocsmanLayout } from "docsman/layouts"
+import { DocsmanLayout, MenuSectionProps } from "docsman/layouts"
 import {
   Book,
   BookOpenIcon,
@@ -14,9 +14,7 @@ import {
   TerminalSquareIcon,
 } from "lucide-react"
 
-import { FaYoutube, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
-import { RiTwitterXFill } from "react-icons/ri"
-import { MenuSectionProps } from "../../../packages/docsman/src/types/menus"
+import { FaYoutube, FaGithub } from "react-icons/fa"
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -25,18 +23,18 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-// const mysosmeds = [
-//   {
-//     title: "Youtube",
-//     icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
-//     href: "/",
-//   },
-//   {
-//     title: "Github",
-//     icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
-//     href: "/",
-//   },
-// ]
+const mysosmeds = [
+  {
+    title: "Youtube",
+    icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
+    href: "/",
+  },
+  {
+    title: "Github",
+    icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
+    href: "/",
+  },
+]
 
 export const menus = [
   {
@@ -193,7 +191,13 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <DocsmanLayout title="Web" icon={<Globe />} sideMenus={menus}>
+          <DocsmanLayout
+            title="Web"
+            variant="floating"
+            icon={<Globe />}
+            sosmeds={mysosmeds}
+            sideMenus={menus}
+          >
             {children}
           </DocsmanLayout>
         </ThemeProvider>
