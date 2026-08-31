@@ -16,18 +16,18 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-const mysosmeds = [
-  {
-    title: "Youtube",
-    icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
-    href: "/",
-  },
-  {
-    title: "Github",
-    icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
-    href: "/",
-  },
-]
+// const mysosmeds = [
+//   {
+//     title: "Youtube",
+//     icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
+//     href: "/",
+//   },
+//   {
+//     title: "Github",
+//     icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
+//     href: "/",
+//   },
+// ]
 
 export default function RootLayout({
   children,
@@ -47,7 +47,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <DocsmanLayout title="Web" icon={<Globe />} sosmeds={mysosmeds}>
+          <DocsmanLayout title="Web" icon={<Globe />}>
             {children}
           </DocsmanLayout>
         </ThemeProvider>

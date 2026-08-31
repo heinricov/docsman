@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { AppLogo } from "./app-logo"
 import { AppFooterProps } from "../types/footer"
+import { AppSosmed } from "./app-sosmed"
 
 export const AppFooter = ({ sosmeds, menus, logo, title }: AppFooterProps) => {
   return (
@@ -23,13 +24,7 @@ export const AppFooter = ({ sosmeds, menus, logo, title }: AppFooterProps) => {
             reserved.
           </p>
 
-          <div className="flex items-center gap-4">
-            {sosmeds?.map((sosmed) => (
-              <Link key={sosmed.title} href={sosmed.href}>
-                {sosmed.icon}
-              </Link>
-            ))}
-          </div>
+          <AppSosmed sosmeds={sosmeds} />
         </div>
       </div>
     </footer>
