@@ -1,4 +1,5 @@
 import { logoProps } from "./logo"
+import { SosmedProps } from "./menus"
 
 export type LayoutProps = {
   Header?: React.ReactNode
@@ -11,4 +12,5 @@ export type LayoutProps = {
   variant?: "sidebar" | "floating" | "inset" | "basic"
   description?: string
   logo?: logoProps
+  sosmeds?: SosmedProps[]
 }

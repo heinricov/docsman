@@ -17,39 +17,27 @@ import {
   SidebarMenuSubItem,
 } from "../ui/sidebar"
 import { ChevronRightIcon } from "lucide-react"
+import { NavCollapsProps } from "../types/menus"
 
-export function NavCollaps({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon: React.ReactNode
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
-}) {
+export function NavCollaps({ label, menus }: NavCollapsProps) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{label}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {menus.map((menu) => (
           <Collapsible
-            key={item.title}
-            defaultOpen={item.isActive}
+            key={menu.title}
+            defaultOpen={menu.isActive}
             render={<SidebarMenuItem />}
           >
             <SidebarMenuButton
-              tooltip={item.title}
-              render={<a href={item.url} />}
+              tooltip={menu.title}
+              render={<a href={menu.url} />}
             >
-              {item.icon}
-              <span>{item.title}</span>
+              {menu.icon}
+              <span>{menu.title}</span>
             </SidebarMenuButton>
-            {item.items?.length ? (
+            {menu.items?.length ? (
               <>
                 <SidebarMenuAction
                   render={<CollapsibleTrigger />}
@@ -60,7 +48,7 @@ export function NavCollaps({
                 </SidebarMenuAction>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
+                    {menu.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton render={<a href={subItem.url} />}>
                           <span>{subItem.title}</span>

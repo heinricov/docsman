@@ -10,6 +10,7 @@ import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
 import { cn } from "../lib/utils"
 import Link from "next/link"
+import { AppSosmed } from "./app-sosmed"
 
 export function AppHeader({
   logo,
@@ -59,13 +60,7 @@ export function AppHeader({
             {search === true ? (
               <SearchForm className="hidden w-full sm:ml-auto sm:w-auto md:block" />
             ) : null}
-            <div className="flex items-center gap-2">
-              {sosmeds?.map((sosmed) => (
-                <Link key={sosmed.title} href={sosmed.href}>
-                  {sosmed.icon}
-                </Link>
-              ))}
-            </div>
+            <AppSosmed sosmeds={sosmeds} />
             {theme === true ? <AppTheme /> : null}
           </div>
         </div>

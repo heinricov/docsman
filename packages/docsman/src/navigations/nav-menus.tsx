@@ -1,5 +1,6 @@
 "use client"
 
+import { NavMenusProps } from "../types/menus"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -8,24 +9,16 @@ import {
   SidebarMenuItem,
 } from "../ui/sidebar"
 
-export function NavMenus({
-  projects,
-}: {
-  projects: {
-    name: string
-    url: string
-    icon: React.ReactNode
-  }[]
-}) {
+export function NavMenus({ label, menus }: NavMenusProps) {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>{label}</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton render={<a href={item.url} />}>
-              {item.icon}
-              <span>{item.name}</span>
+        {menus.map((menu) => (
+          <SidebarMenuItem key={menu.title}>
+            <SidebarMenuButton render={<a href={menu.href} />}>
+              {menu.icon}
+              <span>{menu.title}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

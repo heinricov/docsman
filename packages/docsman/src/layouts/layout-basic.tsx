@@ -18,6 +18,7 @@ export function LayoutBasic({
   },
   Header,
   Footer,
+  sosmeds,
 }: LayoutProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
@@ -25,6 +26,7 @@ export function LayoutBasic({
         {Header}
         <div className="flex flex-1">
           <AppSidebar
+            sosmeds={sosmeds}
             logo={logo}
             className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
           />

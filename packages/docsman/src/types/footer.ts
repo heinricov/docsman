@@ -1,4 +1,4 @@
-import { MenusProps, SosmedProps } from "./header"
+import { MenusProps, SosmedProps } from "./menus"
 import { AppLogoProps } from "./logo"
 
 export type AppFooterProps = {

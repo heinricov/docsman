@@ -110,6 +110,33 @@ export function DocsmanLayout({
       ]}
     />
   ),
+  sosmeds = [
+    {
+      title: "Linkedin",
+      icon: <FaLinkedin className="h-5 w-5 text-muted-foreground" />,
+      href: "/",
+    },
+    {
+      title: "Instagram",
+      icon: <FaInstagram className="h-5 w-5 text-muted-foreground" />,
+      href: "/",
+    },
+    {
+      title: "Youtube",
+      icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
+      href: "/",
+    },
+    {
+      title: "Github",
+      icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
+      href: "/",
+    },
+    {
+      title: "Twitter",
+      icon: <RiTwitterXFill className="h-5 w-5 text-muted-foreground" />,
+      href: "/",
+    },
+  ],
 }: DocsManLayoutProps) {
   const layoutProps = {
     Header,
@@ -119,6 +146,7 @@ export function DocsmanLayout({
     theme,
     search,
     children,
+    sosmeds,
   }
   switch (variant) {
     case "floating":

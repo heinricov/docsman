@@ -1,4 +1,5 @@
 import { AppLogoProps } from "./logo"
+import { MenusProps, SosmedProps } from "./menus"
 
 export type AppHeaderProps = {
   icon?: React.ReactNode
@@ -9,15 +10,4 @@ export type AppHeaderProps = {
   logo?: AppLogoProps
   menus?: MenusProps[]
   sosmeds?: SosmedProps[]
-}
-
-export type MenusProps = {
-  title: string
-  href: string
-}
-
-export type SosmedProps = {
-  title: string
-  href: string
-  icon: React.ReactNode
 }
