@@ -18,14 +18,15 @@ import { cn } from "../lib/utils"
 
 export function NavSwitcher({
   versions,
-  defaultVersion,
+  selectedVersion,
+  onSelect,
   className
 }: {
   versions: string[]
-  defaultVersion: string
-  className?:string
+  selectedVersion: string
+  onSelect: (version: string) => void
+  className?: string
 }) {
-  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion)
 
   return (
     <SidebarMenu className={cn("hover:bg-none",className)}>
@@ -55,7 +56,7 @@ export function NavSwitcher({
             {versions.map((version) => (
               <DropdownMenuItem
                 key={version}
-                onSelect={() => setSelectedVersion(version)}
+                onClick={() => onSelect(version)}
               >
                 v{version}{" "}
                 {version === selectedVersion && <Check className="ml-auto" />}

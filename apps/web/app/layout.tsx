@@ -4,10 +4,19 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "docsman/lib/utils"
 import { DocsmanLayout } from "docsman/layouts"
-import { Globe } from "lucide-react"
+import {
+  Book,
+  BookOpenIcon,
+  BotIcon,
+  Globe,
+  Home,
+  Settings2Icon,
+  TerminalSquareIcon,
+} from "lucide-react"
 
 import { FaYoutube, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { RiTwitterXFill } from "react-icons/ri"
+import { MenuSectionProps } from "../../../packages/docsman/src/types/menus"
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -29,6 +38,143 @@ const fontMono = Geist_Mono({
 //   },
 // ]
 
+export const menus = [
+  {
+    type: "MainNavMenus",
+    label: "Menus",
+    menus: [
+      {
+        title: "Home",
+        href: "/",
+        icon: <Home />,
+      },
+      {
+        title: "Docs",
+        href: "/docs",
+        icon: <Book />,
+      },
+    ],
+  },
+  {
+    grup: "1.0.1",
+    type: "NavCollaps",
+    label: "Platform",
+    menus: [
+      {
+        title: "Playground",
+        url: "#",
+        icon: <TerminalSquareIcon />,
+        isActive: true,
+        items: [
+          {
+            title: "History",
+            url: "#",
+          },
+          {
+            title: "Starred",
+            url: "#",
+          },
+          {
+            title: "Settings",
+            url: "#",
+          },
+        ],
+      },
+      {
+        title: "Models",
+        url: "#",
+        icon: <BotIcon />,
+        items: [
+          {
+            title: "Genesis",
+            url: "#",
+          },
+          {
+            title: "Explorer",
+            url: "#",
+          },
+          {
+            title: "Quantum",
+            url: "#",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    grup: "1.2.1",
+    type: "NavMenus",
+    label: "Projects",
+    menus: [
+      {
+        title: "Design Engineering",
+        href: "#",
+      },
+      {
+        title: "Sales & Marketing",
+        href: "#",
+      },
+      {
+        title: "Travel",
+        href: "#",
+      },
+    ],
+  },
+  {
+    grup: "1.3.3",
+    type: "NavCollaps",
+    label: "Data",
+    menus: [
+      {
+        title: "Documentation",
+        url: "#",
+        icon: <BookOpenIcon />,
+        items: [
+          {
+            title: "Introduction",
+            url: "#",
+          },
+          {
+            title: "Get Started",
+            url: "#",
+          },
+          {
+            title: "Tutorials",
+            url: "#",
+          },
+          {
+            title: "Changelog",
+            url: "#",
+          },
+        ],
+      },
+      {
+        title: "Settings",
+        url: "#",
+        icon: <Settings2Icon />,
+        items: [
+          {
+            title: "General",
+            url: "#",
+          },
+          {
+            title: "Team",
+            url: "#",
+          },
+          {
+            title: "Billing",
+            url: "#",
+          },
+          {
+            title: "Limits",
+            url: "#",
+          },
+        ],
+      },
+    ],
+  },
+] satisfies MenuSectionProps[]
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,7 +193,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <DocsmanLayout title="Web" icon={<Globe />}>
+          <DocsmanLayout title="Web" icon={<Globe />} sideMenus={menus}>
             {children}
           </DocsmanLayout>
         </ThemeProvider>

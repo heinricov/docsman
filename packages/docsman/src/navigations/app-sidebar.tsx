@@ -2,8 +2,6 @@
 
 import * as React from "react"
 
-import { NavCollaps } from "./nav-collaps"
-import { NavMenus } from "./nav-menus"
 import { NavSwitcher } from "./nav-switcher"
 import { AppLogoSidebar } from "./app-logo"
 import {
@@ -13,171 +11,48 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "../ui/sidebar"
-import {
-  TerminalSquareIcon,
-  BotIcon,
-  BookOpenIcon,
-  Settings2Icon,
-  Home,
-  Book,
-} from "lucide-react"
-import { logoProps } from "../types/logo"
 import { AppSosmed } from "./app-sosmed"
-import { SosmedProps } from "../types/menus"
-
-const menus = {
-  teams: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  menus: {
-    label: "Menus",
-    menus: [
-      {
-        title: "Home",
-        href: "/",
-        icon: <Home />,
-      },
-      {
-        title: "Docs",
-        href: "/docs",
-        icon: <Book />,
-      },
-    ],
-  },
-  navMain: {
-    label: "Platform",
-    menus: [
-      {
-        title: "Playground",
-        url: "#",
-        icon: <TerminalSquareIcon />,
-        isActive: true,
-        items: [
-          {
-            title: "History",
-            url: "#",
-          },
-          {
-            title: "Starred",
-            url: "#",
-          },
-          {
-            title: "Settings",
-            url: "#",
-          },
-        ],
-      },
-      {
-        title: "Models",
-        url: "#",
-        icon: <BotIcon />,
-        items: [
-          {
-            title: "Genesis",
-            url: "#",
-          },
-          {
-            title: "Explorer",
-            url: "#",
-          },
-          {
-            title: "Quantum",
-            url: "#",
-          },
-        ],
-      },
-      {
-        title: "Documentation",
-        url: "#",
-        icon: <BookOpenIcon />,
-        items: [
-          {
-            title: "Introduction",
-            url: "#",
-          },
-          {
-            title: "Get Started",
-            url: "#",
-          },
-          {
-            title: "Tutorials",
-            url: "#",
-          },
-          {
-            title: "Changelog",
-            url: "#",
-          },
-        ],
-      },
-      {
-        title: "Settings",
-        url: "#",
-        icon: <Settings2Icon />,
-        items: [
-          {
-            title: "General",
-            url: "#",
-          },
-          {
-            title: "Team",
-            url: "#",
-          },
-          {
-            title: "Billing",
-            url: "#",
-          },
-          {
-            title: "Limits",
-            url: "#",
-          },
-        ],
-      },
-    ],
-  },
-  projects: {
-    label: "Projects",
-    menus: [
-      {
-        title: "Design Engineering",
-        href: "#",
-      },
-      {
-        title: "Sales & Marketing",
-        href: "#",
-      },
-      {
-        title: "Travel",
-        href: "#",
-      },
-    ],
-  },
-}
-
-type AppSidebarProps = {
-  className?: string
-  logo?: logoProps
-  sosmeds?: SosmedProps[]
-} & React.ComponentProps<typeof Sidebar>
+import { AppMenu } from "./app-menu"
+import { AppSidebarProps } from "../types/app-sidebar"
 
 export function AppSidebar({
   className,
   sosmeds,
-  logo = {},
+  logo,
+  menus = [],
   ...props
 }: AppSidebarProps) {
+  const versions = React.useMemo(
+    () =>
+      Array.from(
+        new Set(
+          menus
+            .filter((section) => "grup" in section && section.grup)
+            .map((section) => ("grup" in section ? section.grup : undefined))
+            .filter(Boolean) as string[]
+        )
+      ),
+    [menus]
+  )
+  const [selectedVersion, setSelectedVersion] = React.useState(
+    versions[0] ?? ""
+  )
+
   return (
     <Sidebar className={className} {...props}>
       <SidebarHeader>
         <AppLogoSidebar logo={logo} />
-        <NavSwitcher
-          className="mt-4"
-          versions={menus.teams}
-          defaultVersion={menus.teams[0]!}
-        />
+        {versions.length > 0 && (
+          <NavSwitcher
+            className="mt-4"
+            versions={versions}
+            selectedVersion={selectedVersion}
+            onSelect={setSelectedVersion}
+          />
+        )}
       </SidebarHeader>
-
       <SidebarContent>
-        <NavMenus {...menus.menus} />
-        <NavMenus {...menus.projects} />
-        <NavCollaps {...menus.navMain} />
+        <AppMenu menu={menus} selectedVersion={selectedVersion} />
       </SidebarContent>
       <SidebarFooter>
         <AppSosmed className="md:hidden" sosmeds={sosmeds} />

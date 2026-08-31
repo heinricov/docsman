@@ -19,6 +19,7 @@ export function LayoutBasic({
   Header,
   Footer,
   sosmeds,
+  sideMenus,
 }: LayoutProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
@@ -28,6 +29,7 @@ export function LayoutBasic({
           <AppSidebar
             sosmeds={sosmeds}
             logo={logo}
+            menus={sideMenus}
             className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
           />
           <SidebarInset>

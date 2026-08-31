@@ -6,7 +6,7 @@ export type MenusProps = {
 
 export type NavMenusProps = {
   label: string
-  menus: MenusProps[]
+  menus: MenuItemProps[]
 }
 
 export type NavCollapsItemProps = {
@@ -22,7 +22,31 @@ export type NavCollapsItemProps = {
 
 export type NavCollapsProps = {
   label: string
-  menus: NavCollapsItemProps[]
+  menus: MenuItemProps[]
+}
+
+export type MenuItemProps = {
+  title: string
+  href?: string
+  url?: string
+  icon?: React.ReactNode
+  isActive?: boolean
+  items?: {
+    title: string
+    url: string
+  }[]
+}
+
+export type MenuSectionProps = {
+  type: "MainNavMenus" | "NavMenus" | "NavCollaps"
+  label: string
+  grup?: string
+  menus: MenuItemProps[]
+}
+
+export type AppMenuProps = {
+  menu: MenuSectionProps[]
+  selectedVersion?: string
 }
 
 export type SosmedProps = {

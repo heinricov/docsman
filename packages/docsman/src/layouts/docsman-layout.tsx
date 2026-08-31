@@ -5,9 +5,6 @@ import { SquareText } from "lucide-react"
 import { AppHeader } from "../navigations/app-header"
 import { AppFooter } from "../navigations/app-footer"
 
-import { FaYoutube, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
-import { RiTwitterXFill } from "react-icons/ri"
-
 type DocsManLayoutProps = LayoutProps
 
 export function DocsmanLayout({
@@ -23,6 +20,7 @@ export function DocsmanLayout({
     description: "Version Beta",
   },
   sosmeds,
+  sideMenus,
   Header = (
     <AppHeader
       logo={logo}
@@ -69,6 +67,7 @@ export function DocsmanLayout({
     search,
     children,
     sosmeds,
+    sideMenus,
   }
   switch (variant) {
     case "floating":
