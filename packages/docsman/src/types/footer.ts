@@ -1,4 +1,9 @@
+import { MenusProps, SosmedProps } from "./header"
+import { AppLogoProps } from "./logo"
+
 export type AppFooterProps = {
-  icon?: React.ReactNode
+  logo?: AppLogoProps
   title?: string
+  sosmeds?: SosmedProps[]
+  menus?: MenusProps[]
 }

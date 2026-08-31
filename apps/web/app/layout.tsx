@@ -30,7 +30,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <DocsmanLayout variant="basic">{children}</DocsmanLayout>
+          <DocsmanLayout>{children}</DocsmanLayout>
         </ThemeProvider>
       </body>
     </html>

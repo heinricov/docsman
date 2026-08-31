@@ -1,3 +1,5 @@
+import { logoProps } from "./logo"
+
 export type LayoutProps = {
   Header?: React.ReactNode
   Footer?: React.ReactNode
@@ -7,4 +9,6 @@ export type LayoutProps = {
   theme?: boolean
   search?: boolean
   variant?: "sidebar" | "floating" | "inset" | "basic"
+  description?: string
+  logo?: logoProps
 }

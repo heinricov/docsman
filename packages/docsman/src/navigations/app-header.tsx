@@ -9,12 +9,14 @@ import { AppLogo } from "./app-logo"
 import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
 import { cn } from "../lib/utils"
+import Link from "next/link"
 
 export function AppHeader({
-  icon,
-  title,
+  logo,
   theme,
   search,
+  menus,
+  sosmeds,
   className,
 }: AppHeaderProps) {
   const { toggleSidebar } = useSidebar()
@@ -40,12 +42,30 @@ export function AppHeader({
               </Button>
               <Separator orientation="vertical" className="mx-2" />
             </div>
-            <AppLogo icon={icon} title={title} />
+            <AppLogo {...logo} />
+            <nav className="ml-5 hidden items-center gap-6 md:flex">
+              {menus?.map((menu) => (
+                <a
+                  key={menu.title}
+                  href={menu.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {menu.title}
+                </a>
+              ))}
+            </nav>
           </div>
           <div className="flex items-center gap-2">
             {search === true ? (
               <SearchForm className="hidden w-full sm:ml-auto sm:w-auto md:block" />
             ) : null}
+            <div className="flex items-center gap-2">
+              {sosmeds?.map((sosmed) => (
+                <Link key={sosmed.title} href={sosmed.href}>
+                  {sosmed.icon}
+                </Link>
+              ))}
+            </div>
             {theme === true ? <AppTheme /> : null}
           </div>
         </div>

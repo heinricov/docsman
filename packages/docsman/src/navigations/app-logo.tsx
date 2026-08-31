@@ -1,23 +1,22 @@
 import { cn } from "../lib/utils"
-import { AppLogoProps } from "../types/logo"
+import { AppLogoSidebarProps, AppLogoProps } from "../types/logo"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar"
-import { TerminalIcon } from "lucide-react"
 
-export function AppLogoSidebar({ className }: { className?: string }) {
+export function AppLogoSidebar({ logo = {} }: AppLogoSidebarProps) {
   return (
-    <SidebarMenu>
+    <SidebarMenu className="md:hidden">
       <SidebarMenuItem>
         <SidebarMenuButton
-          className={cn("hover:bg-none", className)}
+          className={cn("hover:bg-none", logo.className)}
           size="lg"
           render={<a href="#" />}
         >
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <TerminalIcon className="size-4" />
+            {logo.icon}
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-medium">Acme Inc</span>
-            <span className="truncate text-xs">Enterprise</span>
+            <span className="truncate font-medium">{logo.title}</span>
+            <span className="truncate text-xs">{logo.description}</span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

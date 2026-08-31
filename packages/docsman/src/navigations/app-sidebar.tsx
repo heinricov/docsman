@@ -4,11 +4,14 @@ import * as React from "react"
 
 import { NavCollaps } from "./nav-collaps"
 import { NavMenus } from "./nav-menus"
+import { NavSwitcher } from "./nav-switcher"
+import { AppLogoSidebar } from "./app-logo"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarRail,
 } from "../ui/sidebar"
 import {
   TerminalSquareIcon,
@@ -19,9 +22,9 @@ import {
   PieChartIcon,
   MapIcon,
 } from "lucide-react"
-import { NavSwitcher } from "./nav-switcher"
+import { logoProps } from "../types/logo"
 
-const data = {
+const menus = {
   teams: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
@@ -128,24 +131,34 @@ const data = {
     },
   ],
 }
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+type AppSidebarProps = {
+  className?: string
+  logo?: logoProps
+} & React.ComponentProps<typeof Sidebar>
+
+export function AppSidebar({
+  className,
+  logo = {},
+  ...props
+}: AppSidebarProps) {
   return (
-    <Sidebar
-      className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
-      {...props}
-    >
+    <Sidebar className={className} {...props}>
       <SidebarHeader>
+        <AppLogoSidebar logo={logo} />
         <NavSwitcher
           className="mt-4"
-          versions={data.teams}
-          defaultVersion={data.teams[0]!}
+          versions={menus.teams}
+          defaultVersion={menus.teams[0]!}
         />
       </SidebarHeader>
+
       <SidebarContent>
-        <NavCollaps items={data.navMain} />
-        <NavMenus projects={data.projects} />
+        <NavMenus projects={menus.projects} />
+        <NavCollaps items={menus.navMain} />
       </SidebarContent>
       <SidebarFooter>{/* footer */}</SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   )
 }
