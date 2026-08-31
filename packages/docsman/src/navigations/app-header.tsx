@@ -9,7 +9,6 @@ import { AppLogo } from "./app-logo"
 import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
 import { cn } from "../lib/utils"
-import Link from "next/link"
 import { AppSosmed } from "./app-sosmed"
 
 export function AppHeader({
