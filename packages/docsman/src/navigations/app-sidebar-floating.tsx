@@ -134,7 +134,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar className="" variant="floating" {...props}>
+    <Sidebar {...props}>
       <SidebarHeader>
         {/* <AppLogoSidebar />{" "} */}
         <NavSwitcher versions={data.teams} defaultVersion={data.teams[0]!} />

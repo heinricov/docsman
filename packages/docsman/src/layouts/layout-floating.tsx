@@ -5,7 +5,9 @@ import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { AppHeader } from "../navigations/app-header"
 import { AppFooter } from "../navigations/app-footer"
 import { SquareText } from "lucide-react"
-import { LayoutBasicProps } from "../types/layouts"
+import { LayoutProps } from "../types/layouts"
+
+export const iframeHeight = "800px"
 
 export function LayoutFloating({
   children,
@@ -23,17 +25,15 @@ export function LayoutFloating({
     />
   ),
   Footer = <AppFooter icon={icon} title={title} />,
-}: LayoutBasicProps) {
+}: LayoutProps) {
   return (
-    <div>
-      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>
-          {Header}
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
-          {Footer}
-        </SidebarInset>
-      </SidebarProvider>
-    </div>
+    <SidebarProvider>
+      <AppSidebar variant="floating" />
+      <SidebarInset>
+        {Header}
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        {Footer}
+      </SidebarInset>
+    </SidebarProvider>
   )
 }

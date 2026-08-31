@@ -4,7 +4,7 @@ import { AppSidebar } from "../navigations/app-sidebar-basic"
 import { AppHeader } from "../navigations/app-header"
 import { AppFooter } from "../navigations/app-footer"
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
-import { LayoutBasicProps } from "../types/layouts"
+import { LayoutProps } from "../types/layouts"
 import { SquareText } from "lucide-react"
 
 export const iframeHeight = "800px"
@@ -27,7 +27,7 @@ export function LayoutBasic({
     />
   ),
   Footer = <AppFooter icon={icon} title={title} />,
-}: LayoutBasicProps) {
+}: LayoutProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">

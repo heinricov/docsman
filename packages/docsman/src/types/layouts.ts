@@ -1,4 +1,4 @@
-export type LayoutBasicProps = {
+export type LayoutProps = {
   Header?: React.ReactNode
   Footer?: React.ReactNode
   children: React.ReactNode
@@ -6,4 +6,5 @@ export type LayoutBasicProps = {
   title?: string
   theme?: boolean
   search?: boolean
+  variant?: "sidebar" | "floating" | "inset" | "basic"
 }
