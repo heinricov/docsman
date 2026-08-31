@@ -38,6 +38,7 @@ export default defineConfig({
     "src/navigations/nav-switcher.tsx",
     "src/navigations/app-footer.tsx",
     "src/navigations/app-theme.tsx",
+    "src/navigations/app-sosmed.tsx",
   ],
   format: ["esm"],
   dts: true,

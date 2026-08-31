@@ -13,7 +13,7 @@ type DocsManLayoutProps = LayoutProps
 export function DocsmanLayout({
   variant = "basic",
   children,
-  title = "Acme",
+  title,
   icon = <SquareText className="size-5! text-primary" />,
   theme = true,
   search = true,
@@ -22,6 +22,7 @@ export function DocsmanLayout({
     title,
     description: "Version Beta",
   },
+  sosmeds,
   Header = (
     <AppHeader
       logo={logo}
@@ -34,33 +35,7 @@ export function DocsmanLayout({
           href: "/",
         },
       ]}
-      sosmeds={[
-        {
-          title: "Linkedin",
-          icon: <FaLinkedin className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Instagram",
-          icon: <FaInstagram className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Youtube",
-          icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Github",
-          icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Twitter",
-          icon: <RiTwitterXFill className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-      ]}
+      sosmeds={sosmeds}
     />
   ),
   Footer = (
@@ -81,62 +56,9 @@ export function DocsmanLayout({
           href: "/#privacy",
         },
       ]}
-      sosmeds={[
-        {
-          title: "Linkedin",
-          icon: <FaLinkedin className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Instagram",
-          icon: <FaInstagram className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Youtube",
-          icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Github",
-          icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-        {
-          title: "Twitter",
-          icon: <RiTwitterXFill className="h-5 w-5 text-muted-foreground" />,
-          href: "/",
-        },
-      ]}
+      sosmeds={sosmeds}
     />
   ),
-  sosmeds = [
-    {
-      title: "Linkedin",
-      icon: <FaLinkedin className="h-5 w-5 text-muted-foreground" />,
-      href: "/",
-    },
-    {
-      title: "Instagram",
-      icon: <FaInstagram className="h-5 w-5 text-muted-foreground" />,
-      href: "/",
-    },
-    {
-      title: "Youtube",
-      icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
-      href: "/",
-    },
-    {
-      title: "Github",
-      icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
-      href: "/",
-    },
-    {
-      title: "Twitter",
-      icon: <RiTwitterXFill className="h-5 w-5 text-muted-foreground" />,
-      href: "/",
-    },
-  ],
 }: DocsManLayoutProps) {
   const layoutProps = {
     Header,
