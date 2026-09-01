@@ -39,7 +39,7 @@ export const menus = [
     ],
   },
   {
-    type: "NavCombine",
+    type: "NavMenus",
     label: "Documentation",
     menus: [
       {
@@ -50,6 +50,11 @@ export const menus = [
         title: "Use Templates",
         href: "/docs/templates",
       },
+    ],
+  },
+  {
+    type: "NavCollaps",
+    menus: [
       {
         title: "Components",
         url: "#",
