@@ -6,19 +6,26 @@ import { MainNavMenus } from "./main-nav-menus"
 import { AppMenuProps, MenuSectionProps } from "../types/menus"
 
 function renderSection(section: MenuSectionProps, selectedVersion?: string) {
+  const label = section.label ?? ""
   switch (section.type) {
     case "MainNavMenus":
-      return <MainNavMenus label={section.label} menus={section.menus} />
+      return <MainNavMenus label={label} menus={section.menus} />
     case "NavMenus":
-      return <NavMenus label={section.label} menus={section.menus} />
+      return <NavMenus label={label} menus={section.menus} />
     case "NavCollaps":
-      return <NavCollaps label={section.label} menus={section.menus} />
+      return <NavCollaps label={label} menus={section.menus} />
   }
 }
 
 export function AppMenu({ menu, selectedVersion }: AppMenuProps) {
   const mainNav = menu.filter((section) => section.type === "MainNavMenus")
-  const others = menu.filter((section) => section.type !== "MainNavMenus")
+  const others = menu.filter(
+    (section) =>
+      section.type !== "MainNavMenus" &&
+      section.type !== "Header" &&
+      section.type !== "Footer" &&
+      !section.hidden
+  )
 
   const visible = others.filter(
     (section) =>
@@ -28,7 +35,10 @@ export function AppMenu({ menu, selectedVersion }: AppMenuProps) {
   return (
     <>
       {mainNav.map((section) => (
-        <div key={`${section.type}-${section.label}`}>
+        <div
+          key={`${section.type}-${section.label}`}
+          className={section.hidden ? "md:hidden" : ""}
+        >
           {renderSection(section, selectedVersion)}
         </div>
       ))}

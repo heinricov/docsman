@@ -1,9 +1,11 @@
 import { logoProps } from "./logo"
-import { MenuSectionProps, SosmedProps } from "./menus"
+import { MenuSectionProps, MenusProps, SosmedProps } from "./menus"
 
 export type LayoutProps = {
   Header?: React.ReactNode
+  HeaderMenus?: MenusProps[]
   Footer?: React.ReactNode
+  FooterMenus?: MenusProps[]
   children: React.ReactNode
   icon?: React.ReactNode
   title?: string

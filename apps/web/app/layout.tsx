@@ -38,8 +38,25 @@ const mysosmeds = [
 
 export const menus = [
   {
+    type: "Header",
+    menus: [
+      {
+        title: "Home",
+      },
+    ],
+  },
+  {
+    type: "Footer",
+    menus: [
+      {
+        title: "Policy",
+      },
+    ],
+  },
+  {
     type: "MainNavMenus",
     label: "Menus",
+    hidden: true,
     menus: [
       {
         title: "Home",

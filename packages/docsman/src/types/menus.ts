@@ -38,9 +38,10 @@ export type MenuItemProps = {
 }
 
 export type MenuSectionProps = {
-  type: "MainNavMenus" | "NavMenus" | "NavCollaps"
-  label: string
+  type: "MainNavMenus" | "NavMenus" | "NavCollaps" | "Header" | "Footer"
+  label?: string
   grup?: string
+  hidden?: boolean
   menus: MenuItemProps[]
 }
 
