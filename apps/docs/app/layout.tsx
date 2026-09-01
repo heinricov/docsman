@@ -5,7 +5,7 @@ import { DocsmanLayout, MenuSectionProps } from "docsman"
 import { cn } from "@/lib/utils"
 
 import { BsArrowUpRightSquareFill } from "react-icons/bs"
-import { Component } from "lucide-react"
+import { Book, Component, Home } from "lucide-react"
 
 export const menus = [
   {
@@ -21,7 +21,23 @@ export const menus = [
       },
     ],
   },
-
+  {
+    type: "MainNavMenus",
+    label: "Menus",
+    hidden: true,
+    menus: [
+      {
+        title: "Home",
+        href: "/",
+        icon: <Home />,
+      },
+      {
+        title: "Docs",
+        href: "/docs",
+        icon: <Book />,
+      },
+    ],
+  },
   {
     type: "NavCombine",
     label: "Documentation",
