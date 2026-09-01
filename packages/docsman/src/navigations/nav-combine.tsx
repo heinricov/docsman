@@ -22,7 +22,7 @@ import { NavCombineProps } from "../types/menus"
 export function NavCombine({ label, menus }: NavCombineProps) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{label}</SidebarGroupLabel>
+      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
       <SidebarMenu>
         {menus.map((menu) =>
           menu.items?.length ? (

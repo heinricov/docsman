@@ -22,7 +22,7 @@ import { NavCollapsProps } from "../types/menus"
 export function NavCollaps({ label, menus }: NavCollapsProps) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{label}</SidebarGroupLabel>
+      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
       <SidebarMenu>
         {menus.map((menu) => (
           <Collapsible

@@ -12,7 +12,7 @@ import {
 export function NavMenus({ label, menus }: NavMenusProps) {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>{label}</SidebarGroupLabel>
+      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
       <SidebarMenu>
         {menus.map((menu) => (
           <SidebarMenuItem key={menu.title}>
