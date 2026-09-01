@@ -5,14 +5,7 @@ import { DocsmanLayout, MenuSectionProps } from "docsman"
 import { cn } from "@/lib/utils"
 
 import { BsArrowUpRightSquareFill } from "react-icons/bs"
-import {
-  Book,
-  BookOpenIcon,
-  BotIcon,
-  Home,
-  Settings2Icon,
-  TerminalSquareIcon,
-} from "lucide-react"
+import { Component } from "lucide-react"
 
 export const menus = [
   {
@@ -30,25 +23,8 @@ export const menus = [
   },
 
   {
-    type: "MainNavMenus",
-    label: "Menus",
-    hidden: true,
-    menus: [
-      {
-        title: "Home",
-        href: "/",
-        icon: <Home />,
-      },
-      {
-        title: "Docs",
-        href: "/docs",
-        icon: <Book />,
-      },
-    ],
-  },
-  {
-    type: "NavMenus",
-    label: "Documentations",
+    type: "NavCombine",
+    label: "Documentation",
     menus: [
       {
         title: "Installasi",
@@ -58,109 +34,22 @@ export const menus = [
         title: "Use Templates",
         href: "/docs/templates",
       },
-    ],
-  },
-  {
-    type: "NavCombine",
-    label: "Platform",
-    grup: "v 0.0.1",
-    menus: [
       {
-        title: "Playground",
+        title: "Components",
         url: "#",
-        icon: <TerminalSquareIcon />,
+        icon: <Component />,
         isActive: true,
         items: [
           {
-            title: "History",
+            title: "Alert",
             url: "#",
           },
           {
-            title: "Starred",
+            title: "Card Section",
             url: "#",
           },
           {
-            title: "Settings",
-            url: "#",
-          },
-        ],
-      },
-      {
-        title: "Installasi",
-        href: "/docs/installasi",
-      },
-      {
-        title: "Use Templates",
-        href: "/docs/templates",
-      },
-      {
-        title: "Models",
-        url: "#",
-        icon: <BotIcon />,
-        items: [
-          {
-            title: "Genesis",
-            url: "#",
-          },
-          {
-            title: "Explorer",
-            url: "#",
-          },
-          {
-            title: "Quantum",
-            url: "#",
-          },
-        ],
-      },
-    ],
-  },
-
-  {
-    type: "NavCollaps",
-    label: "Data",
-    menus: [
-      {
-        title: "Documentation",
-        url: "#",
-        icon: <BookOpenIcon />,
-        items: [
-          {
-            title: "Introduction",
-            url: "#",
-          },
-          {
-            title: "Get Started",
-            url: "#",
-          },
-          {
-            title: "Tutorials",
-            url: "#",
-          },
-          {
-            title: "Changelog",
-            url: "#",
-          },
-        ],
-      },
-      {
-        title: "Settings",
-        url: "#",
-        icon: <Settings2Icon />,
-        items: [
-          {
-            title: "General",
-            url: "#",
-          },
-          {
-            title: "Team",
-            url: "#",
-          },
-          {
-            title: "Billing",
-            url: "#",
-          },
-          {
-            title: "Limits",
+            title: "Code Block",
             url: "#",
           },
         ],
