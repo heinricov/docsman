@@ -1,0 +1,39 @@
+import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { DocsmanLayout } from "docsman/layouts"
+import { FaGithub, FaYoutube } from "react-icons/fa"
+
+const mysosmeds = [
+  {
+    title: "Youtube",
+    icon: <FaYoutube className="h-5 w-5 text-muted-foreground" />,
+    href: "/",
+  },
+  {
+    title: "Github",
+    icon: <FaGithub className="h-5 w-5 text-muted-foreground" />,
+    href: "/",
+  },
+]
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
+      <body>
+        <ThemeProvider>
+          {/*add sosial media di header dan footer  */}
+          <DocsmanLayout sosmeds={mysosmeds}>
+            {children}
+          </DocsmanLayout>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}

@@ -60,3 +60,9 @@ export type AppSosmedProps = {
   sosmeds?: SosmedProps[]
   className?: string
 }
+
+export type GrupProps = {
+  title: string
+  description?: string
+  icon?: React.ReactNode
+}

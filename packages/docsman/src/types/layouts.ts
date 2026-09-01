@@ -1,5 +1,5 @@
 import { logoProps } from "./logo"
-import { MenuSectionProps, MenusProps, SosmedProps } from "./menus"
+import { GrupProps, MenuSectionProps, MenusProps, SosmedProps } from "./menus"
 
 export type LayoutProps = {
   Header?: React.ReactNode
@@ -16,6 +16,7 @@ export type LayoutProps = {
   logo?: logoProps
   sosmeds?: SosmedProps[]
   sideMenus?: MenuSectionProps[]
+  grup?: GrupProps[]
   ShowSidebar?: string | string[]
   sidebarDesktopHidden?: boolean
 }

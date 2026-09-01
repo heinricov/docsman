@@ -1,0 +1,27 @@
+import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+
+import { DocsmanLayout } from "docsman/layouts"
+import { Globe } from "lucide-react"
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
+      <body>
+        <ThemeProvider>
+          {/*Custome title dan icon pada logo header dan footer  */}
+          <DocsmanLayout title="Web" icon={<Globe />}>
+            {children}
+          </DocsmanLayout>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}

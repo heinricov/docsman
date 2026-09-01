@@ -20,6 +20,7 @@ export function LayoutBasic({
   Footer,
   sosmeds,
   sideMenus,
+  grup,
   sidebarDesktopHidden,
 }: LayoutProps) {
   return (
@@ -32,6 +33,7 @@ export function LayoutBasic({
               sosmeds={sosmeds}
               logo={logo}
               menus={sideMenus}
+              grup={grup}
               className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
             />
           </div>

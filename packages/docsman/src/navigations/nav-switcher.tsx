@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react"
+import { Check, ChevronsUpDown } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -9,27 +9,23 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "../ui/sidebar"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar"
 import { cn } from "../lib/utils"
+import { GrupProps } from "../types/menus"
 
 export function NavSwitcher({
-  versions,
-  selectedVersion,
+  options,
+  selected,
   onSelect,
-  className
+  className,
 }: {
-  versions: string[]
-  selectedVersion: string
-  onSelect: (version: string) => void
+  options: GrupProps[]
+  selected: GrupProps
+  onSelect: (group: GrupProps) => void
   className?: string
 }) {
-
   return (
-    <SidebarMenu className={cn("hover:bg-none",className)}>
+    <SidebarMenu className={cn("hover:bg-none", className)}>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger
@@ -39,11 +35,11 @@ export function NavSwitcher({
                 className="w-full rounded-md border data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
+                  {selected.icon ?? <ChevronsUpDown className="size-4" />}
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Documentation</span>
-                  <span className="">v{selectedVersion}</span>
+                  <span className="font-medium">{selected.title}</span>
+                  <span className="">{selected.description}</span>
                 </div>
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>
@@ -53,13 +49,16 @@ export function NavSwitcher({
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
             align="start"
           >
-            {versions.map((version) => (
+            {options.map((option) => (
               <DropdownMenuItem
-                key={version}
-                onClick={() => onSelect(version)}
+                key={option.title}
+                onClick={() => onSelect(option)}
               >
-                v{version}{" "}
-                {version === selectedVersion && <Check className="ml-auto" />}
+                {option.icon}
+                {option.title}{" "}
+                {option.title === selected.title && (
+                  <Check className="ml-auto" />
+                )}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>

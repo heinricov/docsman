@@ -1,0 +1,23 @@
+import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { DocsmanLayout } from "docsman/layouts"
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          <DocsmanLayout
+          // ini untuk merubah variant bisa (basic, floating, inset, dan sidebar, default nya basic) 
+           variant="floating"
+          >
+            {children}
+          </DocsmanLayout>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}

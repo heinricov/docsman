@@ -14,40 +14,43 @@ import {
 import { AppSosmed } from "./app-sosmed"
 import { AppMenu } from "./app-menu"
 import { AppSidebarProps } from "../types/app-sidebar"
+import { GrupProps } from "../types/menus"
 
 export function AppSidebar({
   className,
   sosmeds,
   logo,
   menus = [],
+  grup,
   ...props
 }: AppSidebarProps) {
-  const versions = React.useMemo(
-    () =>
-      Array.from(
-        new Set(
-          menus
-            .filter((section) => "grup" in section && section.grup)
-            .map((section) => ("grup" in section ? section.grup : undefined))
-            .filter(Boolean) as string[]
-        )
-      ),
-    [menus]
+  const groups = React.useMemo<GrupProps[]>(() => {
+    if (grup && grup.length > 0) return grup
+    return Array.from(
+      new Set(
+        menus
+          .filter((section) => "grup" in section && section.grup)
+          .map((section) => ("grup" in section ? section.grup : undefined))
+          .filter(Boolean) as string[]
+      )
+    ).map((title) => ({ title }))
+  }, [grup, menus])
+
+  const [selectedGroup, setSelectedGroup] = React.useState<GrupProps | null>(
+    groups[0] ?? null
   )
-  const [selectedVersion, setSelectedVersion] = React.useState(
-    versions[0] ?? ""
-  )
+  const selectedVersion = selectedGroup?.title ?? ""
 
   return (
     <Sidebar className={className} {...props}>
       <SidebarHeader>
         <AppLogoSidebar logo={logo} />
-        {versions.length > 0 && (
+        {selectedGroup && (
           <NavSwitcher
             className="mt-4"
-            versions={versions}
-            selectedVersion={selectedVersion}
-            onSelect={setSelectedVersion}
+            options={groups}
+            selected={selectedGroup}
+            onSelect={setSelectedGroup}
           />
         )}
       </SidebarHeader>

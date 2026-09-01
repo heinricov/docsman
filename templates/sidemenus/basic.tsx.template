@@ -3,39 +3,15 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { DocsmanLayout, MenuSectionProps } from "docsman/layouts"
 import {
   Book,
-  BookAIcon,
   BookOpenIcon,
   BotIcon,
   Globe,
   Home,
-  MailIcon,
-  PenBox,
   Settings2Icon,
   TerminalSquareIcon,
 } from "lucide-react"
 
 export const menus = [
-  {
-    type: "Header",
-    menus: [
-      {
-        title: "Home",
-        href: "/",
-      },
-      {
-        title: "Docs",
-        href: "/docs",
-      },
-    ],
-  },
-  {
-    type: "Footer",
-    menus: [
-      {
-        title: "Policy",
-      },
-    ],
-  },
   {
     type: "MainNavMenus",
     label: "Menus",
@@ -54,7 +30,6 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 1",
     type: "NavCollaps",
     label: "Platform",
     menus: [
@@ -100,7 +75,6 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 2",
     type: "NavMenus",
     label: "Projects",
     menus: [
@@ -119,7 +93,6 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 3",
     type: "NavCollaps",
     label: "Data",
     menus: [
@@ -173,24 +146,6 @@ export const menus = [
   },
 ] satisfies MenuSectionProps[]
 
-const grupData = [
-  {
-    title: "grup 1",
-    description: "vX 0.0.1",
-    icon: <MailIcon />,
-  },
-  {
-    title: "grup 2",
-    description: "v 0.0.2",
-    icon: <BookAIcon />,
-  },
-  {
-    title: "grup 3",
-    description: "v 0.0.3",
-    icon: <PenBox />,
-  },
-]
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -200,13 +155,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider>
-          <DocsmanLayout
-            title="Web"
-            icon={<Globe />}
-            sideMenus={menus}
-            ShowSidebar="/docs"
-            grup={grupData}
-          >
+          <DocsmanLayout title="Web" icon={<Globe />} sideMenus={menus}>
+            {/*menggunakan property sidemenus, jika pada type mainnavmenus hidden true maka menu hanya akan tampil saat di layar mobile  */}
             {children}
           </DocsmanLayout>
         </ThemeProvider>

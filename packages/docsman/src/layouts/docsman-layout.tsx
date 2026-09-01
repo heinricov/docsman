@@ -33,6 +33,7 @@ export function DocsmanLayout({
   },
   sosmeds,
   sideMenus,
+  grup,
   ShowSidebar,
   Header,
   Footer,
@@ -99,6 +100,7 @@ export function DocsmanLayout({
     children,
     sosmeds,
     sideMenus,
+    grup,
     sidebarDesktopHidden,
   }
   switch (variant) {
