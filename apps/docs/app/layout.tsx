@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/providers/theme-provider"
 import { DocsmanLayout, MenuSectionProps } from "docsman"
 import { cn } from "@/lib/utils"
 
-import { BsArrowUpRightSquareFill } from "react-icons/bs"
 import { Book, Component, Home } from "lucide-react"
+import Image from "next/image"
 
 export const menus = [
   {
@@ -99,7 +99,16 @@ export default function RootLayout({
         <ThemeProvider>
           <DocsmanLayout
             ShowSidebar="/docs"
-            icon={<BsArrowUpRightSquareFill className="text-primary" />}
+            icon={
+              <>
+                <Image
+                  src="/docman.png"
+                  width={22}
+                  height={22}
+                  alt="Docsman logo"
+                />
+              </>
+            }
             title="Docsman"
             sideMenus={menus}
           >

@@ -6,13 +6,13 @@ import {
   BookAIcon,
   BookOpenIcon,
   BotIcon,
-  Globe,
   Home,
   MailIcon,
   PenBox,
   Settings2Icon,
   TerminalSquareIcon,
 } from "lucide-react"
+import Image from "next/image"
 
 export const menus = [
   {
@@ -214,7 +214,16 @@ export default function RootLayout({
         <ThemeProvider>
           <DocsmanLayout
             title="Web"
-            icon={<Globe />}
+            icon={
+              <>
+                <Image
+                  src="/docman.png"
+                  width={22}
+                  height={22}
+                  alt="Docsman logo"
+                />
+              </>
+            }
             sideMenus={menus}
             ShowSidebar="/docs"
             grup={grupData}
