@@ -42,6 +42,11 @@ export const menus = [
     menus: [
       {
         title: "Home",
+        href: "/",
+      },
+      {
+        title: "Docs",
+        href: "/docs",
       },
     ],
   },
@@ -210,10 +215,10 @@ export default function RootLayout({
         <ThemeProvider>
           <DocsmanLayout
             title="Web"
-            variant="floating"
             icon={<Globe />}
             sosmeds={mysosmeds}
             sideMenus={menus}
+            ShowSidebar="/docs"
           >
             {children}
           </DocsmanLayout>

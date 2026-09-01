@@ -1,3 +1,6 @@
+"use client"
+
+import { usePathname } from "next/navigation"
 import { LayoutFloating } from "./layout-floating"
 import { LayoutBasic } from "./layout-basic"
 import { LayoutProps } from "../types/layouts"
@@ -6,6 +9,13 @@ import { AppHeader } from "../navigations/app-header"
 import { AppFooter } from "../navigations/app-footer"
 
 type DocsManLayoutProps = LayoutProps
+
+function matchPath(pathname: string, show: string | string[]) {
+  const allowed = Array.isArray(show) ? show : [show]
+  return allowed.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  )
+}
 
 export function DocsmanLayout({
   variant = "basic",
@@ -23,9 +33,14 @@ export function DocsmanLayout({
   },
   sosmeds,
   sideMenus,
+  ShowSidebar,
   Header,
   Footer,
 }: DocsManLayoutProps) {
+  const pathname = usePathname()
+  const sidebarDesktopHidden =
+    ShowSidebar !== undefined && !matchPath(pathname, ShowSidebar)
+
   const resolvedHeaderMenus =
     HeaderMenus ??
     (sideMenus ?? [])
@@ -57,6 +72,7 @@ export function DocsmanLayout({
         className={variant === "basic" ? "" : "md:block"}
         menus={resolvedHeaderMenus}
         sosmeds={sosmeds}
+        sidebarHidden={sidebarDesktopHidden}
       />
     )
 
@@ -83,6 +99,7 @@ export function DocsmanLayout({
     children,
     sosmeds,
     sideMenus,
+    sidebarDesktopHidden,
   }
   switch (variant) {
     case "floating":

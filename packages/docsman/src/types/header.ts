@@ -10,4 +10,5 @@ export type AppHeaderProps = {
   logo?: AppLogoProps
   menus?: MenusProps[]
   sosmeds?: SosmedProps[]
+  sidebarHidden?: boolean
 }

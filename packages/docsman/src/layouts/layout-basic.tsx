@@ -20,18 +20,21 @@ export function LayoutBasic({
   Footer,
   sosmeds,
   sideMenus,
+  sidebarDesktopHidden,
 }: LayoutProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">
         {Header}
         <div className="flex flex-1">
-          <AppSidebar
-            sosmeds={sosmeds}
-            logo={logo}
-            menus={sideMenus}
-            className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
-          />
+          <div className={sidebarDesktopHidden ? "contents md:hidden" : "contents"}>
+            <AppSidebar
+              sosmeds={sosmeds}
+              logo={logo}
+              menus={sideMenus}
+              className="top-[calc(var(--header-height)-0.5rem)] h-[calc(100svh-var(--header-height))]!"
+            />
+          </div>
           <SidebarInset>
             <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
           </SidebarInset>

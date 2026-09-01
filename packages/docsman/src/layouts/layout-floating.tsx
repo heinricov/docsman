@@ -18,10 +18,13 @@ export function LayoutFloating({
   Header,
   Footer,
   sideMenus,
+  sidebarDesktopHidden,
 }: LayoutProps) {
   return (
     <SidebarProvider>
-      <AppSidebar logo={logo} variant="floating" menus={sideMenus} />
+      <div className={sidebarDesktopHidden ? "contents md:hidden" : "contents"}>
+        <AppSidebar logo={logo} variant="floating" menus={sideMenus} />
+      </div>
       <SidebarInset>
         {Header}
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>

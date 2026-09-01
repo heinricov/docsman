@@ -10,6 +10,7 @@ import { AppHeaderProps } from "../types/header"
 import { AppTheme } from "./app-theme"
 import { cn } from "../lib/utils"
 import { AppSosmed } from "./app-sosmed"
+import Link from "next/link"
 
 export function AppHeader({
   logo,
@@ -17,7 +18,6 @@ export function AppHeader({
   search,
   menus,
   sosmeds,
-  className,
 }: AppHeaderProps) {
   const { toggleSidebar } = useSidebar()
 
@@ -28,8 +28,7 @@ export function AppHeader({
           <div className="flex items-center gap-2">
             <div
               className={cn(
-                "flex items-center md:hidden data-vertical:h-4 data-vertical:self-auto",
-                className
+                "flex items-center md:hidden data-vertical:h-4 data-vertical:self-auto"
               )}
             >
               <Button
@@ -45,13 +44,13 @@ export function AppHeader({
             <AppLogo {...logo} />
             <nav className="ml-5 hidden items-center gap-6 md:flex">
               {menus?.map((menu) => (
-                <a
+                <Link
                   key={menu.title}
                   href={menu.href}
                   className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {menu.title}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

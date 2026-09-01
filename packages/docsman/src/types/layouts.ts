@@ -16,4 +16,6 @@ export type LayoutProps = {
   logo?: logoProps
   sosmeds?: SosmedProps[]
   sideMenus?: MenuSectionProps[]
+  ShowSidebar?: string | string[]
+  sidebarDesktopHidden?: boolean
 }
