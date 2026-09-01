@@ -37,6 +37,7 @@ export default defineConfig({
     "src/navigations/app-theme.tsx",
     "src/navigations/main-nav-menus.tsx",
     "src/navigations/nav-collaps.tsx",
+    "src/navigations/nav-combine.tsx",
     "src/navigations/nav-menus.tsx",
     "src/navigations/nav-switcher.tsx",
     "src/navigations/search-form.tsx",

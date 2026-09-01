@@ -2,6 +2,7 @@
 
 import { NavMenus } from "./nav-menus"
 import { NavCollaps } from "./nav-collaps"
+import { NavCombine } from "./nav-combine"
 import { MainNavMenus } from "./main-nav-menus"
 import { AppMenuProps, MenuSectionProps } from "../types/menus"
 
@@ -14,6 +15,8 @@ function renderSection(section: MenuSectionProps, selectedVersion?: string) {
       return <NavMenus label={label} menus={section.menus} />
     case "NavCollaps":
       return <NavCollaps label={label} menus={section.menus} />
+    case "NavCombine":
+      return <NavCombine label={label} menus={section.menus} />
   }
 }
 

@@ -54,9 +54,9 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 1",
+    grup: "Nav Collaps",
     type: "NavCollaps",
-    label: "Platform",
+    label: "Nav Collaps",
     menus: [
       {
         title: "Playground",
@@ -100,9 +100,9 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 2",
+    grup: "Nav Menus",
     type: "NavMenus",
-    label: "Projects",
+    label: "Nav Menus",
     menus: [
       {
         title: "Design Engineering",
@@ -119,9 +119,9 @@ export const menus = [
     ],
   },
   {
-    grup: "grup 3",
-    type: "NavCollaps",
-    label: "Data",
+    grup: "Nav Combine",
+    type: "NavCombine",
+    label: "Nav Combine",
     menus: [
       {
         title: "Documentation",
@@ -145,6 +145,18 @@ export const menus = [
             url: "#",
           },
         ],
+      },
+      {
+        title: "Design Engineering",
+        href: "#",
+      },
+      {
+        title: "Sales & Marketing",
+        href: "#",
+      },
+      {
+        title: "Travel",
+        href: "#",
       },
       {
         title: "Settings",
@@ -175,18 +187,18 @@ export const menus = [
 
 const grupData = [
   {
-    title: "grup 1",
-    description: "vX 0.0.1",
+    title: "Nav Collaps",
+    description: "v 0.0.1",
     icon: <MailIcon />,
   },
   {
-    title: "grup 2",
-    description: "v 0.0.2",
+    title: "Nav Menus",
+    description: "v 0.0.1",
     icon: <BookAIcon />,
   },
   {
-    title: "grup 3",
-    description: "v 0.0.3",
+    title: "Nav Combine",
+    description: "v 0.0.1",
     icon: <PenBox />,
   },
 ]

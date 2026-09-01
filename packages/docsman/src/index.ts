@@ -9,6 +9,7 @@ export type {
   MenuSectionProps,
   MenusProps,
   MenuItemProps,
+  NavCombineProps,
   GrupProps,
   SosmedProps,
 } from "./types/menus"

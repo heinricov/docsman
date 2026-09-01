@@ -32,20 +32,22 @@ export function NavCollaps({ label, menus }: NavCollapsProps) {
           >
             <SidebarMenuButton
               tooltip={menu.title}
-              render={<a href={menu.url} />}
+              render={<CollapsibleTrigger />}
             >
               {menu.icon}
-              <span>{menu.title}</span>
+              <a href={menu.href}>
+                <span>{menu.title}</span>
+              </a>
             </SidebarMenuButton>
+            <SidebarMenuAction
+              render={<CollapsibleTrigger />}
+              className="aria-expanded:rotate-90"
+            >
+              <ChevronRightIcon />
+              <span className="sr-only">Toggle</span>
+            </SidebarMenuAction>
             {menu.items?.length ? (
               <>
-                <SidebarMenuAction
-                  render={<CollapsibleTrigger />}
-                  className="aria-expanded:rotate-90"
-                >
-                  <ChevronRightIcon />
-                  <span className="sr-only">Toggle</span>
-                </SidebarMenuAction>
                 <CollapsibleContent>
                   <SidebarMenuSub>
                     {menu.items?.map((subItem) => (

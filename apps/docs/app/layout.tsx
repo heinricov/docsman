@@ -61,13 +61,15 @@ export const menus = [
     ],
   },
   {
-    type: "NavCollaps",
+    type: "NavCombine",
     label: "Platform",
+    grup: "v 0.0.1",
     menus: [
       {
         title: "Playground",
         url: "#",
         icon: <TerminalSquareIcon />,
+        isActive: true,
         items: [
           {
             title: "History",
@@ -82,6 +84,14 @@ export const menus = [
             url: "#",
           },
         ],
+      },
+      {
+        title: "Installasi",
+        href: "/docs/installasi",
+      },
+      {
+        title: "Use Templates",
+        href: "/docs/templates",
       },
       {
         title: "Models",
