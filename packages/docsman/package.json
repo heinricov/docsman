@@ -1,6 +1,6 @@
 {
   "name": "docsman",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reusable React layouts and sidebar components built with Base UI, shadcn-style, and Tailwind CSS v4.",
   "type": "module",
   "private": false,
