@@ -7,7 +7,7 @@ const LOGOS = ["Northwind", "Vertex", "Lumina", "Cascade", "Quantel"]
 
 export function HeroBlock() {
   return (
-    <section className="flex min-h-0 flex-1 w-full items-center justify-center bg-background px-6 py-12 text-foreground">
+    <section className="flex min-h-0 w-full flex-1 items-center justify-center bg-background px-6 py-12 text-foreground">
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
         <Badge variant="secondary">
           <Sparkles />
@@ -24,7 +24,7 @@ export function HeroBlock() {
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <Button render={<a href="/docs/installasi" />} nativeButton={false}>
+          <Button render={<a href="/docs/getstarted" />} nativeButton={false}>
             Get Started
             <ArrowRight />
           </Button>
