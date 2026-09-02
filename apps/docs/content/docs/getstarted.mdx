@@ -1,13 +1,35 @@
 ---
 title: "Get Started"
-description: ""
+description: "Docsman dirancang untuk membantu Anda membangun website dokumentasi dengan cepat menggunakan Next.js, MDX, dan komponen UI modern. Ikuti langkah-langkah berikut untuk membuat project dokumentasi pertama Anda dengan Docsman."
 ---
+
+### Create a Next.js Project
+
+Buat project Next.js baru menggunakan shadcn/create. Anda dapat mengikuti dokumentasi resmi shadcn untuk proses pembuatan project di [shadcn/ui create](https://ui.shadcn.com/create), atau menggunakan perintah berikut:
 
 <CodeCommand execute defaultTab="npm">
   shadcn@latest init --preset b1tMcUdYu --template next --pointer
 </CodeCommand>
 
+Perintah tersebut akan membuat project Next.js yang sudah dikonfigurasi dengan shadcn sebagai dasar project.
+
+masuk ke project yang anda buat:
+`cd my-docs`
+Ganti my-docs dengan nama project yang Anda gunakan.
+
+### Install Docsman
+
+Install package Docsman
+
 <CodeCommand defaultTab="npm">docsman</CodeCommand>
+
+Setelah proses instalasi selesai, Docsman dapat digunakan di dalam project Next.js Anda.
+
+### Update app/layout.tsx
+
+app/layout.tsx
+
+Kemudian import dan gunakan `DocsmanLayout` dari `Docsman` sebagai layout utama aplikasi.
 
 <CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
 
@@ -40,6 +62,35 @@ description: ""
 
 </CodeBlock>
 
+DocsLayout bertanggung jawab menyediakan struktur dasar dan layout yang diperlukan oleh website dokumentasi.
+
+### Update app/globals.css
+
+Tambahkan konfigurasi CSS yang diperlukan oleh Docsman sesuai dengan template atau konfigurasi CSS yang tersedia pada dokumentasi Docsman.
+
+<CodeBlock lang="css" variant="header" fileName="app/globals.css" >
+
+    ```
+    @import "tailwindcss";
+    @import "tw-animate-css";
+    @import "shadcn/tailwind.css";
+    @import "docsman/globals.css";
+
+    @custom-variant dark (&:is(.dark *));
+    @source "../app/**/*.{ts,tsx}";
+    @source "../../../node_modules/docsman";
+    ```
+
+</CodeBlock>
+
+### Create the Documentation Route
+
+File page.tsx akan menjadi dynamic catch-all route yang digunakan Docsman untuk menangani halaman dokumentasi.
+
+### Configure DocmanLayoutRender
+
+Kemudian import `DocmanLayoutRender` dari package Docsman dan gunakan sebagai renderer untuk konten dokumentasi.
+
 <CodeBlock lang="tsx" variant="header" fileName="[...docs]/page.tsx" >
 
     ```
@@ -59,6 +110,10 @@ description: ""
     ```
 
 </CodeBlock>
+
+### Create Your First Documentation
+
+Kemudian tambahkan konten dokumentasi pertama
 
 <CodeBlock lang="mdx" variant="header" fileName="content/docs/index.mdx" >
 
