@@ -1,0 +1,143 @@
+---
+title: "TerminalView"
+description: "Komponen untuk menampilkan simulasi proses terminal langkah-demi-langkah dalam dokumentasi MDX, dengan Command, Process, Question, SelectItem, Resault, dan Massage."
+---
+
+# TerminalView
+
+`TerminalView` adalah kumpulan komponen untuk menampilkan **simulasi terminal interaktif** dalam dokumentasi MDX. Ia punya jendela bergaya macOS (titik merah/kuning/hijau), baris perintah, dan urutan **step** yang bisa dinavigasi otomatis (`process`) atau ditampilkan sekaligus.
+
+Komponen-komponen berikut terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** di file MDX:
+
+- `TerminalView` → jendela terminal utama.
+- `Command` → baris perintah (`$`).
+- `Process` → proses berjalan (spinner) lalu selesai (check).
+- `Question` → pertanyaan menunggu jawaban.
+- `SelectItem` → pertanyaan dengan daftar pilihan (`<Option>`).
+- `Resault` + `ResaultItem` → hasil/tampilan output.
+- `Massage` → pesan info dengan ikon.
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem props="TerminalView" type="component" default="-" description="Jendela terminal; props: title, children, process (default false)." />
+  <PropItem props="Command" type="component" default="-" description="Baris perintah; props: command, interactive." />
+  <PropItem props="Process" type="component" default="-" description="Proses (spinner → check); props: command, done, interactive." />
+  <PropItem props="Question" type="component" default="-" description="Pertanyaan; props: command, done, answer, interactive." />
+  <PropItem props="SelectItem" type="component" default="-" description="Pertanyaan dengan pilihan; props: command, select, options, interactive, children (<Option>)." />
+  <PropItem props="Option" type="component" default="-" description="Pilihan data (render null); props: value / children." />
+  <PropItem props="Resault" type="component" default="-" description="Hasil; props: command, children." />
+  <PropItem props="ResaultItem" type="component" default="-" description="Baris hasil; props: children." />
+  <PropItem props="Massage" type="component" default="-" description="Pesan info; props: icon (default Coffee), description." />
+</TableProps>
+
+## Props `TerminalView`
+
+<TableProps>
+  <PropItem props="title" type="string" default="my-folder/my-project" description="Teks judul jendela terminal." />
+  <PropItem props="children" type="ReactNode" default="-" description="Kumpulan step (Command, Process, Question, SelectItem, Resault, Massage, dll)." />
+  <PropItem props="process" type="boolean" default="false" description="true = tampilkan step satu-per-satu sesuai kemajuan; false = tampilkan semua sekaligus." />
+</TableProps>
+
+## Tampilkan Semua Step (`process={false}`)
+
+Tanpa `process`, semua step ditampilkan sekaligus dalam satu jendela:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <TerminalView title="install">
+      <Command command="pnpm add docsman" />
+      <Process command="Resolving packages..." done />
+      <Massage description="Setup Success !" />
+    </TerminalView>
+  </Component>
+  <CodePreview lang="mdx" title="terminal-view.mdx">
+    <TerminalView title="install">
+      <Command command="pnpm add docsman" />
+      <Process command="Resolving packages..." done />
+      <Massage description="Setup Success !" />
+    </TerminalView>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Mode Proses (`process`)
+
+Set `process` agar step tampil **berurutan** seperti proses nyata:
+
+<CodeBlock lang="mdx" title="terminal-view.mdx">
+  <CodeBlock.Code value={"<TerminalView title=\"deploy\" process>\n  <Command command=\"git push origin main\" />\n  <Process command=\"Uploading artifacts...\" interactive={1} />\n  <Question command=\"Aktifkan production? \" done />\n  <Resault command=\"Build selesai\">\n    <ResaultItem>Deployed to Vercel</ResaultItem>\n  </Resault>\n</TerminalView>"} />
+</CodeBlock>
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <TerminalView title="deploy" process>
+      <Command command="git push origin main" />
+      <Process command="Uploading artifacts..." />
+      <Question command="Aktifkan production? " />
+      <Massage description="Deploy selesai" />
+    </TerminalView>
+  </Component>
+</ComponentCodePreview>
+
+## Pilihan dengan `SelectItem` + `Option`
+
+`SelectItem` menampilkan pertanyaan dengan daftar pilihan. Gunakan `<Option value="..." />` sebagai children (paling stabil di MDX):
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <TerminalView title="setup">
+      <Question command="Pilih framework?" answer="Next.js" done />
+      <SelectItem command="Pilih package manager" select="pnpm">
+        <Option value="pnpm" />
+        <Option value="npm" />
+        <Option value="yarn" />
+      </SelectItem>
+      <Massage description="Setup selesai" />
+    </TerminalView>
+  </Component>
+  <CodePreview lang="mdx" title="terminal-view.mdx">
+    <TerminalView title="setup">
+      <Question command="Pilih framework?" answer="Next.js" done />
+      <SelectItem command="Pilih package manager" select="pnpm">
+        <Option value="pnpm" />
+        <Option value="npm" />
+        <Option value="yarn" />
+      </SelectItem>
+      <Massage description="Setup selesai" />
+    </TerminalView>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Props Step Komponen
+
+<TableProps>
+  <PropItem props="Command.command" type="string" default="-" description="Teks perintah yang ditampilkan." />
+  <PropItem props="Command.interactive" type="number" default="-" description="Detik penundaan sebelum lanjut ke step berikut (saat process)." />
+  <PropItem props="Process.command" type="string" default="-" description="Teks proses saat berjalan." />
+  <PropItem props="Process.done" type="boolean|string" default="false" description="true = langsung tampil selesai; string = pesan selesai." />
+  <PropItem props="Question.command" type="string" default="-" description="Teks pertanyaan." />
+  <PropItem props="Question.answer" type="string" default="-" description="Jawaban (tampil hijau saat done)." />
+  <PropItem props="Question.done" type="boolean" default="false" description="true = pertanyaan sudah terjawab." />
+  <PropItem props="SelectItem.command" type="string" default="-" description="Teks pertanyaan." />
+  <PropItem props="SelectItem.select" type="string" default="-" description="Pilihan yang sudah dipilih (tampil hijau)." />
+  <PropItem props="SelectItem.options" type="string[]|string" default="-" description="Alternatif daftar pilihan (array/CSV/JSON) selain <Option> children." />
+  <PropItem props="SelectItem.interactive" type="number" default="-" description="Detik penundaan sebelum lanjut step berikut." />
+  <PropItem props="Resault.command" type="string" default="-" description="Label hasil." />
+  <PropItem props="Massage.icon" type="string" default="Coffee" description="Nama ikon lucide-react (mis. Rocket, Check, Sparkles)." />
+  <PropItem props="Massage.description" type="string" default="Setup Success !" description="Teks pesan." />
+</TableProps>
+
+## Perilaku & Catatan
+
+- **`process`** — tanpa nilai, semua step tampil sekaligus. Dengan `process`, step muncul satu-per-satu; `interactive` (dalam detik) mengendalikan jeda sebelum lanjut. Tombol reload di kanan atas mereset urutan.
+- **`Option`** — hanya *carrier data* (render `null`); gunakan sebagai children `<SelectItem>`. Format via children lebih stabil di MDX daripada array literal `options={[...]}`.
+- **Auto-navigasi** — saat `process`, `Command`/`Process`/`Question`/`SelectItem` otomatis maju ke step berikut lewat hook `useStepTimer`.
+- **Ikon & status** — `Command` memakai `$` (biru), `Process` spinner kuning → check hijau, `Question` tanda `?` kuning → check hijau + jawaban.
+- **Anti-duplikasi** — `TerminalView` mem-flatten children dengan strategi exclusive (unwrap wrapper DOM/typography, skip `Option` di daftar step) untuk menghindari duplikasi key React.
+- **`SelectItem`** — dalam render terminal memakai wrapper server-friendly yang menormalisasi `options` sebelum diteruskan ke komponen asli; punya `data-selftest="OK"` dan atribut debug (`data-options-source`, `data-options-count`, dll.) di DOM.
+- Jendela memiliki scroll area (`max-h-64`) dan footer navigasi (`Navigate` + tombol arah + `Enter`).
+- Semua step komponen adalah **client component** (`"use client"`), jadi interaksi berjalan di browser.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/terminal-view.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `TerminalView`, `Command`, `Process`, `Question`, `SelectItem`, `Option`, `Resault`, `ResaultItem`, `Massage`.

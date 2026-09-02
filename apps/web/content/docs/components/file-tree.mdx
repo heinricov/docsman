@@ -1,0 +1,152 @@
+---
+title: "FileTree"
+description: "Komponen untuk menampilkan struktur direktori dalam dokumentasi MDX, dengan folder yang bisa dilipat (collapsible) dan file sebagai node daun."
+---
+
+# FileTree
+
+`FileTree` adalah kumpulan komponen untuk menampilkan **struktur direktori** dalam dokumentasi MDX. Folder dirender sebagai node yang **bisa dibuka/ditutup** (collapsible), dan file sebagai node daun dengan ikon. Berguna untuk mendokumentasikan struktur proyek.
+
+Tiga komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX:
+
+- `FileTree` → wadah luar struktur.
+- `Folder` → folder (collapsible): `title`, `open`, `children`.
+- `File` → file (node daun): `title`.
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem props="FileTree" type="component" default="-" description="Wadah luar; props: children." />
+  <PropItem props="Folder" type="component" default="-" description="Folder collapsible; props: title, open (default false), children." />
+  <PropItem props="File" type="component" default="-" description="File / node daun; props: title." />
+</TableProps>
+
+## Props `Folder`
+
+<TableProps>
+  <PropItem props="title" type="string" default="-" description="Nama folder yang ditampilkan." />
+  <PropItem props="open" type="boolean" default="false" description="true = folder terbuka saat pertama kali dirender." />
+  <PropItem props="children" type="ReactNode" default="-" description="Isi folder: <Folder /> dan/atau <File />." />
+</TableProps>
+
+## Props `File`
+
+<TableProps>
+  <PropItem props="title" type="string" default="-" description="Nama file yang ditampilkan." />
+</TableProps>
+
+## Penggunaan Dasar
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <FileTree>
+      <Folder title="src">
+        <Folder title="components">
+          <File title="button.tsx" />
+          <File title="card.tsx" />
+        </Folder>
+        <File title="app.ts" />
+      </Folder>
+      <File title="package.json" />
+    </FileTree>
+  </Component>
+  <CodePreview lang="mdx" title="file-tree.mdx">
+    <FileTree>
+      <Folder title="src">
+        <Folder title="components">
+          <File title="button.tsx" />
+          <File title="card.tsx" />
+        </Folder>
+        <File title="app.ts" />
+      </Folder>
+      <File title="package.json" />
+    </FileTree>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Folder Terbuka Otomatis (`open`)
+
+Set `open` pada `Folder` agar folder tampil terbuka pertama kali:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <FileTree>
+      <Folder title="src" open>
+        <Folder title="lib">
+          <File title="mdx.ts" />
+        </Folder>
+        <File title="index.ts" />
+      </Folder>
+      <File title="README.md" />
+    </FileTree>
+  </Component>
+  <CodePreview lang="mdx" title="file-tree.mdx">
+    <FileTree>
+      <Folder title="src" open>
+        <Folder title="lib">
+          <File title="mdx.ts" />
+        </Folder>
+        <File title="index.ts" />
+      </Folder>
+      <File title="README.md" />
+    </FileTree>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Struktur Bertingkat
+
+Folder bisa disarangkan sedalam yang dibutuhkan:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <FileTree>
+      <Folder title="docsman">
+        <Folder title="packages">
+          <Folder title="docsman">
+            <Folder title="src">
+              <Folder title="components">
+                <File title="code-block.tsx" />
+                <File title="file-tree.tsx" />
+                <File title="table-props.tsx" />
+              </Folder>
+              <File title="index.ts" />
+            </Folder>
+          </Folder>
+        </Folder>
+        <File title="pnpm-lock.yaml" />
+      </Folder>
+    </FileTree>
+  </Component>
+  <CodePreview lang="mdx" title="file-tree.mdx">
+    <FileTree>
+      <Folder title="docsman">
+        <Folder title="packages">
+          <Folder title="docsman">
+            <Folder title="src">
+              <Folder title="components">
+                <File title="code-block.tsx" />
+                <File title="file-tree.tsx" />
+                <File title="table-props.tsx" />
+              </Folder>
+              <File title="index.ts" />
+            </Folder>
+          </Folder>
+        </Folder>
+        <File title="pnpm-lock.yaml" />
+      </Folder>
+    </FileTree>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Collapsible** — `Folder` memakai `Collapsible` (base-ui). Klik pada baris folder untuk membuka/menutup; ikon berganti antara `FaFolder` (tertutup) dan `FaFolderOpen` (terbuka).
+- **Ikon file** — `File` memakai `FileIcon` dari `lucide-react`.
+- **Indentasi** — konten diindentasi dengan `border-l` agar hierarki terbaca.
+- **State interaktif** — karena `"use client"`, folder bisa di-toggle oleh pengguna; `open` hanya menentukan state awal.
+- **Flex layout demo** — pada contoh di atas, demo `FileTree` dibungkus `<Component flexCol>` agar struktur vertikal terlihat jelas; `FileTree` sendiri berukuran `w-full`.
+- `FileTree` tidak menerima prop khusus selain `children`.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/file-tree.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `FileTree`, `Folder`, `File`.

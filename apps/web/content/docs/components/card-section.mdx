@@ -1,0 +1,112 @@
+---
+title: "CardSection"
+description: "Komponen untuk menampilkan sekumpulan kartu (Card) dalam grid responsif di dokumentasi MDX, dengan kontrol jumlah kolom."
+---
+
+# CardSection
+
+`CardSection` adalah kumpulan komponen untuk menampilkan **kumpulan kartu** dalam **grid responsif** di dokumentasi MDX. Cocok untuk showcase fitur, daftar item, atau galeri.
+
+Dua komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX:
+
+- `CardSection` → wadah grid responsif; props: `children`, `className`, `columns`.
+- `Card` → kartu dengan `title` + `description`; props: `title`, `description`, `className`.
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem props="CardSection" type="component" default="-" description="Wadah grid; props: children, className, columns (2|3|4)." />
+  <PropItem props="Card" type="component" default="-" description="Kartu tunggal; props: title, description, className." />
+</TableProps>
+
+## Props `CardSection`
+
+<TableProps>
+  <PropItem props="children" type="ReactNode" default="-" description="Kumpulan <Card /> (atau elemen lain) yang ditata grid." />
+  <PropItem props="columns" type="number" default="3" description="Jumlah kolom di layar sm ke atas: 2, 3, atau 4." />
+  <PropItem props="className" type="string" default="-" description="Class tambahan untuk wadah luar." />
+</TableProps>
+
+## Props `Card`
+
+<TableProps>
+  <PropItem props="title" type="string" default="-" description="Judul kartu (font semibold)." />
+  <PropItem props="description" type="string" default="-" description="Deskripsi kartu (muted foreground)." />
+  <PropItem props="className" type="string" default="-" description="Class tambahan untuk kartu." />
+</TableProps>
+
+## Grid 3 Kolom (default)
+
+Tanpa `columns`, `CardSection` memakai 3 kolom di layar `sm` ke atas:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <CardSection>
+      <Card title="Mudah" description="API yang ringkas dan mudah dipahami." />
+      <Card title="Responsif" description="Grid menyesuaikan ukuran layar otomatis." />
+      <Card title="MDX-native" description="Bisa langsung dipakai di file MDX." />
+    </CardSection>
+  </Component>
+  <CodePreview lang="mdx" title="card-section.mdx">
+    <CardSection>
+      <Card title="Mudah" description="API yang ringkas dan mudah dipahami." />
+      <Card title="Responsif" description="Grid menyesuaikan ukuran layar otomatis." />
+      <Card title="MDX-native" description="Bisa langsung dipakai di file MDX." />
+    </CardSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Grid 2 Kolom
+
+Set `columns={2}` untuk dua kolom:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <CardSection columns={2}>
+      <Card title="Fitur A" description="Deskripsi fitur A." />
+      <Card title="Fitur B" description="Deskripsi fitur B." />
+    </CardSection>
+  </Component>
+  <CodePreview lang="mdx" title="card-section.mdx">
+    <CardSection columns={2}>
+      <Card title="Fitur A" description="Deskripsi fitur A." />
+      <Card title="Fitur B" description="Deskripsi fitur B." />
+    </CardSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Grid 4 Kolom
+
+Set `columns={4}` untuk empat kolom:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <CardSection columns={4}>
+      <Card title="TS" description="TypeScript." />
+      <Card title="JS" description="JavaScript." />
+      <Card title="MDX" description="Markdown + JSX." />
+      <Card title="CSS" description="Styling." />
+    </CardSection>
+  </Component>
+  <CodePreview lang="mdx" title="card-section.mdx">
+    <CardSection columns={4}>
+      <Card title="TS" description="TypeScript." />
+      <Card title="JS" description="JavaScript." />
+      <Card title="MDX" description="Markdown + JSX." />
+      <Card title="CSS" description="Styling." />
+    </CardSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Grid responsif** — `CardSection` memakai `grid grid-cols-1` di mobile dan `sm:grid-cols-N` sesuai `columns` (2/3/4) di layar lebih lebar.
+- **Rata tengah** — item grid diatur `place-items-center` agar selalu rapi.
+- **Berbasis `Card` shadcn** — `Card` menyusun `CardPrimitive`, `CardHeader` (judul), dan `CardContent` (deskripsi).
+- **Tidak memakai hook** — `CardSection` dan `Card` adalah komponen server-safe (tanpa `"use client"`), bisa dirender langsung di Server Component / MDX.
+- `columns` hanya berpengaruh pada viewport `sm` ke atas; di mobile selalu satu kolom.
+- Karena disusun dalam `<Component>` preview, gunakan `flexCol` agar kartu tersusun vertikal di area demo.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/card-section.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `CardSection`, `Card`.

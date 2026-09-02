@@ -15,18 +15,44 @@ Ada **dua pendekatan** untuk mengisi data tabel.
 
 ### 1. Children (`<PropItem />`) — direkomendasikan
 
-Setiap baris ditulis sebagai `<PropItem>` di dalam children. Komponen `PropItem` **tidak merender apa pun** — ia hanya *carrier data* yang dibaca oleh `TableProps`.
+Setiap baris ditulis sebagai `<PropItem>` di dalam children. Komponen `PropItem` **tidak merender apa pun** — ia hanya _carrier data_ yang dibaca oleh `TableProps`.
 
-<CodeBlock lang="mdx" title="table-props.mdx">
-  <CodeBlock.Code value='<TableProps>\n  <PropItem\n    props="children"\n    type="ReactNode"\n    default="-"\n    description="Isi konten yang dibungkus komponen ini."\n  />\n  <PropItem\n    props="mode"\n    type="string"\n    default="basic"\n    description="Mode tampilan: basic atau floating."\n  />\n</TableProps>' />
-</CodeBlock>
-
-Hasilnya:
-
-<TableProps>
-  <PropItem props="children" type="ReactNode" default="-" description="Isi konten yang dibungkus komponen ini." />
-  <PropItem props="mode" type="string" default="basic" description="Mode tampilan: basic atau floating." />
-</TableProps>
+<ComponentCodePreview>
+  <Component>
+    <TableProps>
+      <PropItem
+        props="children"
+        type="ReactNode"
+        default="-"
+        description="Isi konten yang dibungkus komponen ini."
+      />
+      <PropItem
+        props="mode"
+        type="string"
+        default="basic"
+        description="Mode tampilan: basic atau floating."
+      />
+    </TableProps>
+  </Component>
+  <CodePreview lang="tsx" title="table-props.mdx">
+    ```
+    <TableProps>
+      <PropItem
+        props="children"
+        type="ReactNode"
+        default="-"
+        description="Isi konten yang dibungkus komponen ini."
+      />
+      <PropItem
+        props="mode"
+        type="string"
+        default="basic"
+        description="Mode tampilan: basic atau floating."
+      />
+    </TableProps>
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 Pendekatan ini paling aman karena `docman-render` didesain khusus membaca data lewat children — beberapa bentuk prop objek/array sering dibuang oleh compiler MDX.
 
@@ -34,22 +60,59 @@ Pendekatan ini paling aman karena `docman-render` didesain khusus membaca data l
 
 Data bisa juga dikirim langsung lewat prop `props`:
 
-<CodeBlock lang="mdx" title="table-props.mdx">
-  <CodeBlock.Code value='<TableProps\n  props={[\n    { props: "slug", type: "string", default: "index", description: "Slug halaman yang dirender." },\n    { props: "dir", type: "string", default: "/docs", description: "Folder tempat file MDX berada." },\n  ]}\n/>' />
-</CodeBlock>
-
-<TableProps
-  props={[
-    { props: "slug", type: "string", default: "index", description: "Slug halaman yang dirender." },
-    { props: "dir", type: "string", default: "/docs", description: "Folder tempat file MDX berada." },
-  ]}
-/>
+<ComponentCodePreview>
+  <Component>
+    <TableProps
+      props={[
+        {
+          props: "slug",
+          type: "string",
+          default: "index",
+          description: "Slug halaman yang dirender.",
+        },
+        {
+          props: "dir",
+          type: "string",
+          default: "/docs",
+          description: "Folder tempat file MDX berada.",
+        },
+      ]}
+    />
+  </Component>
+  <CodePreview lang="tsx" title="table-props.mdx">
+    ```
+    <TableProps
+      props={[
+        {
+          props: "slug",
+          type: "string",
+          default: "index",
+          description: "Slug halaman yang dirender.",
+        },
+        {
+          props: "dir",
+          type: "string",
+          default: "/docs",
+          description: "Folder tempat file MDX berada.",
+        },
+      ]}
+    />
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 Atau sebagai **string JSON** (kutip ganda di dalamnya harus di-escape):
 
-<CodeBlock lang="mdx" title="table-props.mdx">
-  <CodeBlock.Code value={'<TableProps props=\'[{"props":"slug","type":"string","default":"index","description":"Slug halaman."}]\' />'} />
-</CodeBlock>
+<ComponentCodePreview>
+  <Component>
+    <TableProps props='[{"props":"slug","type":"string","default":"index","description":"Slug halaman."}]' />
+  </Component>
+  <CodePreview lang="tsx" title="table-props.mdx">
+    ```
+    <TableProps props='[{"props":"slug","type":"string","default":"index","description":"Slug halaman."}]' />
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 ## Struktur Item
 

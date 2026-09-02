@@ -1,0 +1,133 @@
+---
+title: "ComponentPreview"
+description: "Komponen untuk menampilkan demo interaktif sebuah komponen lengkap dengan area preview dan blok kode, dalam satu card MDX."
+---
+
+# ComponentPreview
+
+Komponen `ComponentPreview` adalah kumpulan (bukan satu komponen tunggal) yang dipakai untuk menampilkan **demo sebuah komponen secara lengkap** dalam dokumentasi MDX: sebuah area *preview* interaktif di bagian atas, dan blok kode sumber yang bisa di-copy di bagian bawah — semuanya dibungkus dalam satu `Card`.
+
+Tiga komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX:
+
+- `ComponentCodePreview` → membungkus seluruh demo dalam satu `Card`.
+- `Component` → area *preview* (tempat render demo).
+- `CodePreview` → blok kode sumber (syntax highlight + copy + tayang sebagian untuk kode panjang).
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem props="ComponentCodePreview" type="component" default="-" description="Wrapper card luar; wadah untuk bagian preview dan code." />
+  <PropItem props="Component" type="component" default="-" description="Area demo di dalam card; props: children, className, flexCol / flex-col." />
+  <PropItem props="CodePreview" type="component" default="-" description="Blok kode di bawah preview; props: children, lang, title." />
+</TableProps>
+
+## Struktur Pola Umum
+
+Bentuk dasar yang direkomendasikan untuk sebuah demo:
+
+```mdx
+<ComponentCodePreview>
+  <Component>
+    {/* demo komponen yang ingin ditampilkan */}
+  </Component>
+  <CodePreview lang="tsx">
+    {/* source code yang ingin ditunjukkan */}
+  </CodePreview>
+</ComponentCodePreview>
+```
+
+1. `ComponentCodePreview` membungkus semuanya dalam satu `Card` tanpa border.
+2. `Component` menampilkan demo (flex di tengah, `border-b`).
+3. `CodePreview` menampilkan source code dengan highlight.
+
+## Dengan `ComponentCodePreview` + `Component` + `CodePreview`
+
+```mdx
+<ComponentCodePreview>
+  <Component>
+    <TableProps>
+      <PropItem props="slug" type="string" default="index" description="Slug halaman." />
+      <PropItem props="dir" type="string" default="/docs" description="Folder MDX." />
+    </TableProps>
+  </Component>
+  <CodePreview lang="mdx">
+    <TableProps>
+      <PropItem props="slug" type="string" default="index" description="Slug halaman." />
+      <PropItem props="dir" type="string" default="/docs" description="Folder MDX." />
+    </TableProps>
+  </CodePreview>
+</ComponentCodePreview>
+```
+
+<ComponentCodePreview>
+  <Component>
+    <TableProps>
+      <PropItem props="slug" type="string" default="index" description="Slug halaman." />
+      <PropItem props="dir" type="string" default="/docs" description="Folder MDX." />
+    </TableProps>
+  </Component>
+  <CodePreview lang="mdx">
+    <TableProps>
+      <PropItem props="slug" type="string" default="index" description="Slug halaman." />
+      <PropItem props="dir" type="string" default="/docs" description="Folder MDX." />
+    </TableProps>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Area Preview — `Component`
+
+`Component` berfungsi sebagai area demo. Ia merender children dalam `flex` (`items-center justify-center`, `padding: 1.5rem`, `bg-muted/30`, dan `border-b`).
+
+### Layout Vertikal — `flexCol` / `flex-col`
+
+Untuk demo yang butuh susunan **vertikal** (mis. heading bertingkat atau daftar menurun), gunakan `flexCol` (atau atribut `flex-col`):
+
+```mdx
+<Component flexCol>
+  <h3>Heading 3</h3>
+  <h4>Heading 4</h4>
+</Component>
+```
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+  </Component>
+</ComponentCodePreview>
+
+> `Component` menandai area-nya dengan `data-toc-exclude="true"`, sehingga demo tidak ikut jadi bagian daftar isi.
+
+## Blok Kode — `CodePreview`
+
+Menampilkan source code dengan syntax highlight (Prism), tema ikut mode `dark`/`light`, tombol **copy**, dan **kolaps** otomatis untuk kode panjang (> 10 baris).
+
+<TableProps>
+  <PropItem props="children" type="string" default="-" description="Source code yang ingin ditampilkan (pastikan tidak mengandung backtick)." />
+  <PropItem props="lang" type="string" default="tsx" description="Bahasa untuk highlight." />
+  <PropItem props="title" type="string" default="-" description="Judul opsional yang tampil di header blok." />
+</TableProps>
+
+### Contoh dengan `title` dan `lang`
+
+```mdx
+<CodePreview lang="tsx" title="Contoh komponen">
+  <Component />
+</CodePreview>
+```
+
+> **Catatan penting:** `CodePreview` mengekstrak **teks mentah** dari children-nya lalu memformatnya sebagai kode. Karena itu jangan taruh backtick (`` ` ``) di dalam children `<CodePreview>` — MDX akan menginterpretasikannya sebagai bagian dari sintaks. Gunakan komponen/teks polos di dalamnya.
+
+## Perilaku & Catatan
+
+- **Auto tema** — `CodePreview` mengikuti mode `dark`/`light` aplikasi secara real-time (via `MutationObserver` pada kelas `dark` di `documentElement`).
+- **Auto format** — kode diformat dengan Prettier (`formatCode`) sebelum ditampilkan.
+- **Copy** — tombol copy di pojok kanan atas (`useCopyToClipboard`); ikon berubah jadi `Check` saat berhasil.
+- **Kode panjang** — jika source > 10 baris, `CodePreview` memotong tampilannya dan menampilkan tombol **"Tampilkan semua code"** / **"Sembunyikan sebagian code"**.
+- `Component` menerima `className` tambahan untuk kustomisasi.
+- Setiap bagian `Component`/`CodePreview` membawa `data-toc-exclude` / padding yang konsisten agar tampilan demo rapi.
+- Karena komponen bersifat **client component** (`"use client"`), demo yang interaktif tetap jalan di sisi klien.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/component-preview.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `ComponentCodePreview`, `Component`, `CodePreview`.

@@ -1,0 +1,117 @@
+---
+title: "AlertSection"
+description: "Komponen untuk menampilkan alert / pemberitahuan dalam dokumentasi MDX dengan berbagai varian (default, success, warning, info, error)."
+---
+
+# AlertSection
+
+`AlertSection` adalah komponen **alert / pemberitahuan** dalam dokumentasi MDX, dibangun di atas `Alert` (shadcn) dengan dukungan beberapa **varian** (`default`, `success`, `warning`, `info`, `error`). Setiap varian punya ikon dan warna yang berbeda.
+
+Komponen ini terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX — langsung pakai tag `<AlertSection>`.
+
+## Props
+
+<TableProps>
+  <PropItem props="type" type="string" default="default" description="Varian alert: default | success | warning | info | error." />
+  <PropItem props="title" type="string" default="-" description="Judul alert (dirender sebagai AlertTitle)." />
+  <PropItem props="children" type="ReactNode" default="-" description="Isi/deskripsi alert (dirender sebagai AlertDescription)." />
+</TableProps>
+
+## Varian `type`
+
+<TableProps>
+  <PropItem props="default" type="-" default="✓" description="Ikon CheckCircle2; gaya netral." />
+  <PropItem props="success" type="-" default="✓" description="Ikon CircleCheckBig; hijau (emerald)." />
+  <PropItem props="warning" type="-" default="!" description="Ikon AlertTriangle; kuning/amber." />
+  <PropItem props="info" type="-" default="i" description="Ikon Info; biru (cyan)." />
+  <PropItem props="error" type="-" default="✕" description="Ikon CircleX; merah." />
+</TableProps>
+
+## Alert Default
+
+Tanpa `type`, `AlertSection` tampil sebagai alert netral:
+
+<ComponentCodePreview>
+  <Component>
+    <AlertSection title="Informasi">
+      Ini adalah alert standar. Tanpa `type`, dipakai gaya default.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="alert-section.mdx">
+    <AlertSection title="Informasi">
+      Ini adalah alert standar. Tanpa type, dipakai gaya default.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Varian Success
+
+<ComponentCodePreview>
+  <Component>
+    <AlertSection type="success" title="Berhasil">
+      Instalasi selesai tanpa masalah.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="alert-section.mdx">
+    <AlertSection type="success" title="Berhasil">
+      Instalasi selesai tanpa masalah.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Varian Warning
+
+<ComponentCodePreview>
+  <Component>
+    <AlertSection type="warning" title="Perhatian">
+      Pastikan versi dependencies sudah sesuai.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="alert-section.mdx">
+    <AlertSection type="warning" title="Perhatian">
+      Pastikan versi dependencies sudah sesuai.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Varian Info
+
+<ComponentCodePreview>
+  <Component>
+    <AlertSection type="info" title="Tips">
+      Gunakan expression container ({'{}'}) untuk props yang kompleks di MDX.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="alert-section.mdx">
+    <AlertSection type="info" title="Tips">
+      Gunakan expression container untuk props yang kompleks di MDX.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Varian Error
+
+<ComponentCodePreview>
+  <Component>
+    <AlertSection type="error" title="Error">
+      Terjadi kegagalan saat build. Periksa log.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="alert-section.mdx">
+    <AlertSection type="error" title="Error">
+      Terjadi kegagalan saat build. Periksa log.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Berbasis `Alert` shadcn** — nyusun `AlertTitle` dan `AlertDescription`; komponen ini memakai `../ui/alert`.
+- **Ikon & warna per varian** — `alertConfig` memetakan tiap `type` ke ikon `lucide-react` dan class warna yang sesuai.
+- **`title` wajib** — `title: string` (wajib); `type` opsional (default `default`).
+- **`children` bebas** — bisa berupa teks, markdown, atau komponen lain sebagai deskripsi.
+- Karena `AlertSection` **tidak** memakai hook (komponen server-safe, tanpa `"use client"`), ia bisa dirender langsung di Server Component / MDX.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/alert-section.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `AlertSection`.

@@ -1,0 +1,119 @@
+---
+title: "StepsSection"
+description: "Komponen untuk menampilkan daftar langkah (step-by-step) sebagai timeline vertikal dalam dokumentasi MDX, dengan penomoran otomatis."
+---
+
+# StepsSection
+
+`StepsSection` adalah kumpulan komponen untuk menampilkan **instruksi langkah-demi-langkah** sebagai **timeline vertikal** dengan nomor otomatis. Cocok untuk panduan setup, alur instalasi, atau tutorial bertahap.
+
+Dua komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX:
+
+- `StepsSection` → wadah timeline (garis vertikal).
+- `Step` → satu langkah bernomor: `title` + `children`.
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem props="StepsSection" type="component" default="-" description="Wadah timeline; props: children." />
+  <PropItem props="Step" type="component" default="-" description="Satu langkah bernomor otomatis; props: title, children." />
+</TableProps>
+
+## Props `Step`
+
+<TableProps>
+  <PropItem props="title" type="string" default="-" description="Judul langkah yang dirender sebagai heading (h3)." />
+  <PropItem props="children" type="ReactNode" default="-" description="Isi langkah: teks, kode, komponen, dll." />
+</TableProps>
+
+## Penggunaan Dasar
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <StepsSection>
+      <Step title="Install docsman">
+        Jalankan installasi package docsman.
+      </Step>
+      <Step title="Buat konten MDX">
+        Tambahkan file markdown di folder content.
+      </Step>
+      <Step title="Render dengan docsman">
+        Gunakan komponen render di halaman Anda.
+      </Step>
+    </StepsSection>
+  </Component>
+  <CodePreview lang="mdx" title="steps-section.mdx">
+    <StepsSection>
+      <Step title="Install docsman">
+        Jalankan installasi package docsman.
+      </Step>
+      <Step title="Buat konten MDX">
+        Tambahkan file markdown di folder content.
+      </Step>
+      <Step title="Render dengan docsman">
+        Gunakan komponen render di halaman Anda.
+      </Step>
+    </StepsSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Generator `StepsSection`
+
+Kode sumber lengkap (Generator asli):
+
+<CodeBlock lang="typescript" title="steps-section.tsx">
+  <CodeBlock.Line value="export function StepsSection({ children }) {" />
+  <CodeBlock.Line value="  let stepCount = 0" />
+  <CodeBlock.Line value="  const childArray = Array.isArray(children) ? children : [children]" />
+  <CodeBlock.Line value="  const numberedChildren = childArray.map((child, i) => {" />
+  <CodeBlock.Line value="    if (child && typeof child === 'object' && 'props' in child && 'title' in child.props) {" />
+  <CodeBlock.Line value="      const index = stepCount++" />
+  <CodeBlock.Line value="      return <StepIndexContext.Provider key={i} value={index}>{child}</StepIndexContext.Provider>" />
+  <CodeBlock.Line value="    }" />
+  <CodeBlock.Line value="    return child" />
+  <CodeBlock.Line value="  })" />
+  <CodeBlock.Line value="  return <div className='relative ml-4 sm:ml-5 md:ml-6'>{numberedChildren}</div>" />
+  <CodeBlock.Line value="}" />
+</CodeBlock>
+
+Penomoran dihasilkan dari `StepIndexContext` (0, 1, 2, ...) lalu `Step` menampilkan `index + 1`.
+
+## Step → Nomor Otomatis
+
+Setiap `Step` mendapatkan nomor berdasarkan urutan kemunculannya:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <StepsSection>
+      <Step title="Satu">
+        Langkah pertama.
+      </Step>
+      <Step title="Dua">
+        Langkah kedua.
+      </Step>
+    </StepsSection>
+  </Component>
+  <CodePreview lang="mdx" title="steps-section.mdx">
+    <StepsSection>
+      <Step title="Satu">
+        Langkah pertama.
+      </Step>
+      <Step title="Dua">
+        Langkah kedua.
+      </Step>
+    </StepsSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Penomoran otomatis** — `StepsSection` menomori setiap `Step` via `StepIndexContext`; `Step` menampilkan `index + 1`. Nomor tidak perlu ditulis manual.
+- **Timeline** — garis vertikal (`border-l`) di sisi kiri, lingkaran bernomor (`rounded-full` + `ring`) untuk tiap step, mengikuti spacing responsif (mobile → `sm` → `md`).
+- **Judul** — `title` dirender sebagai `<h3>`.
+- **`data-toc-exclude`** — `StepsSection` menandai area-nya agar langkah tidak ikut daftar isi.
+- **Responsif** — ukuran lingkaran & heading membesar di layar lebih lebar (`sm`, `md`).
+- **Client component** — bersifat `"use client"`, konsisten dengan pipeline render MDX.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/steps-section.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `StepsSection`, `Step`.

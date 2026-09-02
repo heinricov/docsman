@@ -1,0 +1,102 @@
+---
+title: "Typography"
+description: "Kumpulan komponen tipografi dasar (H1–H6, P, Blockquote, list, Code, Pre, A, Hr, Strong, Em) yang menjadi gaya default untuk elemen markdown di dokumentasi MDX."
+---
+
+# Typography
+
+`Typography` adalah himpunan komponen tipografi dasar untuk dokumentasi MDX: heading (`H1`–`H6`), paragraf, blockquote, daftar, kode, prateks, tautan, garis pemisah, tebal, dan miring.
+
+Komponen ini terdaftar di `mdxComponents` (`docman-render.tsx`) dan dipakai sebagai **renderer default** untuk elemen Markdown/MDX standar. Jadi `> catatan`, `**tebal**`, `# Judul`, dan seterusnya otomatis memakai gaya ini — **tanpa perlu import**. Nama komponen (`H1`, `P`, `Code`, dll.) juga bisa dipakai langsung sebagai tag di MDX bila ingin lebih eksplisit.
+
+## Komponen
+
+Semua komponen menerima `children` (ReactNode), `className` opsional (ditambahkan lewat `cn`), dan sebagian juga `id`.
+
+<TableProps>
+  <PropItem props="H1" type="h1" default="=" description="Heading 1: text-4xl extrabold tracking-tight." />
+  <PropItem props="H2" type="h2" default="=" description="Heading 2: text-3xl semibold, border-b bawah." />
+  <PropItem props="H3" type="h3" default="=" description="Heading 3: text-2xl semibold." />
+  <PropItem props="H4" type="h4" default="=" description="Heading 4: text-xl semibold." />
+  <PropItem props="H5" type="h5" default="=" description="Heading 5: text-lg semibold." />
+  <PropItem props="H6" type="h6" default="=" description="Heading 6: text-base semibold." />
+  <PropItem props="P" type="p" default="=" description="Paragraf: leading-7 muted." />
+  <PropItem props="Blockquote" type="blockquote" default="=" description="Kutipan: border-l, italic." />
+  <PropItem props="Ul" type="ul" default="•" description="Daftar tak-berurutan (list-disc)." />
+  <PropItem props="Ol" type="ol" default="1." description="Daftar berurutan (list-decimal)." />
+  <PropItem props="Li" type="li" default="•" description="Item daftar." />
+  <PropItem props="Code" type="code" default="`" description="Kode inline: bg-muted, font-mono." />
+  <PropItem props="Pre" type="pre" default="=" description="Prateks: border, bg-muted, overflow-x." />
+  <PropItem props="A" type="a" default="→" description="Tautan: text-primary underline." />
+  <PropItem props="Hr" type="hr" default="—" description="Garis pemisah horizontal; hanya props className." />
+  <PropItem props="Strong" type="strong" default="B" description="Teks tebal: semibold foreground." />
+  <PropItem props="Em" type="em" default="i" description="Teks miring: italic muted." />
+</TableProps>
+
+## Heading
+
+Heading memakai `scroll-m-20` untuk anchor scroll yang rapi dan mendukung prop `id`:
+
+<CodeBlock lang="mdx" title="typography.mdx">
+  <CodeBlock.Code value={"# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4"} />
+</CodeBlock>
+
+<ComponentCodePreview>
+  <Component flexCol>
+    # Heading 1
+
+    ## Heading 2
+
+    ### Heading 3
+
+    #### Heading 4
+  </Component>
+</ComponentCodePreview>
+
+## Markdown Standar (default renderer)
+
+Karena komponen ini adalah renderer default, Markdown biasa otomatis ter-*style*:
+
+<CodeBlock lang="mdx" title="typography.mdx">
+  <CodeBlock.Code value={"## Sub Judul\n> Sebuah kutipan.\n- Item A\n- Item B\n`kode inline`"} />
+</CodeBlock>
+
+Hasilnya:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    Ilustrasi hasil renderer default:
+
+    > Sebuah kutipan.
+
+    - Item A
+    - Item B
+
+    `kode inline`
+  </Component>
+</ComponentCodePreview>
+
+## Tautan, Tebal, Miring
+
+<CodeBlock lang="mdx" title="typography.mdx">
+  <CodeBlock.Code value="Kunjungi [dokumentasi](https://example.com). Ini teks **tebal** dan *miring*." />
+</CodeBlock>
+
+<ComponentCodePreview>
+  <Component>
+    Kunjungi [dokumentasi](https://example.com). Ini teks **tebal** dan *miring*.
+  </Component>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Renderer default** — `H1`–`H6`, `P`, `Blockquote`, `Ul`, `Ol`, `Li`, `Code`, `Pre`, `A`, `Hr`, `Strong`, `Em` dipetakan ke tag Markdown standar di `mdxComponents`, jadi seluruh konten MDX otomatis memakai gaya ini.
+- **`className` bisa ditimpa** — setiap komponen menggabungkan class default dengan `className` via `cn`, sehingga bisa di-override.
+- **`id` untuk anchor** — heading mendukung `id` dan `scroll-m-20`; cocok untuk anchor/link langsung ke bagian.
+- **Server-safe** — komponen tanpa `"use client"` (murni stateless), bisa dirender langsung di Server Component / MDX.
+- **`Hr` khusus** — hanya menerima `className`; tidak punya `children`/`id`.
+- **`typographyComponents`** — file juga mengekspor `typographyComponents` (peta `h1`→`H1`, dst.) untuk kebutuhan mapping MDX manual.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/typograpy.tsx` dan dipakai langsung sebagai renderer default di pipeline render MDX (`docman-render.tsx`). Ekspor: `H1`, `H2`, `H3`, `H4`, `H5`, `H6`, `P`, `Blockquote`, `Ul`, `Ol`, `Li`, `Code`, `Pre`, `A`, `Hr`, `Strong`, `Em`, `typographyComponents`.

@@ -188,16 +188,48 @@ export const menus = [
     label: "Components",
     menus: [
       {
-        title: "Command Code",
-        href: "/docs/components/command-code",
+        title: "Alert Section",
+        href: "/docs/components/alert-section",
+      },
+      {
+        title: "Card Section",
+        href: "/docs/components/card-section",
       },
       {
         title: "Code Block",
         href: "/docs/components/code-block",
       },
       {
+        title: "Command Code",
+        href: "/docs/components/command-code",
+      },
+      {
+        title: "Componen Preview",
+        href: "/docs/components/component-preview",
+      },
+      {
+        title: "File Tree",
+        href: "/docs/components/file-tree",
+      },
+      {
+        title: "Logo Section",
+        href: "/docs/components/logo-section",
+      },
+      {
+        title: "Steps Section",
+        href: "/docs/components/steps-section",
+      },
+      {
         title: "Table Props",
         href: "/docs/components/table-props",
+      },
+      {
+        title: "Terminal View",
+        href: "/docs/components/terminal-view",
+      },
+      {
+        title: "Typograpy",
+        href: "/docs/components/typograpy",
       },
     ],
   },
