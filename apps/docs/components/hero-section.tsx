@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react"
+import Link from "next/link"
 
 const LOGOS = ["Northwind", "Vertex", "Lumina", "Cascade", "Quantel"]
 
@@ -24,13 +25,16 @@ export function HeroBlock() {
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <Button render={<a href="/docs/getstarted" />} nativeButton={false}>
+          <Button
+            render={<Link href="/docs/getstarted" />}
+            nativeButton={false}
+          >
             Get Started
             <ArrowRight />
           </Button>
           <Button
             variant="outline"
-            render={<a href="/docs" />}
+            render={<Link href="/docs" />}
             nativeButton={false}
           >
             Learn Docs
