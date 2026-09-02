@@ -113,29 +113,17 @@ Kemudian import `DocmanLayoutRender` dari package Docsman dan gunakan sebagai re
 <CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
 
     ```
-    import "./globals.css"
-    import { ThemeProvider } from "@/components/theme-provider"
-    import { cn } from "@/lib/utils"
+    import { DocmanLayoutRender } from "docsman/render"
 
-    import { DocsmanLayout } from "docsman/layouts"
+    export default async function DocsPage({
+    params,
+    }: {
+    params: Promise<{ docs?: string[] }>
+    }) {
+    const { docs = [] } = await params
+    const segments = docs[0] === "docs" ? docs.slice(1) : docs
 
-    export default function RootLayout({
-    children,
-    }: Readonly<{
-    children: React.ReactNode
-    }>) {
-    return (
-        <html
-        lang="en"
-        suppressHydrationWarning
-        >
-        <body>
-            <ThemeProvider>
-            <DocsmanLayout>{children}</DocsmanLayout>
-            </ThemeProvider>
-        </body>
-        </html>
-    )
+    return <DocmanLayoutRender dir="/docs" slug={segments.join("/") || "index"} />
     }
     ```
 
