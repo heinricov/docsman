@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider"
 import { DocsmanLayout, MenuSectionProps } from "docsman"
 import { cn } from "@/lib/utils"
 
-import { Book, Component, Home } from "lucide-react"
+import { Book, Home } from "lucide-react"
 import Image from "next/image"
 
 export const menus = [
