@@ -346,7 +346,7 @@ export async function DocmanLayoutRender({
       const fm = frontmatter as FrontmatterData
 
       return (
-        <section className={cn("py-15 md:py-10", className)}>
+        <section className={cn("py-7 md:py-10", className)}>
           <div className="container mx-auto flex w-full max-w-7xl overflow-visible px-4">
             <div className="relative grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-20">
               <div className="lg:col-span-2">
