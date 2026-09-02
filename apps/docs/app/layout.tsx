@@ -43,8 +43,8 @@ export const menus = [
     label: "Documentation",
     menus: [
       {
-        title: "Installasi",
-        href: "/docs/installasi",
+        title: "Get Started",
+        href: "/docs/getstarted",
       },
       {
         title: "Use Templates",

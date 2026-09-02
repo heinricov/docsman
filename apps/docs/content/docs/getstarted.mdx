@@ -1,0 +1,40 @@
+---
+title:"Get Started"
+---
+
+<CodeCommand execute defaultTab="npm">
+  shadcn@latest init --preset b1tMcUdYu --template next --pointer
+</CodeCommand>
+
+<CodeCommand defaultTab="npm">docsman</CodeCommand>
+
+<CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
+
+    ```
+    import "./globals.css"
+    import { ThemeProvider } from "@/components/theme-provider"
+    import { cn } from "@/lib/utils"
+
+    import { DocsmanLayout } from "docsman/layouts"
+
+    export default function RootLayout({
+    children,
+    }: Readonly<{
+    children: React.ReactNode
+    }>) {
+    return (
+        <html
+        lang="en"
+        suppressHydrationWarning
+        >
+        <body>
+            <ThemeProvider>
+            <DocsmanLayout>{children}</DocsmanLayout>
+            </ThemeProvider>
+        </body>
+        </html>
+    )
+    }
+    ```
+
+</CodeBlock>

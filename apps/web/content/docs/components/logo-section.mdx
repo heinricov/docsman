@@ -15,23 +15,58 @@ Dua komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.t
 ## Komponen Penyusun
 
 <TableProps>
-  <PropItem props="LogoSection" type="component" default="-" description="Wadah grid; props: children, className, columns (2–6)." />
-  <PropItem props="Logo" type="component" default="-" description="Satu logo; props: icon (key string), title." />
+  <PropItem
+    props="LogoSection"
+    type="component"
+    default="-"
+    description="Wadah grid; props: children, className, columns (2–6)."
+  />
+  <PropItem
+    props="Logo"
+    type="component"
+    default="-"
+    description="Satu logo; props: icon (key string), title."
+  />
 </TableProps>
 
 ## Props `LogoSection`
 
 <TableProps>
-  <PropItem props="children" type="ReactNode" default="-" description="Kumpulan <Logo /> yang ditata grid." />
-  <PropItem props="columns" type="number" default="4" description="Jumlah kolom di layar sm ke atas: 2, 3, 4, 5, atau 6." />
-  <PropItem props="className" type="string" default="-" description="Class tambahan untuk wadah luar." />
+  <PropItem
+    props="children"
+    type="ReactNode"
+    default="-"
+    description="Kumpulan <Logo /> yang ditata grid."
+  />
+  <PropItem
+    props="columns"
+    type="number"
+    default="4"
+    description="Jumlah kolom di layar sm ke atas: 2, 3, 4, 5, atau 6."
+  />
+  <PropItem
+    props="className"
+    type="string"
+    default="-"
+    description="Class tambahan untuk wadah luar."
+  />
 </TableProps>
 
 ## Props `Logo`
 
 <TableProps>
-  <PropItem props="icon" type="string" default="-" description="Key ikon react-icons (mis. SiTypescript, RiNextjsFill)." />
-  <PropItem props="title" type="string" default="-" description="Label yang ditampilkan di samping ikon." />
+  <PropItem
+    props="icon"
+    type="string"
+    default="-"
+    description="Key ikon react-icons (mis. SiTypescript, RiNextjsFill)."
+  />
+  <PropItem
+    props="title"
+    type="string"
+    default="-"
+    description="Label yang ditampilkan di samping ikon."
+  />
 </TableProps>
 
 ## Penggunaan Dasar (4 Kolom default)
@@ -46,12 +81,14 @@ Dua komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.t
     </LogoSection>
   </Component>
   <CodePreview lang="mdx" title="logo-section.mdx">
+    ```
     <LogoSection>
       <Logo icon="SiTypescript" title="TypeScript" />
       <Logo icon="SiNextdotjs" title="Next.js" />
       <Logo icon="RiReactjsLine" title="React" />
       <Logo icon="SiTailwindcss" title="Tailwind" />
     </LogoSection>
+    ```
   </CodePreview>
 </ComponentCodePreview>
 
@@ -89,8 +126,18 @@ Set `columns={6}` untuk enam kolom:
 Prefix yang tersedia:
 
 <TableProps>
-  <PropItem props="Ri*" type="react-icons/ri" default="-" description="RiNextjsFill, RiReactjsLine, RiVuejsLine, RiSvelteLine, RiAngularjsFill, RiNpmjsLine, RiGithubFill, RiTailwindCssFill." />
-  <PropItem props="Si*" type="react-icons/si" default="-" description="SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiVuedotjs, SiSvelte, SiAngular, SiTailwindcss, SiShadcnui, SiMdx, SiPostgresql, SiMongodb, SiDocker, SiPrisma, SiGraphql, SiNodedotjs, SiVercel, SiSupabase, SiFirebase, SiRedis, SiGit, SiFigma, SiStorybook, SiVite, SiWebpack, SiAstro." />
+  <PropItem
+    props="Ri*"
+    type="react-icons/ri"
+    default="-"
+    description="RiNextjsFill, RiReactjsLine, RiVuejsLine, RiSvelteLine, RiAngularjsFill, RiNpmjsLine, RiGithubFill, RiTailwindCssFill."
+  />
+  <PropItem
+    props="Si*"
+    type="react-icons/si"
+    default="-"
+    description="SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiVuedotjs, SiSvelte, SiAngular, SiTailwindcss, SiShadcnui, SiMdx, SiPostgresql, SiMongodb, SiDocker, SiPrisma, SiGraphql, SiNodedotjs, SiVercel, SiSupabase, SiFirebase, SiRedis, SiGit, SiFigma, SiStorybook, SiVite, SiWebpack, SiAstro."
+  />
 </TableProps>
 
 <CodeBlock lang="mdx" title="logo-section.mdx">

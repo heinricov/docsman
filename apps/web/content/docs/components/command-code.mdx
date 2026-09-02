@@ -12,9 +12,24 @@ Komponen ini bersifat **client component** (`"use client"`) dan sudah terdaftar 
 ## Props
 
 <TableProps>
-  <PropItem props="children" type="ReactNode" default="-" description="Nama package atau perintah yang akan ditampilkan (wajib)." />
-  <PropItem props="defaultTab" type="string" default="pnpm" description="Package manager yang aktif pertama kali (pnpm / npm / yarn / bun)." />
-  <PropItem props="execute" type="boolean" default="false" description="false = tampilkan perintah instalasi; true = tampilkan perintah eksekusi (dlx)." />
+  <PropItem
+    props="children"
+    type="ReactNode"
+    default="-"
+    description="Nama package atau perintah yang akan ditampilkan (wajib)."
+  />
+  <PropItem
+    props="defaultTab"
+    type="string"
+    default="pnpm"
+    description="Package manager yang aktif pertama kali (pnpm / npm / yarn / bun)."
+  />
+  <PropItem
+    props="execute"
+    type="boolean"
+    default="false"
+    description="false = tampilkan perintah instalasi; true = tampilkan perintah eksekusi (dlx)."
+  />
 </TableProps>
 
 ## Penggunaan Dasar
@@ -25,8 +40,10 @@ Tulis nama package sebagai konten (`children`) komponen:
   <Component>
     <CodeCommand>docsman</CodeCommand>
   </Component>
-  <CodePreview lang="mdx" title="command-code.mdx">
+  <CodePreview lang="tsx" title="command-code.mdx">
+    ```
     <CodeCommand>docsman</CodeCommand>
+    ```
   </CodePreview>
 </ComponentCodePreview>
 
@@ -40,8 +57,10 @@ Setel `execute` untuk menampilkan perintah jalankan langsung, bukan instalasi:
   <Component>
     <CodeCommand execute>create-docsman-app</CodeCommand>
   </Component>
-  <CodePreview lang="mdx" title="command-code.mdx">
+  <CodePreview lang="tsx" title="command-code.mdx">
+    ```
     <CodeCommand execute>create-docsman-app</CodeCommand>
+    ```
   </CodePreview>
 </ComponentCodePreview>
 
@@ -61,7 +80,9 @@ Pilih package manager yang aktif lebih dulu:
     <CodeCommand defaultTab="bun">docsman</CodeCommand>
   </Component>
   <CodePreview lang="mdx" title="command-code.mdx">
+    ```
     <CodeCommand defaultTab="bun">docsman</CodeCommand>
+    ```
   </CodePreview>
 </ComponentCodePreview>
 

@@ -1,8 +1,184 @@
 ---
-title: "Documentation"
-description: "ini coba file mdx"
+title: "docsman"
+description: "Kit komponen MDX untuk membangun dokumentasi yang menarik dan informatif dengan Next.js — typography, code block, preview, terminal, tree, dan lainnya."
 ---
 
-# Coba render file mdx
+# docsman
 
-ini halam documentation
+**docsman** adalah kit komponen **MDX** untuk membangun dokumentasi yang menarik dan informatif di atas React/Next.js. Semua komponen sudah terdaftar otomatis di `mdxComponents` (`docman-render.tsx`) — cukup tulis tag komponen di file `.mdx`, **tanpa perlu import**.
+
+Dokumentasi ini dibangun menggunakan components dari `packages/docsman/src/components/` itu sendiri.
+
+## Mengapa docsman?
+
+<CardSection columns={3}>
+  <Card
+    title="Tanpa Import"
+    description="Semua komponen terdaftar otomatis di mdxComponents — langsung pakai tag di MDX."
+  />
+  <Card
+    title="Server-friendly"
+    description="Sebagian besar komponen server-safe, bisa dirender langsung di Server Component / RSC."
+  />
+  <Card
+    title="Responsif"
+    description="Grid, timeline, dan blok kode menyesuaikan ukuran layar dengan mulus."
+  />
+</CardSection>
+
+## Instalasi
+
+Tambahkan `docsman` ke proyek Anda menggunakan salah satu package manager:
+
+<CodeBlock lang="bash" title="install" variant="header" showLineNumbers={false}>
+  <CodeBlock.Code value="pnpm add docsman" />
+</CodeBlock>
+
+Alternatif cara cepat, jalankan generator proyek:
+
+<ComponentCodePreview>
+  <Component>
+    <CodeCommand>docsman</CodeCommand>
+  </Component>
+  <CodePreview lang="mdx" title="index.mdx">
+    <CodeCommand>docsman</CodeCommand>
+  </CodePreview>
+</ComponentCodePreview>
+
+<AlertSection type="info" title="Requirements">
+  docsman membutuhkan React 19 dan Next.js 16+. Semua komponen dirender lewat pipeline render `<DocmanLayoutRender>` di `docsman/render`.
+</AlertSection>
+
+## Memulai
+
+Ikuti langkah-langkah berikut untuk memakai docsman:
+
+<StepsSection>
+  <Step title="Install">
+    Tambahkan package dengan `pnpm add docsman` (atau via `CodeCommand` di
+    atas).
+  </Step>
+  <Step title="Impor render">
+    Import `DocmanLayoutRender` dari `docsman/render` di halaman
+    `[...docs]/page.tsx`.
+  </Step>
+  <Step title="Tulis MDX">
+    Buat dokumen di folder content dan gunakan komponen `<CodeBlock />
+    `, `<TableProps />
+    `, `<TerminalView />
+    `, dan lainnya.
+  </Step>
+  <Step title="Render & publish">
+    Jalankan dev server, preview halaman, lalu deploy ke Vercel.
+  </Step>
+</StepsSection>
+
+## Komponen
+
+Berikut komponen yang tersedia. Klik untuk dokumentasi lengkap:
+
+<CardSection columns={4}>
+  <Card
+    title="CodeBlock"
+    description="Blok kode dengan tabs, highlight, diff, & copy."
+  />
+  <Card
+    title="CodeCommand"
+    description="Perintah multi package manager (pnpm/npm/yarn/bun)."
+  />
+  <Card
+    title="ComponentPreview"
+    description="Demo komponen + blok kode dalam satu card."
+  />
+  <Card
+    title="TableProps"
+    description="Tabel props komponen (Props/Type/Default/Description)."
+  />
+</CardSection>
+
+<CardSection columns={4}>
+  <Card
+    title="TerminalView"
+    description="Simulasi terminal langkah-demi-langkah."
+  />
+  <Card
+    title="AlertSection"
+    description="Alert dengan varian default/success/warning/info/error."
+  />
+  <Card
+    title="CardSection"
+    description="Kumpulan kartu dalam grid responsif."
+  />
+  <Card title="LogoSection" description="Barisan logo teknologi responsif." />
+</CardSection>
+
+<CardSection columns={3}>
+  <Card title="FileTree" description="Struktur direktori collapsible." />
+  <Card
+    title="StepsSection"
+    description="Instruksi step-by-step bertimeline."
+  />
+  <Card
+    title="Typography"
+    description="Gaya default untuk elemen Markdown (H1–H6, list, kode, dll)."
+  />
+</CardSection>
+
+Panduan tiap komponen tersedia di bawah **Components** pada sidebar, misalnya [CodeBlock](/docs/components/code-block), [CodeCommand](/docs/components/command-code), dan [TableProps](/docs/components/table-props).
+
+## Teknologi yang Dipakai
+
+<LogoSection columns={6}>
+  <Logo icon="RiNextjsFill" title="Next.js" />
+  <Logo icon="RiReactjsLine" title="React" />
+  <Logo icon="SiTypescript" title="TypeScript" />
+  <Logo icon="SiTailwindcss" title="Tailwind" />
+  <Logo icon="SiShadcnui" title="shadcn/ui" />
+  <Logo icon="SiVercel" title="Vercel" />
+</LogoSection>
+
+## Demo Singkat
+
+Contoh perpaduan beberapa komponen sekaligus:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <AlertSection type="success" title="Setup Selesai">
+      docsman siap dipakai di dokumentasi Anda.
+    </AlertSection>
+  </Component>
+  <CodePreview lang="mdx" title="index.mdx">
+    <AlertSection type="success" title="Setup Selesai">
+      docsman siap dipakai di dokumentasi Anda.
+    </AlertSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Informasi Versi
+
+<TableProps>
+  <PropItem
+    props="Nama"
+    type="docsman"
+    default="0.0.8"
+    description="Versi package saat ini."
+  />
+  <PropItem
+    props="Renderer"
+    type="docsman/render"
+    default="-"
+    description="Server entry untuk MDX renderer (DocmanLayoutRender)."
+  />
+  <PropItem
+    props="Lokasi"
+    type="packages/docsman"
+    default="-"
+    description="Folder package di workspace monorepo."
+  />
+</TableProps>
+
+### Catatan
+
+- `docsman` dipublikasikan **secara manual** (jangan jalankan `npm publish` tanpa diminta).
+- `dist/` di-_ignore_; app me-resolusi via workspace symlink.
+- Deploy ke Vercel: pastikan `apps/docs` memakai `"commonjs"` (bukan `"type": "module"`) untuk menghindari `ERR_REQUIRE_ESM` di runtime.

@@ -1,8 +1,36 @@
 ---
-title: "Documentation"
-description: "ini coba file mdx"
+title: "Docsman"
+description: "Docsman adalah framework modern untuk membangun dokumentasi yang cepat, fleksibel, dan menarik tanpa kompleksitas yang tidak diperlukan. Terinspirasi dari framework seperti Docusaurus, Nextra, dan Fumadocs, Docsman dirancang untuk membantu developer mengubah konten menjadi dokumentasi yang terstruktur, konsisten, dan profesional dengan pengalaman pengembangan yang sederhana—sehingga Anda dapat fokus pada konten, bukan konfigurasi."
 ---
 
-# Coba render file mdx
+**docsman** adalah kit komponen **MDX** untuk membangun dokumentasi yang menarik dan informatif di atas React/Next.js. Semua komponen sudah terdaftar otomatis di `mdxComponents` (`docman-render.tsx`) — cukup tulis tag komponen di file `.mdx`, **tanpa perlu import**.
 
-ini halam documentation
+Dokumentasi ini dibangun menggunakan components dari `packages/docsman/src/components/` itu sendiri.
+
+## Mengapa docsman?
+
+<CardSection columns={3}>
+  <Card
+    title="Tanpa Import"
+    description="Semua komponen terdaftar otomatis di mdxComponents — langsung pakai tag di MDX."
+  />
+  <Card
+    title="Server-friendly"
+    description="Sebagian besar komponen server-safe, bisa dirender langsung di Server Component / RSC."
+  />
+  <Card
+    title="Responsif"
+    description="Grid, timeline, dan blok kode menyesuaikan ukuran layar dengan mulus."
+  />
+</CardSection>
+
+## Teknologi yang Dipakai
+
+<LogoSection columns={6}>
+  <Logo icon="RiNextjsFill" title="Next.js" />
+  <Logo icon="RiReactjsLine" title="React" />
+  <Logo icon="SiTypescript" title="TypeScript" />
+  <Logo icon="SiTailwindcss" title="Tailwind" />
+  <Logo icon="SiShadcnui" title="shadcn/ui" />
+  <Logo icon="SiVercel" title="Vercel" />
+</LogoSection>
