@@ -38,3 +38,36 @@ title:"Get Started"
     ```
 
 </CodeBlock>
+
+<CodeBlock lang="tsx" variant="header" fileName="[...docs]/page.tsx" >
+
+    ```
+    // Jangan Lupa hapus "type": "module"
+    import { DocmanLayoutRender } from "docsman/render"
+
+    export default async function DocsPage({
+    params,
+    }: {
+    params: Promise<{ docs?: string[] }>
+    }) {
+    const { docs = [] } = await params
+    const segments = docs[0] === "docs" ? docs.slice(1) : docs
+
+    return <DocmanLayoutRender dir="/docs" slug={segments.join("/") || "index"} />
+    }
+    ```
+
+</CodeBlock>
+
+<CodeBlock lang="mdx" variant="header" fileName="content/docs/index.mdx" >
+
+    ```
+    ---
+    title:"Index"
+    dectription:"ini file mdx pertam"
+    ---
+
+    ini ada di halaman `/docs`
+    ```
+
+</CodeBlock>
