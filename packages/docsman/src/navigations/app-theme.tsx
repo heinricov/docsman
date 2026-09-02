@@ -2,20 +2,20 @@
 
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
 import { Button } from "../ui/button"
 
 export const AppTheme = () => {
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
   const { resolvedTheme, setTheme } = useTheme()
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   // Prevent SSR flicker and hydration mismatch
   if (!mounted) {

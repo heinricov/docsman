@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useEffect, useMemo, useState } from "react"
+import { Fragment, useMemo } from "react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb"
+import { usePathname } from "../hooks/use-pathname"
 
 /**
  * Mengubah segmen URL menjadi label yang lebih ramah dibaca
@@ -23,15 +24,7 @@ function formatBreadcrumbLabel(segment: string): string {
 }
 
 export function BreadcrumbSection() {
-  const [pathname, setPathname] = useState("/")
-
-  /**
-   * Menyelaraskan pathname saat ini dari browser agar breadcrumb
-   * dapat dirender dinamis tanpa bergantung pada API framework tertentu.
-   */
-  useEffect(() => {
-    setPathname(window.location.pathname || "/")
-  }, [])
+  const pathname = usePathname()
 
   /**
    * Menyusun daftar breadcrumb berdasarkan pathname aktif agar

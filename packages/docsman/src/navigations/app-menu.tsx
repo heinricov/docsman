@@ -6,7 +6,7 @@ import { NavCombine } from "./nav-combine"
 import { MainNavMenus } from "./main-nav-menus"
 import { AppMenuProps, MenuSectionProps } from "../types/menus"
 
-function renderSection(section: MenuSectionProps, selectedVersion?: string) {
+function renderSection(section: MenuSectionProps) {
   const label = section.label ?? ""
   switch (section.type) {
     case "MainNavMenus":
@@ -42,14 +42,14 @@ export function AppMenu({ menu, selectedVersion }: AppMenuProps) {
           key={`${section.type}-${section.label}`}
           className={section.hidden ? "md:hidden" : ""}
         >
-          {renderSection(section, selectedVersion)}
+          {renderSection(section)}
         </div>
       ))}
       {visible.map((section) => (
         <div
           key={`${section.type}-${section.label}-${"grup" in section ? (section.grup ?? "ungrouped") : "ungrouped"}`}
         >
-          {renderSection(section, selectedVersion)}
+          {renderSection(section)}
         </div>
       ))}
     </>

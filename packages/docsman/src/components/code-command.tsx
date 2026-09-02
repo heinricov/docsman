@@ -1,6 +1,11 @@
 "use client"
 
-import { type ReactNode, useEffect, useState } from "react"
+import {
+  type ReactNode,
+  useEffect,
+  useSyncExternalStore,
+  useState,
+} from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { Check, Copy, Terminal } from "lucide-react"
 import { Button } from "../ui/button"
@@ -151,11 +156,9 @@ export default function CodeCommand({
   execute = false,
 }: CodeCommandProps) {
   const packageName = typeof children === "string" ? children.trim() : ""
-  const [mounted, setMounted] = useState(false)
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     const checkDark = () => {
       setIsDark(document.documentElement.classList.contains("dark"))
     }
@@ -233,11 +236,11 @@ export default function CodeCommand({
 
 function CommandRow({ command, isDark }: { command: string; isDark: boolean }) {
   const { copyToClipboard, isCopied } = useCopyToClipboard()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  )
 
   const syntaxTheme = isDark ? customDarkTheme : customLightTheme
 

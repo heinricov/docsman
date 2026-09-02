@@ -1,5 +1,4 @@
 import { BreadcrumbSection } from "./breadcrumb"
-import { CopySection } from "./copy-section"
 
 interface HeaderSectionProps {
   title?: string
