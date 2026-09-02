@@ -9,6 +9,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
 } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
@@ -469,6 +470,12 @@ function SyntaxCode({
   const [formattedCode, setFormattedCode] = useState(code)
   const { showLineNumbers, highlight, focus } = useContext(CodeBlockContext)
 
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  )
+
   useEffect(() => {
     const checkDark = () => {
       setIsDark(document.documentElement.classList.contains("dark"))
@@ -503,6 +510,31 @@ function SyntaxCode({
 
   const syntaxTheme = isDark ? oneDark : oneLight
   const hasFocus = focus.length > 0
+
+  if (!mounted) {
+    return (
+      <div className="bg-muted/30 dark:bg-muted/20">
+        <pre
+          className="overflow-x-auto p-4"
+          style={{
+            margin: 0,
+            fontSize: "0.875rem",
+            lineHeight: "1.5",
+            background: "transparent",
+          }}
+        >
+          <code
+            style={{
+              fontFamily: "var(--font-mono, monospace)",
+              whiteSpace: "pre",
+            }}
+          >
+            {formattedCode}
+          </code>
+        </pre>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-muted/30 dark:bg-muted/20">
