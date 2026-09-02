@@ -1,4 +1,5 @@
 // docsman/render Package (server entry — MDX renderer)
+// Jangan Lupa hapus "type": "module"
 import { DocmanLayoutRender } from "docsman/render"
 
 export default async function DocsPage({
