@@ -9,7 +9,7 @@ export function AppLogoSidebar({ logo = {} }: AppLogoSidebarProps) {
         <SidebarMenuButton
           className={cn("hover:bg-none", logo.className)}
           size="lg"
-          render={<a href="#" />}
+          render={<a href={logo.href || "/"} />}
         >
           <div className="flex items-center justify-center">{logo.icon}</div>
           <div className="grid flex-1 text-left text-sm leading-tight">
@@ -22,9 +22,9 @@ export function AppLogoSidebar({ logo = {} }: AppLogoSidebarProps) {
   )
 }
 
-export function AppLogo({ icon, title }: AppLogoProps) {
+export function AppLogo({ icon, title, href }: AppLogoProps) {
   return (
-    <a href="#" className="flex items-center gap-2">
+    <a href={href || "/"} className="flex items-center gap-2">
       {icon}
       <span className="text-base font-semibold">{title}</span>
     </a>

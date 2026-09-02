@@ -7,9 +7,11 @@ export type logoProps = {
   title?: string
   description?: string
   className?: string
+  href?: string
 }
 
 export type AppLogoProps = {
   icon?: React.ReactNode
   title?: string
+  href?: string
 }
