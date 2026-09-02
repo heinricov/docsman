@@ -22,7 +22,13 @@ import { NavCombineProps } from "../types/menus"
 export function NavCombine({ label, menus }: NavCombineProps) {
   return (
     <SidebarGroup>
-      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
+      {label && { label } ? (
+        <SidebarGroupLabel className="text-lg md:text-sm">
+          {label}
+        </SidebarGroupLabel>
+      ) : (
+        ""
+      )}
       <SidebarMenu>
         {menus.map((menu) =>
           menu.items?.length ? (
@@ -34,6 +40,7 @@ export function NavCombine({ label, menus }: NavCombineProps) {
               <SidebarMenuButton
                 tooltip={menu.title}
                 render={<CollapsibleTrigger />}
+                className="text-lg md:text-sm"
               >
                 {menu.icon}
                 <a href={menu.href}>
@@ -51,7 +58,10 @@ export function NavCombine({ label, menus }: NavCombineProps) {
                 <SidebarMenuSub>
                   {menu.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton render={<a href={subItem.url} />}>
+                      <SidebarMenuSubButton
+                        className="text-lg md:text-sm"
+                        render={<a href={subItem.url} />}
+                      >
                         <span>{subItem.title}</span>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
@@ -61,7 +71,10 @@ export function NavCombine({ label, menus }: NavCombineProps) {
             </Collapsible>
           ) : (
             <SidebarMenuItem key={menu.title}>
-              <SidebarMenuButton render={<a href={menu.href} />}>
+              <SidebarMenuButton
+                className="text-lg md:text-sm"
+                render={<a href={menu.href} />}
+              >
                 {menu.icon}
                 <span>{menu.title}</span>
               </SidebarMenuButton>

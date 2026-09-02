@@ -12,11 +12,20 @@ import {
 export function NavMenus({ label, menus }: NavMenusProps) {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
+      {label && { label } ? (
+        <SidebarGroupLabel className="text-lg md:text-sm">
+          {label}
+        </SidebarGroupLabel>
+      ) : (
+        ""
+      )}
       <SidebarMenu>
         {menus.map((menu) => (
           <SidebarMenuItem key={menu.title}>
-            <SidebarMenuButton render={<a href={menu.href} />}>
+            <SidebarMenuButton
+              className="text-lg md:text-sm"
+              render={<a href={menu.href} />}
+            >
               {menu.icon}
               <span>{menu.title}</span>
             </SidebarMenuButton>

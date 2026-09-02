@@ -22,7 +22,13 @@ import { NavCollapsProps } from "../types/menus"
 export function NavCollaps({ label, menus }: NavCollapsProps) {
   return (
     <SidebarGroup>
-      {label && { label } ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : ""}
+      {label && { label } ? (
+        <SidebarGroupLabel className="text-lg md:text-sm">
+          {label}
+        </SidebarGroupLabel>
+      ) : (
+        ""
+      )}
       <SidebarMenu>
         {menus.map((menu) => (
           <Collapsible
@@ -33,6 +39,7 @@ export function NavCollaps({ label, menus }: NavCollapsProps) {
             <SidebarMenuButton
               tooltip={menu.title}
               render={<CollapsibleTrigger />}
+              className="text-lg md:text-sm"
             >
               {menu.icon}
               <a href={menu.href}>
@@ -52,7 +59,10 @@ export function NavCollaps({ label, menus }: NavCollapsProps) {
                   <SidebarMenuSub>
                     {menu.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton render={<a href={subItem.url} />}>
+                        <SidebarMenuSubButton
+                          className="text-lg md:text-sm"
+                          render={<a href={subItem.url} />}
+                        >
                           <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

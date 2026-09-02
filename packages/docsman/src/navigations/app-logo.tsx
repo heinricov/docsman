@@ -11,11 +11,9 @@ export function AppLogoSidebar({ logo = {} }: AppLogoSidebarProps) {
           size="lg"
           render={<a href="#" />}
         >
-          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            {logo.icon}
-          </div>
+          <div className="flex items-center justify-center">{logo.icon}</div>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-medium">{logo.title}</span>
+            <span className="truncate text-sm font-medium">{logo.title}</span>
             <span className="truncate text-xs">{logo.description}</span>
           </div>
         </SidebarMenuButton>

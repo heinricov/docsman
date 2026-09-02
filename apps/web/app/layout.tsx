@@ -56,7 +56,7 @@ export const menus = [
   {
     grup: "Nav Collaps",
     type: "NavCollaps",
-    // label: "Nav Collaps",
+    label: "Nav Collaps",
     menus: [
       {
         title: "Playground",
@@ -102,7 +102,7 @@ export const menus = [
   {
     grup: "Nav Menus",
     type: "NavMenus",
-    // label: "Nav Menus",
+    label: "Nav Menus",
     menus: [
       {
         title: "Design Engineering",
