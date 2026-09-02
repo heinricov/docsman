@@ -183,6 +183,24 @@ export const menus = [
       },
     ],
   },
+  {
+    type: "NavMenus",
+    label: "Components",
+    menus: [
+      {
+        title: "Command Code",
+        href: "/docs/components/command-code",
+      },
+      {
+        title: "Code Block",
+        href: "/docs/components/code-block",
+      },
+      {
+        title: "Table Props",
+        href: "/docs/components/table-props",
+      },
+    ],
+  },
 ] satisfies MenuSectionProps[]
 
 const grupData = [
