@@ -1,0 +1,71 @@
+---
+title: "TableProps"
+description: "Komponen untuk menampilkan tabel daftar props komponen dalam dokumentasi MDX, dengan kolom Props, Type, Default, dan Description."
+---
+
+# TableProps
+
+`TableProps` adalah komponen untuk membuat **tabel dokumentasi props** komponen dalam file MDX. Tabel otomatis berisi 4 kolom: `Props`, `Type`, `Default`, dan `Description`, dengan styling yang konsisten.
+
+Komponen ini sudah terdaftar di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** — langsung pakai `<TableProps>` dan `<PropItem>`.
+
+## Cara Pakai
+
+Ada **dua pendekatan** untuk mengisi data tabel.
+
+### 1. Children (`<PropItem />`) — direkomendasikan
+
+Setiap baris ditulis sebagai `<PropItem>` di dalam children. Komponen `PropItem` **tidak merender apa pun** — ia hanya *carrier data* yang dibaca oleh `TableProps`.
+
+<CodeBlock lang="mdx" title="table-props.mdx">
+  <CodeBlock.Code value='<TableProps>\n  <PropItem\n    props="children"\n    type="ReactNode"\n    default="-"\n    description="Isi konten yang dibungkus komponen ini."\n  />\n  <PropItem\n    props="mode"\n    type="string"\n    default="basic"\n    description="Mode tampilan: basic atau floating."\n  />\n</TableProps>' />
+</CodeBlock>
+
+Hasilnya:
+
+<TableProps>
+  <PropItem props="children" type="ReactNode" default="-" description="Isi konten yang dibungkus komponen ini." />
+  <PropItem props="mode" type="string" default="basic" description="Mode tampilan: basic atau floating." />
+</TableProps>
+
+Pendekatan ini paling aman karena `docman-render` didesain khusus membaca data lewat children — beberapa bentuk prop objek/array sering dibuang oleh compiler MDX.
+
+### 2. Prop `props` (array atau string JSON)
+
+Data bisa juga dikirim langsung lewat prop `props`:
+
+<CodeBlock lang="mdx" title="table-props.mdx">
+  <CodeBlock.Code value='<TableProps\n  props={[\n    { props: "slug", type: "string", default: "index", description: "Slug halaman yang dirender." },\n    { props: "dir", type: "string", default: "/docs", description: "Folder tempat file MDX berada." },\n  ]}\n/>' />
+</CodeBlock>
+
+<TableProps
+  props={[
+    { props: "slug", type: "string", default: "index", description: "Slug halaman yang dirender." },
+    { props: "dir", type: "string", default: "/docs", description: "Folder tempat file MDX berada." },
+  ]}
+/>
+
+Atau sebagai **string JSON** (kutip ganda di dalamnya harus di-escape):
+
+<CodeBlock lang="mdx" title="table-props.mdx">
+  <CodeBlock.Code value={'<TableProps props=\'[{"props":"slug","type":"string","default":"index","description":"Slug halaman."}]\' />'} />
+</CodeBlock>
+
+## Struktur Item
+
+Setiap baris harus memenuhi bentuk berikut — **keempat field wajib berupa string**:
+
+- `props` — nama prop
+- `type` — tipe prop (mis. `string`, `boolean`, `ReactNode`)
+- `default` — nilai default (tulislah sebagai string, contoh `"pnpm"`, `"false"`)
+- `description` — deskripsi prop
+
+## Catatan
+
+- `PropItem` tidak menampilkan apa pun; gunakan hanya sebagai child **data**.
+- Jika children tidak berisi `PropItem` valid, `TableProps` akan mencoba membaca prop `props` dari array atau string JSON.
+- Contoh penggunaan nyata: lihat [CodeCommand](/docs/components/command-code).
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/table-props.tsx` dan dipakai oleh pipeline render MDX melalui `docsman/render-client` (`TableProps` + `PropItem`).

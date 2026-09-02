@@ -62,16 +62,16 @@ export const menus = [
         isActive: true,
         items: [
           {
-            title: "Alert",
-            url: "#",
-          },
-          {
-            title: "Card Section",
-            url: "#",
+            title: "Command Code",
+            url: "/docs/components/command-code",
           },
           {
             title: "Code Block",
-            url: "#",
+            url: "/docs/components/code-block",
+          },
+          {
+            title: "Table Props",
+            url: "/docs/components/table-props",
           },
         ],
       },

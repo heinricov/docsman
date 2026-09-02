@@ -1,0 +1,70 @@
+---
+title: "CodeCommand"
+description: "Komponen untuk menampilkan perintah instalasi/eksekusi dalam bentuk tab multi package manager (pnpm, npm, yarn, bun) dengan tombol copy."
+---
+
+# CodeCommand
+
+`CodeCommand` adalah komponen yang menampilkan perintah terminal dengan tab untuk empat **package manager** sekaligus: pnpm, npm, yarn, dan bun. Komponen ini otomatis dilengkapi **syntax highlighting**, indikator prompt `$`, serta tombol **copy ke clipboard**.
+
+Komponen ini bersifat **client component** (`"use client"`) dan sudah terdaftar otomatis di `mdxComponents` pada `docman-render.tsx`, sehingga **tidak perlu import tambahan** di file MDX — langsung pakai tag `<CodeCommand>`.
+
+## Props
+
+<TableProps>
+  <PropItem props="children" type="ReactNode" default="-" description="Nama package atau perintah yang akan ditampilkan (wajib)." />
+  <PropItem props="defaultTab" type="string" default="pnpm" description="Package manager yang aktif pertama kali (pnpm / npm / yarn / bun)." />
+  <PropItem props="execute" type="boolean" default="false" description="false = tampilkan perintah instalasi; true = tampilkan perintah eksekusi (dlx)." />
+</TableProps>
+
+## Penggunaan Dasar
+
+Tulis nama package sebagai konten (`children`) komponen:
+
+<CodeBlock lang="mdx" title="command-code.mdx">
+  <CodeBlock.Code value="<CodeCommand>docsman</CodeCommand>" />
+</CodeBlock>
+
+Hasilnya: tab `pnpm` / `npm` / `yarn` / `bun`, masing-masing menampilkan perintah instalasi-nya.
+
+<CodeCommand>docsman</CodeCommand>
+
+## Mode Eksekusi (`execute`)
+
+Setel `execute` untuk menampilkan perintah jalankan langsung, bukan instalasi:
+
+<CodeBlock lang="mdx" title="command-code.mdx">
+  <CodeBlock.Code value="<CodeCommand execute>create-docsman-app</CodeCommand>" />
+</CodeBlock>
+
+Perintah yang dihasilkan mengikuti kebiasaan tiap package manager:
+
+- `pnpm dlx create-docsman-app`
+- `npx create-docsman-app`
+- `yarn dlx create-docsman-app`
+- `bunx --bun create-docsman-app`
+
+<CodeCommand execute>create-docsman-app</CodeCommand>
+
+## Mengubah Tab Awal (`defaultTab`)
+
+Pilih package manager yang aktif lebih dulu:
+
+<CodeBlock lang="mdx" title="command-code.mdx">
+  <CodeBlock.Code value='<CodeCommand defaultTab="bun">docsman</CodeCommand>' />
+</CodeBlock>
+
+<CodeCommand defaultTab="bun">docsman</CodeCommand>
+
+## Perilaku & Detail
+
+- **Instalasi vs Eksekusi** — verb per package manager:
+  - instalasi (`execute={false}`): `pnpm add`, `npm install`, `yarn add`, `bun add`
+  - eksekusi (`execute={true}`): `pnpm dlx`, `npx`, `yarn dlx`, `bunx --bun`
+- **Auto tema** — mengikuti mode `dark`/`light` aplikasi secara real-time (via `MutationObserver` pada kelas `dark` di `documentElement`).
+- **Copy** — tombol copy di kanan memakai `useCopyToClipboard`; ikon berubah jadi `Check` berwarna hijau saat berhasil.
+- **Hydration-safe** — `CommandRow` hanya me-render `SyntaxHighlighter` setelah komponen ter-mount di browser untuk mencegah hydration mismatch (SSR flicker), dengan fallback `<pre>` polos.
+
+## Kode Sumber
+
+Komponen berada di `packages/docsman/src/components/code-command.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`).

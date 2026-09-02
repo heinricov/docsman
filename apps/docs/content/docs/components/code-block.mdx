@@ -1,0 +1,175 @@
+---
+title: "CodeBlock"
+description: "Komponen untuk menampilkan blok kode dengan syntax highlighting, tabs, diff, highlight baris, fokus baris, auto-format, dan tombol copy."
+---
+
+# CodeBlock
+
+`CodeBlock` adalah komponen serbaguna untuk menampilkan **blok kode** dalam dokumentasi MDX: syntax highlighting (Prism), ikon bahasa, nomor baris, highlight/fokus baris tertentu, mode **tabs**, mode **diff**, auto-format (Prettier), dan tombol copy.
+
+Komponen sudah terdaftar di `mdxComponents` (`docman-render.tsx`), termasuk sub-komponennya:
+
+- `CodeBlock` → `<CodeBlock>`
+- `CodeBlock.Code` → `<CodeBlock.Code />`
+- `CodeBlock.Line` → `<CodeBlock.Line />`
+- `CodeBlock.Tab` → `<CodeBlock.Tab />`
+
+Jadi **tidak perlu import** apa pun di file MDX.
+
+## Props
+
+<TableProps>
+  <PropItem props="code" type="string" default="-" description="Kode sumber langsung, alternatif dari cara children." />
+  <PropItem props="lang" type="string" default="tsx" description="Bahasa untuk highlight & ikon (tsx, typescript, js, bash, json, yaml, dll)." />
+  <PropItem props="variant" type="string" default="default" description="Mode tampilan: default | header | tabs." />
+  <PropItem props="fileName" type="string" default="-" description="Nama file yang ditampilkan (fallback untuk title)." />
+  <PropItem props="title" type="string" default="-" description="Judul di atas blok. Diprioritaskan dibanding fileName." />
+  <PropItem props="showLineNumbers" type="boolean" default="true" description="Tampilkan nomor baris." />
+  <PropItem props="highlight" type="number[] | string" default="[]" description="Baris yang disorot (array, JSON, atau CSV seperti [1,3] / 1,3)." />
+  <PropItem props="focus" type="number[] | string" default="[]" description="Baris fokus; baris lain diredupkan (array, JSON, atau CSV)." />
+  <PropItem props="tabs" type="string[] | string" default="[]" description="Daftar tab untuk variant tabs (array, JSON, atau CSV), atau via <CodeBlock.Tab />." />
+  <PropItem props="defaultTab" type="string" default="-" description="Tab yang aktif pertama kali." />
+  <PropItem props="diff" type="object" default="-" description="Object { oldCode, newCode } untuk mode diff." />
+  <PropItem props="oldCode / newCode" type="string" default="-" description="Alternatif diff lewat dua string terpisah (dukung escape \\n)." />
+  <PropItem props="autoFormat" type="boolean" default="true" description="Format otomatis kode via Prettier." />
+  <PropItem props="children" type="ReactNode" default="-" description="Konten kode: <CodeBlock.Code />, <CodeBlock.Line />, atau tab." />
+</TableProps>
+
+## Sub-Komponen (Data Carrier di MDX)
+
+<TableProps>
+  <PropItem props="CodeBlock.Code" type="component" default="-" description="Menampung seluruh source code lewat prop value." />
+  <PropItem props="CodeBlock.Line" type="component" default="-" description="Satu baris kode lewat prop value; beberapa baris otomatis digabung dengan newline." />
+  <PropItem props="CodeBlock.Tab" type="component" default="-" description="Mendefinisikan satu tab: prop value (label) + lang + children (kode)." />
+</TableProps>
+
+Semuanya tidak merender apa pun — hanya *carrier data* yang dibaca `CodeBlock`.
+
+## Penggunaan Dasar
+
+### a. Dengan `CodeBlock.Code`
+
+```mdx
+<CodeBlock lang="typescript" title="types.ts">
+  <CodeBlock.Code value="interface User {\n  name: string\n  age: number\n}" />
+</CodeBlock>
+```
+
+<CodeBlock lang="typescript" title="types.ts">
+  <CodeBlock.Code value="interface User {\n  name: string\n  age: number\n}" />
+</CodeBlock>
+
+### b. Dengan beberapa `CodeBlock.Line`
+
+```mdx
+<CodeBlock lang="bash" title="install.sh">
+  <CodeBlock.Line value="pnpm install docsman" />
+  <CodeBlock.Line value="pnpm add react-syntax-highlighter" />
+</CodeBlock>
+```
+
+<CodeBlock lang="bash" title="install.sh">
+  <CodeBlock.Line value="pnpm install docsman" />
+  <CodeBlock.Line value="pnpm add react-syntax-highlighter" />
+</CodeBlock>
+
+### c. Lewat prop `code`
+
+```mdx
+<CodeBlock lang="tsx" code="const x = 1" />
+```
+
+## Variant `header` — Tampilkan Nama File
+
+```mdx
+<CodeBlock lang="ts" variant="header" fileName="app.ts" showLineNumbers={false}>
+  <CodeBlock.Code value="const app = createApp()" />
+</CodeBlock>
+```
+
+<CodeBlock lang="ts" variant="header" fileName="app.ts" showLineNumbers={false}>
+  <CodeBlock.Code value="const app = createApp()" />
+</CodeBlock>
+
+## Variant `tabs` — Perintah Multi-Package-Manager
+
+Gunakan `<CodeBlock.Tab value="label" lang="bash">kode</CodeBlock.Tab>` di dalam children:
+
+```mdx
+<CodeBlock variant="tabs" defaultTab="pnpm">
+  <CodeBlock.Tab value="pnpm" lang="bash">pnpm add docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="npm" lang="bash">npm install docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">yarn add docsman</CodeBlock.Tab>
+</CodeBlock>
+```
+
+<CodeBlock variant="tabs" defaultTab="pnpm">
+  <CodeBlock.Tab value="pnpm" lang="bash">pnpm add docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="npm" lang="bash">npm install docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">yarn add docsman</CodeBlock.Tab>
+</CodeBlock>
+
+Anda juga bisa definisikan hanya label tab via prop `tabs`:
+
+```mdx
+<CodeBlock variant="tabs" tabs="npm,pnpm,yarn" defaultTab="npm">
+  <CodeBlock.Tab value="npm" lang="bash">npm init docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="pnpm" lang="bash">pnpm create docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">yarn create docsman</CodeBlock.Tab>
+</CodeBlock>
+```
+
+## Highlight & Focus Baris
+
+- `highlight` → warnai baris tertentu.
+- `focus` → redupkan semua baris kecuali yang difokuskan.
+
+```mdx
+<CodeBlock lang="bash" highlight="[1,3]" focus="[1]">
+  <CodeBlock.Line value="pnpm install" />
+  <CodeBlock.Line value="pnpm add docsman" />
+  <CodeBlock.Line value="pnpm run build" />
+</CodeBlock>
+```
+
+<CodeBlock lang="bash" highlight="[1,3]" focus="[1]">
+  <CodeBlock.Line value="pnpm install" />
+  <CodeBlock.Line value="pnpm add docsman" />
+  <CodeBlock.Line value="pnpm run build" />
+</CodeBlock>
+
+## Mode Diff
+
+Tampilkan perubahan kode (hijau = tambahan, merah = penghapusan):
+
+```mdx
+<CodeBlock title="ubah konstanta" oldCode="const a = 1" newCode="const a = 2" />
+```
+
+<CodeBlock title="ubah konstanta" oldCode="const a = 1" newCode="const a = 2" />
+
+Untuk multi-line, gunakan `\n` dalam string:
+
+```mdx
+<CodeBlock
+  oldCode="const a = 1\nconst b = a + 1"
+  newCode="const a = 2\nconst b = a + 1\nconsole.log(b)"
+/>
+```
+
+<CodeBlock
+  oldCode="const a = 1\nconst b = a + 1"
+  newCode="const a = 2\nconst b = a + 1\nconsole.log(b)"
+/>
+
+## Perilaku & Catatan
+
+- **Auto tema** — ikut mode `dark`/`light` aplikasi secara real-time (via `MutationObserver` pada kelas `dark`).
+- **Auto format** — `autoFormat={true}` menjalankan Prettier via `formatCode` sesuai bahasa; matikan jika kode sudah diformat manual.
+- **Copy** — tombol muncul saat hover di pojok kanan atas (`useCopyToClipboard`).
+- **Extraction dari children** — `CodeBlock.Code`/`.Line`/`.Tab` membawa data lewat children/props string sehingga kompatibel dengan compiler MDX yang kadang membuang prop objek/array (pendekatan `extractTextContent` / `flattenElementChildren`).
+- Untuk banyak kasus, **auto-format** (Prettier) sudah menormalkan isi kode, sehingga tidak perlu menulis ulang indentasi manual.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/code-block.tsx` dan diekspor ulang melalui `docsman/render-client`. Sub-komponennya juga tersedia sebagai `CodeBlockCode`, `CodeBlockLine`, `CodeBlockTabItem`, dan `CodeBlockHeader`.
