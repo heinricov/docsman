@@ -155,7 +155,7 @@ export default function CodeCommand({
   defaultTab = "pnpm",
   execute = false,
 }: CodeCommandProps) {
-  const packageName = typeof children === "string" ? children.trim() : ""
+  const packageName = extractTextContent(children).trim()
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
@@ -337,4 +337,42 @@ function CommandRow({ command, isDark }: { command: string; isDark: boolean }) {
       </Button>
     </div>
   )
+}
+
+function extractTextContent(children: ReactNode): string {
+  if (typeof children === "string" || typeof children === "number") {
+    return String(children)
+  }
+
+  // Handle React element (e.g., MDX code/pre element)
+  if (children && typeof children === "object" && "props" in children) {
+    const element = children as { props: { children?: ReactNode } }
+    if (element.props.children) {
+      return extractTextContent(element.props.children)
+    }
+  }
+
+  // Handle React lazy/await element (RSC serialized): unwrap _payload fulfilled value
+  if (
+    children &&
+    typeof children === "object" &&
+    "_payload" in children &&
+    (children as Record<string, unknown>)._payload
+  ) {
+    const payload = (children as Record<string, unknown>)._payload as {
+      status?: string
+      value?: { props?: { children?: ReactNode } }
+    }
+    if (payload.value?.props?.children) {
+      const inner = extractTextContent(payload.value.props.children)
+      if (inner) return inner
+    }
+  }
+
+  // Handle arrays (e.g., multiple elements/text nodes)
+  if (Array.isArray(children)) {
+    return children.map((child) => extractTextContent(child)).join("")
+  }
+
+  return ""
 }
