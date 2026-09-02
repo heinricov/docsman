@@ -2,9 +2,7 @@
 
 export { cn } from "./lib/utils"
 export { DocsmanLayout } from "./layouts/docsman-layout"
-export type {
-  LayoutProps,
-} from "./types/layouts"
+export type { LayoutProps } from "./types/layouts"
 export type {
   MenuSectionProps,
   MenusProps,

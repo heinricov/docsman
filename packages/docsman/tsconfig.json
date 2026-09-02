@@ -3,7 +3,11 @@
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "docsman": ["./src/index.ts"],
+      "docsman/*": ["./src/*"]
+    }
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]

@@ -4,10 +4,10 @@ import remarkGfm from "remark-gfm"
 import rehypePrettyCode from "rehype-pretty-code"
 import { cn } from "../lib/utils"
 import { getMdxFile } from "../lib/mdx"
-import { HeaderSection } from "./header"
-import { Toc } from "./toc"
 import { PaginationSection } from "./pagination"
 import {
+  HeaderSection,
+  Toc,
   H1,
   H2,
   H3,
@@ -25,35 +25,36 @@ import {
   Hr,
   Strong,
   Em,
-} from "../components/typograpy"
-import { AlertSection } from "../components/alert-section"
-import { LogoSection, Logo } from "../components/logo-setion"
-import CodeCommand from "../components/code-command"
-import { CardSection, Card } from "../components/card-section"
-import CodeBlock, {
+  AlertSection,
+  LogoSection,
+  Logo,
+  CodeCommand,
+  CardSection,
+  Card,
+  CodeBlock,
   CodeBlockCode,
   CodeBlockLine,
   CodeBlockTabItem,
-} from "../components/code-block"
-import { StepsSection, Step } from "../components/steps-section"
-import { FileTree, Folder, File } from "../components/file-tree"
-import TablePropsBase, { PropItem } from "../components/table-props"
-import {
+  StepsSection,
+  Step,
+  FileTree,
+  Folder,
+  File,
+  TablePropsBase,
+  PropItem,
   ComponentCodePreview,
   Component,
   CodePreview,
-} from "../components/component-preview"
-import {
   TerminalView,
   Command,
   Question,
   Process,
-  SelectItem as SelectItemBase,
+  SelectItemBase,
   Option,
   Resault,
   ResaultItem,
   Massage,
-} from "../components/terminal-view"
+} from "docsman/render-client"
 
 const MdxCodeBlock = Object.assign(CodeBlock, {
   Code: CodeBlockCode,

@@ -5,6 +5,8 @@ export default defineConfig({
   splitting: false,
   entry: [
     "src/index.ts",
+    "src/render-client.ts",
+    "src/render/index.ts",
     "src/layouts/index.ts",
     "src/layouts/docsman-layout.tsx",
     "src/layouts/layout-basic.tsx",
@@ -51,6 +53,7 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   external: [
+    /^docsman(\/|$)/,
     "react",
     "react-dom",
     "@base-ui/react",
@@ -68,6 +71,10 @@ export default defineConfig({
     "shadcn",
     "zod",
     "node:path",
+    "node:url",
+    "fs",
+    "path",
+    "node:fs",
     "node:url",
   ],
   onSuccess: async () => {

@@ -83,11 +83,19 @@
       "source": "./src/ui/*.tsx",
       "import": "./dist/ui/*.js"
     },
-    "./layouts": {
-      "types": "./dist/layouts/index.d.ts",
-      "import": "./dist/layouts/index.js"
-    },
-    "./layouts/*": "./dist/layouts/*.js",
-    "./navigations/*": "./dist/navigations/*.js"
+"./layouts": {
+  "types": "./dist/layouts/index.d.ts",
+  "import": "./dist/layouts/index.js"
+ },
+ "./layouts/*": "./dist/layouts/*.js",
+ "./render": {
+  "types": "./dist/render/index.d.ts",
+  "import": "./dist/render/index.js"
+ },
+ "./render-client": {
+  "types": "./dist/render-client.d.ts",
+  "import": "./dist/render-client.js"
+ },
+ "./navigations/*": "./dist/navigations/*.js"
   }
 }
