@@ -74,7 +74,10 @@
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./dist/lib/*.js",
     "./hooks/*": "./dist/hooks/*.js",
-    "./ui/*": "./dist/ui/*.js",
+    "./ui/*": {
+      "source": "./src/ui/*.tsx",
+      "import": "./dist/ui/*.js"
+    },
     "./layouts": {
       "types": "./dist/layouts/index.d.ts",
       "import": "./dist/layouts/index.js"

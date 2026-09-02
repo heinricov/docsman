@@ -14,6 +14,7 @@ export default defineConfig({
     "src/ui/avatar.tsx",
     "src/ui/breadcrumb.tsx",
     "src/ui/button.tsx",
+    "src/ui/button-group.tsx",
     "src/ui/card.tsx",
     "src/ui/collapsible.tsx",
     "src/ui/command.tsx",
