@@ -10,6 +10,7 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { cn } from "../lib/utils"
 import { formatCode } from "../lib/format-code"
+import { extractTextContent } from "../lib/extract-text-content"
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard"
 import { Check, ChevronDown, ChevronUp, Copy } from "lucide-react"
 import { Button } from "../ui/button"
@@ -74,7 +75,7 @@ export function CodePreview({
   title,
   children,
 }: CodePreviewProps) {
-  const code = extractTextContent(children)
+  const code = extractTextContent(children) ?? ""
   const [isDark, setIsDark] = useState(false)
   const [formattedCode, setFormattedCode] = useState("")
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
@@ -193,32 +194,6 @@ export function CodePreview({
 
 /**
  * Mengekstrak teks mentah dari children preview agar bisa diformat sebagai source code.
- * Fungsi ini menembus wrapper React sederhana yang umum muncul dari hasil kompilasi MDX.
+ * Fungsi ini menembus wrapper React sederhana (termasuk lazy `_payload` hasil RSC)
+ * yang umum muncul dari hasil kompilasi MDX.
  */
-function extractTextContent(children: ReactNode): string {
-  if (typeof children === "string") {
-    return children.trim()
-  }
-
-  if (typeof children === "number") {
-    return String(children)
-  }
-
-  if (children && typeof children === "object" && "props" in children) {
-    const element = children as { props: { children?: ReactNode } }
-    if (element.props.children) {
-      return extractTextContent(element.props.children)
-    }
-  }
-
-  if (Array.isArray(children)) {
-    const texts = children
-      .map((child) => extractTextContent(child))
-      .filter(Boolean)
-    if (texts.length > 0) {
-      return texts.join("")
-    }
-  }
-
-  return ""
-}

@@ -18,6 +18,7 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { cn } from "../lib/utils"
 import { formatCode } from "../lib/format-code"
+import { extractTextContent } from "../lib/extract-text-content"
 
 import { Check, Copy, Minus, Plus } from "lucide-react"
 import { Button } from "../ui/button"
@@ -679,41 +680,6 @@ function extractLinesFromChildren(children: ReactNode): string[] {
   }
 
   return lines
-}
-
-function extractTextContent(children: ReactNode): string | null {
-  if (typeof children === "string") {
-    return children
-  }
-
-  if (typeof children === "number") {
-    return String(children)
-  }
-
-  // Handle React element (e.g., MDX code block)
-  if (children && typeof children === "object" && "props" in children) {
-    const element = children as { props: { children?: ReactNode } }
-
-    // If it's a code/pre element from MDX triple backticks
-    if (element.props.children) {
-      const innerText = extractTextContent(element.props.children)
-      if (innerText) {
-        return innerText
-      }
-    }
-  }
-
-  // Handle arrays (e.g., multiple elements)
-  if (Array.isArray(children)) {
-    const texts = children
-      .map((child) => extractTextContent(child))
-      .filter(Boolean)
-    if (texts.length > 0) {
-      return texts.join("")
-    }
-  }
-
-  return null
 }
 
 export default function CodeBlock({

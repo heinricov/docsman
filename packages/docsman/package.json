@@ -1,6 +1,6 @@
 {
   "name": "docsman",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Reusable React layouts and sidebar components built with Base UI, shadcn-style, and Tailwind CSS v4.",
   "type": "module",
   "private": false,
@@ -21,7 +21,9 @@
     "prepublishOnly": "npm run build",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -57,7 +59,8 @@
     "eslint": "^9",
     "tailwindcss": "^4",
     "tsup": "^8.3.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.11"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
