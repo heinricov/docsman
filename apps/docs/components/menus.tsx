@@ -58,7 +58,7 @@ export const menus = [
       },
       {
         title: "Deploy",
-        href: "/docs/templates",
+        href: "/docs/deploy",
       },
     ],
   },
