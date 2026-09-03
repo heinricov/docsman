@@ -108,7 +108,7 @@ export const menus = [
       },
       {
         title: "Typograpy",
-        href: "/docs/components/typograpy",
+        href: "/docs/components/typography",
       },
     ],
   },
