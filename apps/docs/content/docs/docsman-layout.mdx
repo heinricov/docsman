@@ -1,0 +1,70 @@
+---
+title: "DocsmanLayout"
+description: "Docsman memiliki komponen layout yang bisa membungkus proyek dokumentasi anda sehingga terlihat profesional"
+---
+
+### Basic
+
+<CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
+
+    ```
+    import "./globals.css"
+    import { ThemeProvider } from "@/components/theme-provider"
+    import { cn } from "@/lib/utils"
+
+    import { DocsmanLayout } from "docsman/layouts"
+
+    export default function RootLayout({
+    children,
+    }: Readonly<{
+    children: React.ReactNode
+    }>) {
+    return (
+        <html
+        lang="en"
+        suppressHydrationWarning
+        >
+        <body>
+            <ThemeProvider>
+            <DocsmanLayout>{children}</DocsmanLayout>
+            </ThemeProvider>
+        </body>
+        </html>
+    )
+    }
+    ```
+
+</CodeBlock>
+
+### Variants Floating
+
+<CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
+
+    ```
+    import "./globals.css"
+    import { ThemeProvider } from "@/components/theme-provider"
+    import { cn } from "@/lib/utils"
+
+    import { DocsmanLayout } from "docsman/layouts"
+
+    export default function RootLayout({
+    children,
+    }: Readonly<{
+    children: React.ReactNode
+    }>) {
+    return (
+        <html
+        lang="en"
+        suppressHydrationWarning
+        >
+        <body>
+            <ThemeProvider>
+            <DocsmanLayout variant="floating">{children}</DocsmanLayout>
+            </ThemeProvider>
+        </body>
+        </html>
+    )
+    }
+    ```
+
+</CodeBlock>

@@ -55,6 +55,14 @@ export const menus = [
         href: "/docs/templates",
       },
       {
+        title: "DocsmanLayout",
+        href: "/docsman-layout",
+      },
+      {
+        title: "DocmanLayoutRender",
+        href: "/docsman-layout-render",
+      },
+      {
         title: "Deploy",
         href: "/docs/templates",
       },

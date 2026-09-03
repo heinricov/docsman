@@ -1,0 +1,25 @@
+---
+title: "DocsmanLayoutRender"
+description: "Docsman memiliki komponen layout yang bisa membungkus proyek dokumentasi anda sehingga terlihat profesional"
+---
+
+### Basic
+
+<CodeBlock lang="tsx" variant="header" fileName="[...docs]/page.tsx" >
+
+    ```tsx
+    import { DocmanLayoutRender } from "docsman/render"
+
+    export default async function DocsPage({
+    params,
+    }: {
+    params: Promise<{ docs?: string[] }>
+    }) {
+    const { docs = [] } = await params
+    const segments = docs[0] === "docs" ? docs.slice(1) : docs
+
+    return <DocmanLayoutRender dir="/docs" slug={segments.join("/") || "index"} />
+    }
+    ```
+
+</CodeBlock>
