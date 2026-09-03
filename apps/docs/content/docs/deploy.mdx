@@ -1,0 +1,26 @@
+---
+title: "Deploy"
+description: "Anda bisa mendeploy proyek dokumentasi anda dengan mengikuti langkah berikut dibawah"
+---
+
+### Update file package.json
+
+<CodeBlock lang="json" variant="header" fileName="package.json" >
+
+    ```
+    {
+    "name": "docs",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint",
+        "format": "prettier --write \"**/*.{ts,tsx}\"",
+        "typecheck": "tsc --noEmit"
+    },
+    }
+    ```
+
+</CodeBlock>
