@@ -12,30 +12,61 @@ Komponen ini bersifat **client component** (`"use client"`) dan sudah terdaftar 
 ## Props
 
 <TableProps>
-  <PropItem props="children" type="ReactNode" default="-" description="Nama package atau perintah yang akan ditampilkan (wajib)." />
-  <PropItem props="defaultTab" type="string" default="pnpm" description="Package manager yang aktif pertama kali (pnpm / npm / yarn / bun)." />
-  <PropItem props="execute" type="boolean" default="false" description="false = tampilkan perintah instalasi; true = tampilkan perintah eksekusi (dlx)." />
+  <PropItem
+    props="children"
+    type="ReactNode"
+    default="-"
+    description="Nama package atau perintah yang akan ditampilkan (wajib)."
+  />
+  <PropItem
+    props="defaultTab"
+    type="string"
+    default="pnpm"
+    description="Package manager yang aktif pertama kali (pnpm / npm / yarn / bun)."
+  />
+  <PropItem
+    props="execute"
+    type="boolean"
+    default="false"
+    description="false = tampilkan perintah instalasi; true = tampilkan perintah eksekusi (dlx)."
+  />
 </TableProps>
 
 ## Penggunaan Dasar
 
 Tulis nama package sebagai konten (`children`) komponen:
 
-<CodeBlock lang="mdx" title="command-code.mdx">
-  <CodeBlock.Code value="<CodeCommand>docsman</CodeCommand>" />
-</CodeBlock>
+<ComponentCodePreview>
+  <Component>
+    <CodeCommand>docsman</CodeCommand>
+  </Component>
+  <CodePreview lang="tsx" title="command-code.mdx">
+    ```
+    <CodeCommand>docsman</CodeCommand>
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 Hasilnya: tab `pnpm` / `npm` / `yarn` / `bun`, masing-masing menampilkan perintah instalasi-nya.
-
-<CodeCommand>docsman</CodeCommand>
 
 ## Mode Eksekusi (`execute`)
 
 Setel `execute` untuk menampilkan perintah jalankan langsung, bukan instalasi:
 
-<CodeBlock lang="mdx" title="command-code.mdx">
-  <CodeBlock.Code value="<CodeCommand execute>create-docsman-app</CodeCommand>" />
-</CodeBlock>
+<CodeCommand execute defaultTab="npm">
+  shadcn@latest init --preset b1tMcUdYu --template next --pointer
+</CodeCommand>
+
+<ComponentCodePreview>
+  <Component>
+    <CodeCommand execute>create-docsman-app</CodeCommand>
+  </Component>
+  <CodePreview lang="tsx" title="command-code.mdx">
+    ```
+    <CodeCommand execute>create-docsman-app</CodeCommand>
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 Perintah yang dihasilkan mengikuti kebiasaan tiap package manager:
 
@@ -44,17 +75,20 @@ Perintah yang dihasilkan mengikuti kebiasaan tiap package manager:
 - `yarn dlx create-docsman-app`
 - `bunx --bun create-docsman-app`
 
-<CodeCommand execute>create-docsman-app</CodeCommand>
-
 ## Mengubah Tab Awal (`defaultTab`)
 
 Pilih package manager yang aktif lebih dulu:
 
-<CodeBlock lang="mdx" title="command-code.mdx">
-  <CodeBlock.Code value='<CodeCommand defaultTab="bun">docsman</CodeCommand>' />
-</CodeBlock>
-
-<CodeCommand defaultTab="bun">docsman</CodeCommand>
+<ComponentCodePreview>
+  <Component>
+    <CodeCommand defaultTab="bun">docsman</CodeCommand>
+  </Component>
+  <CodePreview lang="mdx" title="command-code.mdx">
+    ```
+    <CodeCommand defaultTab="bun">docsman</CodeCommand>
+    ```
+  </CodePreview>
+</ComponentCodePreview>
 
 ## Perilaku & Detail
 

@@ -1,0 +1,163 @@
+---
+title: "LogoSection"
+description: "Komponen untuk menampilkan barisan logo teknologi dalam grid responsif di dokumentasi MDX, dengan dukungan banyak ikon react-icons."
+---
+
+# LogoSection
+
+`LogoSection` adalah kumpulan komponen untuk menampilkan **barisan logo/teknologi** dalam **grid responsif** di dokumentasi MDX — misalnya daftar teknologi/stack yang dipakai sebuah proyek. Setiap logo dirender sebagai kartu kecil (ikon + nama, tampil grayscale dengan efek warna saat hover).
+
+Dua komponen penyusunnya terdaftar otomatis di `mdxComponents` (`docman-render.tsx`), jadi **tidak perlu import** apa pun di file MDX:
+
+- `LogoSection` → wadah grid responsif; props: `children`, `className`, `columns`.
+- `Logo` → satu logo; props: `icon` (key string), `title`.
+
+## Komponen Penyusun
+
+<TableProps>
+  <PropItem
+    props="LogoSection"
+    type="component"
+    default="-"
+    description="Wadah grid; props: children, className, columns (2–6)."
+  />
+  <PropItem
+    props="Logo"
+    type="component"
+    default="-"
+    description="Satu logo; props: icon (key string), title."
+  />
+</TableProps>
+
+## Props `LogoSection`
+
+<TableProps>
+  <PropItem
+    props="children"
+    type="ReactNode"
+    default="-"
+    description="Kumpulan <Logo /> yang ditata grid."
+  />
+  <PropItem
+    props="columns"
+    type="number"
+    default="4"
+    description="Jumlah kolom di layar sm ke atas: 2, 3, 4, 5, atau 6."
+  />
+  <PropItem
+    props="className"
+    type="string"
+    default="-"
+    description="Class tambahan untuk wadah luar."
+  />
+</TableProps>
+
+## Props `Logo`
+
+<TableProps>
+  <PropItem
+    props="icon"
+    type="string"
+    default="-"
+    description="Key ikon react-icons (mis. SiTypescript, RiNextjsFill)."
+  />
+  <PropItem
+    props="title"
+    type="string"
+    default="-"
+    description="Label yang ditampilkan di samping ikon."
+  />
+</TableProps>
+
+## Penggunaan Dasar (4 Kolom default)
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <LogoSection>
+      <Logo icon="SiTypescript" title="TypeScript" />
+      <Logo icon="SiNextdotjs" title="Next.js" />
+      <Logo icon="RiReactjsLine" title="React" />
+      <Logo icon="SiTailwindcss" title="Tailwind" />
+    </LogoSection>
+  </Component>
+  <CodePreview lang="mdx" title="logo-section.mdx">
+    ```
+    <LogoSection>
+      <Logo icon="SiTypescript" title="TypeScript" />
+      <Logo icon="SiNextdotjs" title="Next.js" />
+      <Logo icon="RiReactjsLine" title="React" />
+      <Logo icon="SiTailwindcss" title="Tailwind" />
+    </LogoSection>
+    ```
+  </CodePreview>
+</ComponentCodePreview>
+
+## Grid 6 Kolom
+
+Set `columns={6}` untuk enam kolom:
+
+<ComponentCodePreview>
+  <Component flexCol>
+    <LogoSection columns={6}>
+      <Logo icon="SiPostgresql" title="Postgres" />
+      <Logo icon="SiMongodb" title="Mongo" />
+      <Logo icon="SiDocker" title="Docker" />
+      <Logo icon="SiPrisma" title="Prisma" />
+      <Logo icon="SiGraphql" title="GraphQL" />
+      <Logo icon="SiVercel" title="Vercel" />
+    </LogoSection>
+  </Component>
+  <CodePreview lang="mdx" title="logo-section.mdx">
+    <LogoSection columns={6}>
+      <Logo icon="SiPostgresql" title="Postgres" />
+      <Logo icon="SiMongodb" title="Mongo" />
+      <Logo icon="SiDocker" title="Docker" />
+      <Logo icon="SiPrisma" title="Prisma" />
+      <Logo icon="SiGraphql" title="GraphQL" />
+      <Logo icon="SiVercel" title="Vercel" />
+    </LogoSection>
+  </CodePreview>
+</ComponentCodePreview>
+
+## Mengenal Key Ikon
+
+`Logo` menerima nama ikon sebagai **string key** (bukan komponen). Jika key tidak dikenali, hanya `title` yang dirender (tanpa ikon).
+
+Prefix yang tersedia:
+
+<TableProps>
+  <PropItem
+    props="Ri*"
+    type="react-icons/ri"
+    default="-"
+    description="RiNextjsFill, RiReactjsLine, RiVuejsLine, RiSvelteLine, RiAngularjsFill, RiNpmjsLine, RiGithubFill, RiTailwindCssFill."
+  />
+  <PropItem
+    props="Si*"
+    type="react-icons/si"
+    default="-"
+    description="SiTypescript, SiJavascript, SiReact, SiNextdotjs, SiVuedotjs, SiSvelte, SiAngular, SiTailwindcss, SiShadcnui, SiMdx, SiPostgresql, SiMongodb, SiDocker, SiPrisma, SiGraphql, SiNodedotjs, SiVercel, SiSupabase, SiFirebase, SiRedis, SiGit, SiFigma, SiStorybook, SiVite, SiWebpack, SiAstro."
+  />
+</TableProps>
+
+<CodeBlock lang="mdx" title="logo-section.mdx">
+  <CodeBlock.Code value='<Logo icon="SiShadcnui" title="shadcn/ui" />' />
+</CodeBlock>
+
+<ComponentCodePreview>
+  <Component>
+    <Logo icon="SiShadcnui" title="shadcn/ui" />
+  </Component>
+</ComponentCodePreview>
+
+## Perilaku & Catatan
+
+- **Key string ikon** — `icon` adalah nama string yang dipetakan lewat `iconMap`; tidak menerima komponen langsung. Fallback menampilkan `title` saja bila key tidak dikenal.
+- **Efek hover** — kartu logo dirender `grayscale` dan menjadi berwarna saat hover (`hover:grayscale-0`), mengikuti aturan "logo stack".
+- **Ikon bisa di-import** — file juga mengekspor ulang ikon (`Si*`, `Ri*`) dari `react-icons`, agar bisa dipakai langsung sebagai komponen di MDX bila diperlukan.
+- **Grid responsif** — `grid-cols-2` di mobile, `sm:grid-cols-3`, lalu `sm:grid-cols-N` (2–6) sesuai `columns`; `place-items-center` menjaga kerapian.
+- **Server-safe** — `LogoSection` dan `Logo` tanpa `"use client"` (tidak memakai hook), bisa dirender langsung di Server Component / MDX.
+
+## Kode Sumber
+
+Berada di `packages/docsman/src/components/logo-setion.tsx` dan diekspor ulang melalui `docsman/render-client` untuk dipakai di pipeline render MDX (`docman-render.tsx`). Ekspor: `LogoSection`, `Logo`, serta ikon `Ri*`/`Si*`.

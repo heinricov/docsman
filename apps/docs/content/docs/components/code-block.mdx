@@ -19,33 +19,149 @@ Jadi **tidak perlu import** apa pun di file MDX.
 ## Props
 
 <TableProps>
-  <PropItem props="code" type="string" default="-" description="Kode sumber langsung, alternatif dari cara children." />
-  <PropItem props="lang" type="string" default="tsx" description="Bahasa untuk highlight & ikon (tsx, typescript, js, bash, json, yaml, dll)." />
-  <PropItem props="variant" type="string" default="default" description="Mode tampilan: default | header | tabs." />
-  <PropItem props="fileName" type="string" default="-" description="Nama file yang ditampilkan (fallback untuk title)." />
-  <PropItem props="title" type="string" default="-" description="Judul di atas blok. Diprioritaskan dibanding fileName." />
-  <PropItem props="showLineNumbers" type="boolean" default="true" description="Tampilkan nomor baris." />
-  <PropItem props="highlight" type="number[] | string" default="[]" description="Baris yang disorot (array, JSON, atau CSV seperti [1,3] / 1,3)." />
-  <PropItem props="focus" type="number[] | string" default="[]" description="Baris fokus; baris lain diredupkan (array, JSON, atau CSV)." />
-  <PropItem props="tabs" type="string[] | string" default="[]" description="Daftar tab untuk variant tabs (array, JSON, atau CSV), atau via <CodeBlock.Tab />." />
-  <PropItem props="defaultTab" type="string" default="-" description="Tab yang aktif pertama kali." />
-  <PropItem props="diff" type="object" default="-" description="Object { oldCode, newCode } untuk mode diff." />
-  <PropItem props="oldCode / newCode" type="string" default="-" description="Alternatif diff lewat dua string terpisah (dukung escape \\n)." />
-  <PropItem props="autoFormat" type="boolean" default="true" description="Format otomatis kode via Prettier." />
-  <PropItem props="children" type="ReactNode" default="-" description="Konten kode: <CodeBlock.Code />, <CodeBlock.Line />, atau tab." />
+  <PropItem
+    props="code"
+    type="string"
+    default="-"
+    description="Kode sumber langsung, alternatif dari cara children."
+  />
+  <PropItem
+    props="lang"
+    type="string"
+    default="tsx"
+    description="Bahasa untuk highlight & ikon (tsx, typescript, js, bash, json, yaml, dll)."
+  />
+  <PropItem
+    props="variant"
+    type="string"
+    default="default"
+    description="Mode tampilan: default | header | tabs."
+  />
+  <PropItem
+    props="fileName"
+    type="string"
+    default="-"
+    description="Nama file yang ditampilkan (fallback untuk title)."
+  />
+  <PropItem
+    props="title"
+    type="string"
+    default="-"
+    description="Judul di atas blok. Diprioritaskan dibanding fileName."
+  />
+  <PropItem
+    props="showLineNumbers"
+    type="boolean"
+    default="true"
+    description="Tampilkan nomor baris."
+  />
+  <PropItem
+    props="highlight"
+    type="number[] | string"
+    default="[]"
+    description="Baris yang disorot (array, JSON, atau CSV seperti [1,3] / 1,3)."
+  />
+  <PropItem
+    props="focus"
+    type="number[] | string"
+    default="[]"
+    description="Baris fokus; baris lain diredupkan (array, JSON, atau CSV)."
+  />
+  <PropItem
+    props="tabs"
+    type="string[] | string"
+    default="[]"
+    description="Daftar tab untuk variant tabs (array, JSON, atau CSV), atau via <CodeBlock.Tab />."
+  />
+  <PropItem
+    props="defaultTab"
+    type="string"
+    default="-"
+    description="Tab yang aktif pertama kali."
+  />
+  <PropItem
+    props="diff"
+    type="object"
+    default="-"
+    description="Object { oldCode, newCode } untuk mode diff."
+  />
+  <PropItem
+    props="oldCode / newCode"
+    type="string"
+    default="-"
+    description="Alternatif diff lewat dua string terpisah (dukung escape \\n)."
+  />
+  <PropItem
+    props="autoFormat"
+    type="boolean"
+    default="true"
+    description="Format otomatis kode via Prettier."
+  />
+  <PropItem
+    props="children"
+    type="ReactNode"
+    default="-"
+    description="Konten kode: <CodeBlock.Code />, <CodeBlock.Line />, atau tab."
+  />
 </TableProps>
 
 ## Sub-Komponen (Data Carrier di MDX)
 
 <TableProps>
-  <PropItem props="CodeBlock.Code" type="component" default="-" description="Menampung seluruh source code lewat prop value." />
-  <PropItem props="CodeBlock.Line" type="component" default="-" description="Satu baris kode lewat prop value; beberapa baris otomatis digabung dengan newline." />
-  <PropItem props="CodeBlock.Tab" type="component" default="-" description="Mendefinisikan satu tab: prop value (label) + lang + children (kode)." />
+  <PropItem
+    props="CodeBlock.Code"
+    type="component"
+    default="-"
+    description="Menampung seluruh source code lewat prop value."
+  />
+  <PropItem
+    props="CodeBlock.Line"
+    type="component"
+    default="-"
+    description="Satu baris kode lewat prop value; beberapa baris otomatis digabung dengan newline."
+  />
+  <PropItem
+    props="CodeBlock.Tab"
+    type="component"
+    default="-"
+    description="Mendefinisikan satu tab: prop value (label) + lang + children (kode)."
+  />
 </TableProps>
 
-Semuanya tidak merender apa pun — hanya *carrier data* yang dibaca `CodeBlock`.
+Semuanya tidak merender apa pun — hanya _carrier data_ yang dibaca `CodeBlock`.
 
 ## Penggunaan Dasar
+
+<CodeBlock lang="tsx" variant="header" fileName="layout.tsx" >
+
+    ```
+    import "./globals.css"
+    import { ThemeProvider } from "@/components/theme-provider"
+    import { cn } from "@/lib/utils"
+
+    import { DocsmanLayout } from "docsman/layouts"
+
+    export default function RootLayout({
+    children,
+    }: Readonly<{
+    children: React.ReactNode
+    }>) {
+    return (
+        <html
+        lang="en"
+        suppressHydrationWarning
+        >
+        <body>
+            <ThemeProvider>
+            <DocsmanLayout>{children}</DocsmanLayout>
+            </ThemeProvider>
+        </body>
+        </html>
+    )
+    }
+    ```
+
+</CodeBlock>
 
 ### a. Dengan `CodeBlock.Code`
 
@@ -97,25 +213,43 @@ Gunakan `<CodeBlock.Tab value="label" lang="bash">kode</CodeBlock.Tab>` di dalam
 
 ```mdx
 <CodeBlock variant="tabs" defaultTab="pnpm">
-  <CodeBlock.Tab value="pnpm" lang="bash">pnpm add docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="npm" lang="bash">npm install docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="yarn" lang="bash">yarn add docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="pnpm" lang="bash">
+    pnpm add docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="npm" lang="bash">
+    npm install docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">
+    yarn add docsman
+  </CodeBlock.Tab>
 </CodeBlock>
 ```
 
 <CodeBlock variant="tabs" defaultTab="pnpm">
-  <CodeBlock.Tab value="pnpm" lang="bash">pnpm add docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="npm" lang="bash">npm install docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="yarn" lang="bash">yarn add docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="pnpm" lang="bash">
+    pnpm add docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="npm" lang="bash">
+    npm install docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">
+    yarn add docsman
+  </CodeBlock.Tab>
 </CodeBlock>
 
 Anda juga bisa definisikan hanya label tab via prop `tabs`:
 
 ```mdx
 <CodeBlock variant="tabs" tabs="npm,pnpm,yarn" defaultTab="npm">
-  <CodeBlock.Tab value="npm" lang="bash">npm init docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="pnpm" lang="bash">pnpm create docsman</CodeBlock.Tab>
-  <CodeBlock.Tab value="yarn" lang="bash">yarn create docsman</CodeBlock.Tab>
+  <CodeBlock.Tab value="npm" lang="bash">
+    npm init docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="pnpm" lang="bash">
+    pnpm create docsman
+  </CodeBlock.Tab>
+  <CodeBlock.Tab value="yarn" lang="bash">
+    yarn create docsman
+  </CodeBlock.Tab>
 </CodeBlock>
 ```
 
